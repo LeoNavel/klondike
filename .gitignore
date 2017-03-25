@@ -27,3 +27,7 @@
 *.exe
 *.out
 *.app
+
+#fuck clion
+.idea
+cmake-build-debug
