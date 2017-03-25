@@ -7,15 +7,20 @@
  *   Notes :         CARD Definition
  *
  ***************************************/
+#include <algorithm>
 #include "Card.hpp"
 
-using namespace Card;
 
-color get_card_color(card_t card) {
-    if (card.card_sign == HEART || card.card_sign == DIAMONDS){
-        return RED;
-    }
-    else {
-        return BLACK;
-    }
+namespace Card {
+
+        color get_card_color(card_t card) {
+            if (card.card_sign == HEART || card.card_sign == DIAMONDS) {
+                return RED;
+            } else {
+                return BLACK;
+            }
+        }
+/*
+
+*/
 }

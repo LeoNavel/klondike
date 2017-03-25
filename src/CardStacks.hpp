@@ -14,10 +14,11 @@
 #include <vector>
 #include "Card.hpp"
 
+
 namespace CardStacks{
 
     class GenericCardStack {
-    private:
+    protected:
         std::vector<Card::card_t> card_stack;
 
     public:
@@ -49,10 +50,10 @@ namespace CardStacks{
         void push(Card::card_t card);
 
         void pop();
-        void pop_invisivle();
+        void popInvisivle();
 
-        Card::card_t top_visivle();
-        Card::card_t top_invisivle();
+        Card::card_t topVisivle();
+        Card::card_t topInvisivle();
     };
 
     class RemainingPack: GenericCardStack {
@@ -60,10 +61,20 @@ namespace CardStacks{
         int current_card;
 
     public:
-        void pop_current();
+        RemainingPack();
+        void popCurrent();
 
     };
 
+    class CardDeck : public CardStacks::GenericCardStack {
+    public:
+        CardDeck();
+
+        void shuffleCards();
+
+        Card::card_t topAndPop();
+
+    };
 
 }
 #endif //KLONDIKE_CARDSTACKS_HPP

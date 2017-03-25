@@ -13,20 +13,29 @@
 namespace Card {
 
 
-    const int KING  = 13;
+    const int KING = 13;
     const int QUEEN = 12;
-    const int JACK  = 11;
+    const int JACK = 11;
 
-    enum sign {SPADES, HEART, CLUBS, DIAMONDS};
-    enum color {BLACK, RED};
+    const int MAX_CARD_IN_DECK = 13;
+
+    enum sign {
+        SPADES, HEART, CLUBS, DIAMONDS
+    };
+    enum color {
+        BLACK, RED
+    };
     typedef struct {
-        sign   card_sign;
-        int     number;
+        sign card_sign;
+        int number;
     } card_t;
 
+    /**
+     * This function return color of sign in card.
+     * @param card card which color is finded
+     * @return color of sign
+     */
     color get_card_color(card_t card);
 
-};
-
-
+}
 #endif //CARD
