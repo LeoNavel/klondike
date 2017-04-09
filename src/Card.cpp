@@ -41,4 +41,17 @@ namespace card {
         this->number = number;
         this->card_sign = card_sign;
     }
+
+    bool Card::operator==(Card other) {
+        if (    this->get_number() == other.get_number() &&
+                this->get_sign() == other.get_sign()){
+            return true;
+        }
+        else return false;
+    }
+
+    bool Card::operator!=(Card other) {
+        return !(this->operator==(other));
+    }
+
 }
