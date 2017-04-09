@@ -1,8 +1,14 @@
 <RCC>
     <qresource prefix="/icons">
-        <file>resources/list.png</file>
+        <file>resources/zalud.png</file>
         <file>resources/piko.png</file>
         <file>resources/srdce.png</file>
-        <file>resources/zalud.png</file>
+        <file>resources/list.png</file>
+    </qresource>
+    <qresource prefix="/icons_15">
+        <file>resources/list@15.png</file>
+        <file>resources/piko@15.png</file>
+        <file>resources/srdce@15.png</file>
+        <file>resources/zalud@15.png</file>
     </qresource>
 </RCC>

@@ -79,9 +79,43 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="iconTop">
+   <property name="geometry">
+    <rect>
+     <x>136</x>
+     <y>10</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #f00;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="iconBottom">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>21</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #f00;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>imageLabel</zorder>
   <zorder>numberBottomRight</zorder>
   <zorder>numberTopLeft</zorder>
+  <zorder>iconTop</zorder>
+  <zorder>iconBottom</zorder>
  </widget>
  <resources/>
  <connections/>
