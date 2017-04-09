@@ -31,3 +31,8 @@
 #fuck clion
 .idea
 cmake-build-debug
+
+#fuck user
+src/klondike.pro.user
+#macos
+.DS_Store

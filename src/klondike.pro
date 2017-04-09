@@ -18,13 +18,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     deckview.cpp \
     Card.cpp \
-    CardStacks.cpp
+    CardStacks.cpp \
+    Error.cpp
 
 
 HEADERS  += mainwindow.h \
     deckview.h \
     Card.hpp \
-    CardStacks.hpp
+    CardStacks.hpp \
+    Error.hpp
 
 FORMS    += mainwindow.ui \
     deckview.ui
