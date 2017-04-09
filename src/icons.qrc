@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/list.png</file>
+        <file>resources/piko.png</file>
+        <file>resources/srdce.png</file>
+        <file>resources/zalud.png</file>
+    </qresource>
+</RCC>

@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     games.push_back(ui->framik);
 
+    games[0]->setGeometry(this->rect());
+
 //    ui->gridLayout->addWidget(all);
 //    ui->gridLayout->addLayout(new DeckView, 0, 1);
 //    ui->gridLayout->addLayout(new DeckView, 1, 0);
@@ -31,6 +33,18 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+   QMainWindow::resizeEvent(event);
+
+}
+
+//void MainWindow::QResizeEvent(const QSize & size, const QSize & oldSize){
+////    QMainWindow::QResizeEvent(size, oldSize);
+
+//    qDebug() << "resizeee";
+//}
 
 
 void MainWindow::on_actionMore_games_triggered()
@@ -69,6 +83,10 @@ void MainWindow::on_actionMore_games_triggered()
         all->addLayout(bot);
 
         ui->gridLayout->addLayout(all, 0, 0);
+        games[0]->setGeometry(games[0]->rect());
+        games[1]->setGeometry(games[0]->rect());
+        games[2]->setGeometry(games[0]->rect());
+        games[3]->setGeometry(games[0]->rect());
 
     } else {
         changeGamesNumberOption->setText(moreGames);
@@ -82,5 +100,7 @@ void MainWindow::on_actionMore_games_triggered()
         }
 
         ui->gridLayout->addWidget(ui->framik);
+
+        games[0]->setGeometry(this->rect());
     }
 }

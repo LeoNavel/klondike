@@ -2,6 +2,7 @@
 #define DECKVIEW_H
 
 #include <QFrame>
+#include <QResizeEvent>
 
 namespace Ui {
 class DeckView;
@@ -13,6 +14,7 @@ class DeckView : public QFrame
 
 public:
     explicit DeckView(QWidget *parent = 0);
+    void resizeEvent(QResizeEvent* event);
     ~DeckView();
 
 private:

@@ -17,16 +17,22 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     deckview.cpp \
-    card.cpp \
+    Card.cpp \
     CardStacks.cpp \
-    Error.cpp
+    Error.cpp \
+    cardview.cpp
 
 
 HEADERS  += mainwindow.h \
     deckview.h \
-    card.hpp \
+    Card.hpp \
     CardStacks.hpp \
-    Error.hpp
+    Error.hpp \
+    cardview.h
 
 FORMS    += mainwindow.ui \
-    deckview.ui
+    deckview.ui \
+    cardview.ui
+
+RESOURCES += \
+    icons.qrc

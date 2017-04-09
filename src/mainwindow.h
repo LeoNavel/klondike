@@ -4,6 +4,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QResizeEvent>
 #include "mydialog.h"
 #include "deckview.h"
 #include <vector>
@@ -18,6 +19,8 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+//    void QResizeEvent(const QSize & size, const QSize & oldSize);
+    void resizeEvent(QResizeEvent* event);
     ~MainWindow();
 
 protected:
