@@ -22,11 +22,13 @@ namespace CardStacks{
         std::vector<card::Card> card_stack;
 
     public:
-        virtual void push(card::Card card);
+        void push(card::Card card);
 
-        virtual void pop();
+        void pop();
 
         card::Card top();
+
+        card::Card topAndPop();
 
         bool isEmpty();
 
@@ -36,10 +38,12 @@ namespace CardStacks{
 
     };
 
+
     class TargetPack : public GenericCardStack {
     public:
         void push(card::Card card);
     };
+
 
     class WorkingPack{
     private:
@@ -48,13 +52,17 @@ namespace CardStacks{
 
     public:
         void push(card::Card card);
+        void push_invisible(card::Card card);
 
         void pop();
         void popInvisivle();
 
         card::Card topVisivle();
         card::Card topInvisivle();
+
+        void turn_invisible();
     };
+
 
     class RemainingPack: GenericCardStack {
     private:
@@ -66,14 +74,12 @@ namespace CardStacks{
 
     };
 
+
     class CardDeck : public CardStacks::GenericCardStack {
     public:
         CardDeck();
 
         void shuffleCards();
-
-        card::Card topAndPop();
-
     };
 
 }

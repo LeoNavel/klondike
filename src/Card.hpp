@@ -16,6 +16,7 @@ namespace card {
     const int KING = 13;
     const int QUEEN = 12;
     const int JACK = 11;
+    const int ACE = 1;
 
     const int MAX_CARD_IN_DECK = 13;
 
@@ -31,6 +32,8 @@ namespace card {
         sign card_sign;
         int number;
     public:
+        bool operator ==(Card other);
+        bool operator !=(Card other);
         Card(int number, sign card_sign);
         void set_number(int number);
         void set_sign(sign card_sign);

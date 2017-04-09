@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "CardStacks.hpp"
 #include "Card.hpp"
+#include "Error.hpp"
 
 namespace CardStacks {
 
@@ -22,6 +23,12 @@ namespace CardStacks {
         if (!this->isEmpty()) {
             this->card_stack.pop_back();
         }
+    }
+
+    card::Card GenericCardStack::topAndPop() {
+        card::Card poped_card = top();
+        pop();
+        return poped_card;
     }
 
     bool GenericCardStack::isEmpty() {
@@ -49,14 +56,17 @@ namespace CardStacks {
 
     void TargetPack::push(card::Card card) {
         if (isEmpty()) {
-            GenericCardStack::push(card);
+            if(card.get_number() == card::ACE) {
+                GenericCardStack::push(card);
+            }
+            else throw ErrorException(E_TARGET_PACK_PUSH, "On top might be ACE");
         } else {
             card::Card card_on_top = top();
-            if (card_on_top.get_sign() == card.get_sign() && card_on_top.get_number() == card.get_number() - 1) {
+            if (card_on_top.get_sign() == card.get_sign() &&
+                    card_on_top.get_number() == card.get_number() - 1) {
                 GenericCardStack::push(card);
             } else {
-                throw ; // TODO : talk about this with FITO
-                // TODO creat nice errors
+                throw ErrorException(E_TARGET_PACK_PUSH,"this is wrong push");
             }
         }
     }
@@ -66,14 +76,21 @@ namespace CardStacks {
         if (visible_cards.isEmpty() && invisible_cards.isEmpty()) {
             if (card.get_number() == card::KING) {
                 visible_cards.push(card);
-            } else throw;
+            } else throw ErrorException(E_WORK_PACK_PUSH, "First card might be king");
         } else {
+            int tmp;
             card::Card top_card = visible_cards.top();
             if (card::get_card_color(top_card) != card::get_card_color(card) &&
-                card.get_number() < top_card.get_number()) {
+                    (tmp=(card.get_number() + 1)) == top_card.get_number())
+            {
                 visible_cards.push(card);
-            } else throw;
+            }
+            else throw ErrorException(E_WORK_PACK_PUSH, "Color match or numbers of cards are not in order");
         }
+    }
+
+    void WorkingPack::push_invisible(card::Card card) {
+        invisible_cards.push(card);
     }
 
     void WorkingPack::pop() {
@@ -83,9 +100,10 @@ namespace CardStacks {
     }
 
     void WorkingPack::popInvisivle() {
-        if (!invisible_cards.isEmpty()) {
+        if (!invisible_cards.isEmpty() && visible_cards.isEmpty()) {
             invisible_cards.pop();
         }
+        else throw ErrorException(E_WORK_PACK_POP, "popping invisible card over visible");
     }
 
     card::Card WorkingPack::topVisivle() {
@@ -94,6 +112,10 @@ namespace CardStacks {
 
     card::Card WorkingPack::topInvisivle() {
         return invisible_cards.top();
+    }
+
+    void WorkingPack::turn_invisible() {
+        visible_cards.push(invisible_cards.topAndPop());
     }
 
 
@@ -134,12 +156,5 @@ namespace CardStacks {
     void CardDeck::shuffleCards() {
         std::random_shuffle(card_stack.begin(), card_stack.end());
     }
-
-    card::Card CardDeck::topAndPop() {
-        card::Card poped_card = top();
-        pop();
-        return poped_card;
-    }
-
 
 }
