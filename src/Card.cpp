@@ -11,16 +11,34 @@
 #include "Card.hpp"
 
 
-namespace Card {
+namespace card {
 
-        color get_card_color(card_t card) {
-            if (card.card_sign == HEART || card.card_sign == DIAMONDS) {
+        color get_card_color(Card card) {
+            if (card.get_sign() == HEART || card.get_sign() == DIAMONDS) {
                 return RED;
             } else {
                 return BLACK;
             }
         }
-/*
 
-*/
+    sign Card::get_sign() const {
+        return card_sign;
+    }
+
+    int Card::get_number() const {
+        return number;
+    }
+
+    void Card::set_sign(sign card_sign) {
+        Card::card_sign = card_sign;
+    }
+
+    void Card::set_number(int number) {
+        Card::number = number;
+    }
+
+    Card::Card(int number = 0, sign card_sign = SPADES) {
+        this->number = number;
+        this->card_sign = card_sign;
+    }
 }

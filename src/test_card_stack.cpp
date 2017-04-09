@@ -4,13 +4,12 @@
 
 
 int main(){
-
-    Card::card_t my_card;
-    my_card.card_sign = Card::HEART;
+/*
+    card::Card my_card(1, card::HEART);
     CardStacks::TargetPack my_generic_stack;
 
     for (int i = 1; i < 17; i++){
-        my_card.number = i;
+        my_card.set_number(i);
         my_generic_stack.push(my_card);
     }
     my_generic_stack.printContent();
@@ -32,7 +31,19 @@ int main(){
 
     for (int i = 0 ; i < 50 ; i++) deck.topAndPop();
     deck.printContent();
+*/
 
+    //test generic card tack
+
+    CardStacks::GenericCardStack generic_stack;
+
+    try{
+
+    }
+    catch (const char* error){
+        std::cerr << error << std::endl;
+        exit(1);
+    }
 
     return EXIT_SUCCESS;
 }

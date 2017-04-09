@@ -17,14 +17,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     deckview.cpp \
-    Card.cpp \
+    card.cpp \
     CardStacks.cpp \
     Error.cpp
 
 
 HEADERS  += mainwindow.h \
     deckview.h \
-    Card.hpp \
+    card.hpp \
     CardStacks.hpp \
     Error.hpp
 

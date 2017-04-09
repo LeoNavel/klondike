@@ -7,7 +7,6 @@ class ErrorException {
     int error_code;
     std::string msg;
 
-
     ErrorException(int error, std::string message);
 
     int get_err_code();

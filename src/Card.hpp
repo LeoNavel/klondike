@@ -10,7 +10,7 @@
 #ifndef CARD
 #define CARD
 
-namespace Card {
+namespace card {
 
 
     const int KING = 13;
@@ -25,17 +25,25 @@ namespace Card {
     enum color {
         BLACK, RED
     };
-    typedef struct {
+
+    class Card {
+    private:
         sign card_sign;
         int number;
-    } card_t;
+    public:
+        Card(int number, sign card_sign);
+        void set_number(int number);
+        void set_sign(sign card_sign);
+        int get_number() const;
+        sign get_sign() const;
+    };
 
     /**
      * This function return color of sign in card.
      * @param card card which color is finded
      * @return color of sign
      */
-    color get_card_color(card_t card);
+    color get_card_color(Card card);
 
 }
 #endif //CARD

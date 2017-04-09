@@ -19,14 +19,14 @@ namespace CardStacks{
 
     class GenericCardStack {
     protected:
-        std::vector<Card::card_t> card_stack;
+        std::vector<card::Card> card_stack;
 
     public:
-        virtual void push(Card::card_t card);
+        virtual void push(card::Card card);
 
         virtual void pop();
 
-        Card::card_t top();
+        card::Card top();
 
         bool isEmpty();
 
@@ -38,7 +38,7 @@ namespace CardStacks{
 
     class TargetPack : public GenericCardStack {
     public:
-        void push(Card::card_t card);
+        void push(card::Card card);
     };
 
     class WorkingPack{
@@ -47,13 +47,13 @@ namespace CardStacks{
         GenericCardStack visible_cards;
 
     public:
-        void push(Card::card_t card);
+        void push(card::Card card);
 
         void pop();
         void popInvisivle();
 
-        Card::card_t topVisivle();
-        Card::card_t topInvisivle();
+        card::Card topVisivle();
+        card::Card topInvisivle();
     };
 
     class RemainingPack: GenericCardStack {
@@ -72,7 +72,7 @@ namespace CardStacks{
 
         void shuffleCards();
 
-        Card::card_t topAndPop();
+        card::Card topAndPop();
 
     };
 

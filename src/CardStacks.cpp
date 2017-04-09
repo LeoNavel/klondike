@@ -14,7 +14,7 @@
 
 namespace CardStacks {
 
-    void GenericCardStack::push(Card::card_t card) {
+    void GenericCardStack::push(card::Card card) {
         this->card_stack.push_back(card);
     }
 
@@ -34,11 +34,11 @@ namespace CardStacks {
 
     void GenericCardStack::printContent() {
         for (auto &i:card_stack) {
-            std::cout << "Card-color:" << i.card_sign << "  Number:" << i.number << std::endl;
+            std::cout << "card-color:" << i.get_sign() << "  Number:" << i.get_number() << std::endl;
         }
     }
 
-    Card::card_t GenericCardStack::top() {
+    card::Card GenericCardStack::top() {
         if (!isEmpty()) {
             return this->card_stack[size() - 1];
         } else {
@@ -47,29 +47,30 @@ namespace CardStacks {
     }
 
 
-    void TargetPack::push(Card::card_t card) {
+    void TargetPack::push(card::Card card) {
         if (isEmpty()) {
             GenericCardStack::push(card);
         } else {
-            Card::card_t card_on_top = top();
-            if (card_on_top.card_sign == card.card_sign && card_on_top.number == card.number - 1) {
+            card::Card card_on_top = top();
+            if (card_on_top.get_sign() == card.get_sign() && card_on_top.get_number() == card.get_number() - 1) {
                 GenericCardStack::push(card);
             } else {
-                throw; // TODO : talk about this with FITO
+                throw ; // TODO : talk about this with FITO
+                // TODO creat nice errors
             }
         }
     }
 
 
-    void WorkingPack::push(Card::card_t card) {
+    void WorkingPack::push(card::Card card) {
         if (visible_cards.isEmpty() && invisible_cards.isEmpty()) {
-            if (card.number == Card::KING) {
+            if (card.get_number() == card::KING) {
                 visible_cards.push(card);
             } else throw;
         } else {
-            Card::card_t top_card = visible_cards.top();
-            if (Card::get_card_color(top_card) != Card::get_card_color(card) &&
-                card.number < top_card.number) {
+            card::Card top_card = visible_cards.top();
+            if (card::get_card_color(top_card) != card::get_card_color(card) &&
+                card.get_number() < top_card.get_number()) {
                 visible_cards.push(card);
             } else throw;
         }
@@ -87,11 +88,11 @@ namespace CardStacks {
         }
     }
 
-    Card::card_t WorkingPack::topVisivle() {
+    card::Card WorkingPack::topVisivle() {
         return visible_cards.top();
     }
 
-    Card::card_t WorkingPack::topInvisivle() {
+    card::Card WorkingPack::topInvisivle() {
         return invisible_cards.top();
     }
 
@@ -101,29 +102,31 @@ namespace CardStacks {
     }
 
     CardDeck::CardDeck() {
-        Card::card_t new_card;
+        card::Card new_card(1, card::SPADES);
 
-        new_card.card_sign = Card::SPADES;
-        for (int i = 1; i <= Card::MAX_CARD_IN_DECK ; i++){
-            new_card.number = i;
+        new_card.set_sign(card::SPADES);
+        for (int i = 1; i <= card::MAX_CARD_IN_DECK ; i++){
+            new_card.set_number(i);
             push(new_card);
         }
 
-        new_card.card_sign = Card::HEART;
-        for (int i = 1; i <= Card::MAX_CARD_IN_DECK ; i++){
-            new_card.number = i;
+        new_card.set_sign(card::HEART);
+
+        for (int i = 1; i <= card::MAX_CARD_IN_DECK ; i++){
+            new_card.set_number(i);
             push(new_card);
         }
 
-        new_card.card_sign = Card::CLUBS;
-        for (int i = 1; i <= Card::MAX_CARD_IN_DECK ; i++){
-            new_card.number = i;
+        new_card.set_sign(card::CLUBS);
+
+        for (int i = 1; i <= card::MAX_CARD_IN_DECK ; i++){
+            new_card.set_number(i);
             push(new_card);
         }
 
-        new_card.card_sign = Card::DIAMONDS;
-        for (int i = 1; i <= Card::MAX_CARD_IN_DECK ; i++){
-            new_card.number = i;
+        new_card.set_sign(card::DIAMONDS);
+        for (int i = 1; i <= card::MAX_CARD_IN_DECK ; i++){
+            new_card.set_number(i);
             push(new_card);
         }
     }
@@ -132,9 +135,8 @@ namespace CardStacks {
         std::random_shuffle(card_stack.begin(), card_stack.end());
     }
 
-    Card::card_t CardDeck::topAndPop() {
-        Card::card_t poped_card;
-        poped_card = top();
+    card::Card CardDeck::topAndPop() {
+        card::Card poped_card = top();
         pop();
         return poped_card;
     }
