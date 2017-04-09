@@ -1,6 +1,6 @@
 /**************************************
  *   Project :               Solitaire
- *   Authors :               xklemb??,xtomas32
+ *   Authors :               xklemb00, xtomas32
  *   Created :               25.03.2017
  *   Compiled:               g++ 6.3.1
  *
