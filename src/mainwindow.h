@@ -27,9 +27,8 @@ protected:
 
 
 private slots:
-    void on_actionNew_Window_triggered();
 
-    void on_actionAnother_game_triggered();
+    void on_actionMore_games_triggered();
 
 private:
     Ui::MainWindow *ui;

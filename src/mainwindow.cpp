@@ -32,14 +32,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionNew_Window_triggered()
-{
-    mDialog = new myDialog(this);
-    mDialog->show();
 
-}
-
-void MainWindow::on_actionAnother_game_triggered()
+void MainWindow::on_actionMore_games_triggered()
 {
     qDebug() << "blah";
     QVBoxLayout *all = new QVBoxLayout;
@@ -48,13 +42,9 @@ void MainWindow::on_actionAnother_game_triggered()
     QHBoxLayout *top = new QHBoxLayout;
 
 //    top->setAlignment(Qt::AlignLeading);
-    qDebug() << ui->mainToolBar->actions();
-    QList<QAction *> a = ui->mainToolBar->actions();
-    qDebug() << a.size();
-    qDebug() << a[0]->text();
     QString moreGames = "More games";
     QString oneGame = "One game";
-    QAction * changeGamesNumberOption = ui->menuBar->actions()[0]->menu()->actions()[1];
+    QAction * changeGamesNumberOption = ui->menuBar->actions()[0]->menu()->actions()[0];
     QString optionName = changeGamesNumberOption->text();
     if(optionName == moreGames) {
         changeGamesNumberOption->setText(oneGame);
@@ -94,4 +84,3 @@ void MainWindow::on_actionAnother_game_triggered()
         ui->gridLayout->addWidget(ui->framik);
     }
 }
-
