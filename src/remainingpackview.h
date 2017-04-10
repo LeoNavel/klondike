@@ -2,12 +2,13 @@
 #define REMAININGPACKVIEW_H
 
 #include <QFrame>
+#include "CardStacks.hpp"
 
 namespace Ui {
 class RemainingPackView;
 }
 
-class RemainingPackView : public QFrame
+class RemainingPackView : public QFrame, public CardStacks::RemainingPack
 {
     Q_OBJECT
 

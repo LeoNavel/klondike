@@ -19,7 +19,7 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <widget class="CardView" name="frame">
+  <widget class="RemainingPackView" name="frame">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -38,9 +38,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CardView</class>
+   <class>RemainingPackView</class>
    <extends>QFrame</extends>
-   <header>cardview.h</header>
+   <header>remainingpackview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

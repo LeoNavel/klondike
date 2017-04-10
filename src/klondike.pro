@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     Card.cpp \
     CardStacks.cpp \
     Error.cpp \
-    cardview.cpp
+    cardview.cpp \
+    remainingpackview.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -28,11 +29,13 @@ HEADERS  += mainwindow.h \
     Card.hpp \
     CardStacks.hpp \
     Error.hpp \
-    cardview.h
+    cardview.h \
+    remainingpackview.h
 
 FORMS    += mainwindow.ui \
     deckview.ui \
-    cardview.ui
+    cardview.ui \
+    remainingpackview.ui
 
 RESOURCES += \
     icons.qrc

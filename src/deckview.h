@@ -3,6 +3,8 @@
 
 #include <QFrame>
 #include <QResizeEvent>
+#include "CardStacks.hpp"
+#include "Card.hpp"
 
 namespace Ui {
 class DeckView;
@@ -15,6 +17,7 @@ class DeckView : public QFrame
 public:
     explicit DeckView(QWidget *parent = 0);
     void resizeEvent(QResizeEvent* event);
+    void mouseReleaseEvent(QMouseEvent *e);
     ~DeckView();
 
 private:

@@ -10,7 +10,7 @@ namespace Ui {
 class CardView;
 }
 
-class CardView : public QFrame
+class CardView : public QFrame, card::Card
 {
     Q_OBJECT
 public:
@@ -30,8 +30,8 @@ public:
 
 private:
     Ui::CardView *ui;
-    int value = 1;
-    card::sign sign = card::sign::CLUBS;
+//    int value = 1;
+//    card::sign sign = card::sign::CLUBS;
     QPoint offset;
 
 };

@@ -4,6 +4,7 @@
 
 CardView::CardView(QWidget *parent) :
     QFrame(parent),
+    card::Card(1, card::sign::CLUBS),
     ui(new Ui::CardView)
 {
     ui->setupUi(this);
@@ -12,20 +13,14 @@ CardView::CardView(QWidget *parent) :
 }
 
 CardView::CardView(int value, card::sign sign, QWidget *parent): CardView(parent){
-    this->value = value;
-    this->sign = sign;
+    Card::set_number(value);
+    Card::set_sign(sign);
     redrawCard();
 }
 
-//void CardView::setCard(int value, card::sign sign){
-//    this->value = value;
-//    this->sign = sign;
-
-//}
-
 void CardView::redrawCard() {
-    int value = this->value;
-    card::sign sign = this->sign;
+    int value = Card::get_number();
+    card::sign sign = Card::get_sign();
     QString valueS;
     switch(value) {
     case 1:
@@ -123,6 +118,7 @@ void CardView::mousePressEvent(QMouseEvent *event) {
     qDebug() << "asda";
 //    qDebug() << event->pos();
     offset = event->pos();
+    raise();
 }
 
 void CardView::mouseMoveEvent(QMouseEvent *event)

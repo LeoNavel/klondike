@@ -64,13 +64,20 @@ namespace CardStacks{
     };
 
 
-    class RemainingPack: GenericCardStack {
+    class RemainingPack: public GenericCardStack {
     private:
         int current_card;
 
     public:
         RemainingPack();
         void popCurrent();
+
+        // v klude metody premenuj ja som to len tak z hlavy strelil :D
+        bool isSetCurrent(); // na zistenie ci je aspon jedna karta uz pretocena
+        card::Card currentCard(); // na zistenie aka karta je current
+        void nextCard(); // na zobrazenie dalsej karty (treba riesit aj to ked uz budu vsetky pretocene)
+        bool allCardVisible(); // na zistenie ci sa uz vsetky karty pretocili
+        // to ze namiesto visiBle pises obcas visiVle je schvalne? :D
 
     };
 

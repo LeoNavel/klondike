@@ -104,3 +104,4 @@ void MainWindow::on_actionMore_games_triggered()
         games[0]->setGeometry(this->rect());
     }
 }
+

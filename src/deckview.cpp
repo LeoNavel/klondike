@@ -9,6 +9,13 @@ DeckView::DeckView(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    CardStacks::CardDeck cardDeck = CardStacks::CardDeck();
+
+    cardDeck.shuffleCards();
+
+    while(!cardDeck.isEmpty())
+        ui->frame->push(cardDeck.topAndPop());
+
     CardView *cv1 = new CardView(this);
     cv1->setGeometry(QRect(0, 100, 200, 150));
 
@@ -30,12 +37,32 @@ DeckView::DeckView(QWidget *parent) :
 void DeckView::resizeEvent(QResizeEvent* event)
 {
    QFrame::resizeEvent(event);
-   QSize size = event->size();
-   QRect ar = ui->frame->rect();
-   ar.setTopLeft(QPoint(5, 5));
-   QRect nr = QRect(ar.topLeft(), QSize(size.width() / 6, size.height() / 4));
-   ui->frame->setGeometry(nr);
+//   QSize size = event->size();
+//   QRect ar = ui->frame->rect();
+//   ar.setTopLeft(QPoint(5, 5));
+//   QRect nr = QRect(ar.topLeft(), QSize(size.width() / 6, size.height() / 4));
+//   ui->frame->setGeometry(nr);
 
+}
+
+
+void DeckView::mouseReleaseEvent(QMouseEvent *e)
+{
+  if (e->button() == Qt::LeftButton)    // Left button...
+  {
+    // Do something related to the left button
+      qDebug() << "a";
+  }
+  else if (e->button() == Qt::RightButton)   // Right button...
+  {
+    // Do something related to the right button
+      qDebug() << "a";
+  }
+  else if (e->button() == Qt::MidButton)   // Middle button...
+  {
+    // Do something related to the middle button
+      qDebug() << "a";
+  }
 }
 
 DeckView::~DeckView()
