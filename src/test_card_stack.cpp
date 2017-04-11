@@ -109,6 +109,28 @@ int main(){
             if (error.get_err_code() == -4) throw error.get_message().c_str();
         }
 
+        std::cout << "working pack test correct" << std::endl;
+
+        CardStacks::RemainingPack rem_pack = CardStacks::RemainingPack();
+        for (int i = 0; i < 10; i++) rem_pack.push(deck.topAndPop());
+
+        if (rem_pack.isSetCurrent()) throw "Card is set";
+        rem_pack.nextCard();
+        if (!rem_pack.isSetCurrent()) throw "Card is not set";
+
+        for (int i = 0 ; i < 20 ; i++) rem_pack.nextCard();
+        if(!rem_pack.allCardVisible()) throw "All cards wasnt seen";
+
+        rem_pack.turnPack();
+
+        if (rem_pack.isSetCurrent()) throw "Card is set";
+        rem_pack.nextCard();
+        if (!rem_pack.isSetCurrent()) throw "Card is not set";
+
+
+
+
+        std::cout << "Remaining pack tets OK" << std::endl;
     }
     catch (const char* error){
         std::cerr << error << std::endl;

@@ -6,7 +6,7 @@
 #define E_TARGET_PACK_PUSH  1
 #define E_WORK_PACK_POP     2
 #define E_WORK_PACK_PUSH    3
-
+#define E_REM_PACK_POP      4
 
 class ErrorException {
 private:
