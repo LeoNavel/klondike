@@ -25,6 +25,7 @@ public:
     void redrawCard();
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
+    void turnUp();
 
     ~CardView();
 

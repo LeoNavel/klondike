@@ -19,48 +19,53 @@ CardView::CardView(int value, card::sign sign, QWidget *parent): CardView(parent
 }
 
 void CardView::redrawCard() {
-    int value = Card::get_number();
-    card::sign sign = Card::get_sign();
-    QString valueS;
-    switch(value) {
-    case 1:
-        valueS = "A";
-        break;
-    case 10:
-        valueS = "J";
-        break;
-    case 11:
-        valueS = "Q";
-        break;
-    case 12:
-        valueS = "K";
-        break;
-    default:
-        valueS.setNum(value);
-    }
+    ui->back->hide();
+    if(Card::isVisible()){
+        int value = Card::get_number();
+        card::sign sign = Card::get_sign();
+        QString valueS;
+        switch(value) {
+        case 1:
+            valueS = "A";
+            break;
+        case 10:
+            valueS = "J";
+            break;
+        case 11:
+            valueS = "Q";
+            break;
+        case 12:
+            valueS = "K";
+            break;
+        default:
+            valueS.setNum(value);
+        }
 
-    ui->numberBottomRight->setText(valueS);
-    ui->numberTopLeft->setText(valueS);
-    QString imgSrc;
-    switch (sign) {
-    case card::sign::DIAMONDS:
-        imgSrc = "piko";
-        break;
-    case card::sign::SPADES:
-        imgSrc = "list";
-        break;
-    case card::sign::HEART:
-        imgSrc = "srdce";
-        break;
-    default:
-        imgSrc = "zalud";
-    }
+        ui->numberBottomRight->setText(valueS);
+        ui->numberTopLeft->setText(valueS);
+        QString imgSrc;
+        switch (sign) {
+        case card::sign::DIAMONDS:
+            imgSrc = "piko";
+            break;
+        case card::sign::SPADES:
+            imgSrc = "list";
+            break;
+        case card::sign::HEART:
+            imgSrc = "srdce";
+            break;
+        default:
+            imgSrc = "zalud";
+        }
 
-    QString img = "background-image: url(\":/icons/resources/" + imgSrc + ".png\")";
-    QString imgMini = "background-image: url(\":/icons_15/resources/" + imgSrc + "@15.png\")";
-    ui->imageLabel->setStyleSheet(img);
-    ui->iconBottom->setStyleSheet(imgMini);
-    ui->iconTop->setStyleSheet(imgMini);
+        QString img = "background-image: url(\":/icons/resources/" + imgSrc + ".png\")";
+        QString imgMini = "background-image: url(\":/icons_15/resources/" + imgSrc + "@15.png\")";
+        ui->imageLabel->setStyleSheet(img);
+        ui->iconBottom->setStyleSheet(imgMini);
+        ui->iconTop->setStyleSheet(imgMini);
+    } else {
+        ui->back->show();
+    }
 }
 
 void CardView::setGeometry(const QRect &r) {
@@ -112,6 +117,8 @@ void CardView::setGeometry(const QRect &r) {
     l5.setWidth(50);
     l5.setHeight(54);
     ui->imageLabel->setGeometry(l5);
+
+    ui->back->setGeometry(QRect(QPoint(0,0), nr.size()));
 }
 
 void CardView::mousePressEvent(QMouseEvent *event) {
@@ -127,6 +134,11 @@ void CardView::mouseMoveEvent(QMouseEvent *event)
     {
         this->move(mapToParent(event->pos() - offset));
     }
+}
+
+void CardView::turnUp() {
+    Card::turnUp();
+    redrawCard();
 }
 
 

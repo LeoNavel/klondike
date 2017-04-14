@@ -37,9 +37,12 @@ namespace card {
         Card::number = number;
     }
 
-    Card::Card(int number = 0, sign card_sign = SPADES) {
+    Card::Card(int number = 0, sign card_sign = SPADES):Card(number, card_sign, false){}
+
+    Card::Card(int number = 0, sign card_sign = SPADES, bool visible = false){
         this->number = number;
         this->card_sign = card_sign;
+        this->visible = visible;
     }
 
     bool Card::operator==(Card other) {
@@ -52,6 +55,14 @@ namespace card {
 
     bool Card::operator!=(Card other) {
         return !(this->operator==(other));
+    }
+
+    bool Card::isVisible() {
+        return this->visible;
+    }
+
+    void Card::turnUp() {
+        this->visible = true;
     }
 
 }

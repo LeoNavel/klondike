@@ -14,13 +14,15 @@ DeckView::DeckView(QWidget *parent) :
     cardDeck.shuffleCards();
 
     while(!cardDeck.isEmpty())
-        ui->frame->push(cardDeck.topAndPop());
+        ui->remainingCards->push(cardDeck.topAndPop());
+    ui->remainingCards->update();
 
     CardView *cv1 = new CardView(this);
     cv1->setGeometry(QRect(0, 100, 200, 150));
 
     CardView *cv2 = new CardView(5, card::sign::HEART, this);
     cv2->setGeometry(QRect(160, 100, 200, 150));
+    cv2->turnUp();
 
     CardView *cv3 = new CardView(10, card::sign::SPADES, this);
     cv3->setGeometry(QRect(160 * 2, 100, 200, 150));
@@ -37,11 +39,12 @@ DeckView::DeckView(QWidget *parent) :
 void DeckView::resizeEvent(QResizeEvent* event)
 {
    QFrame::resizeEvent(event);
-//   QSize size = event->size();
-//   QRect ar = ui->frame->rect();
-//   ar.setTopLeft(QPoint(5, 5));
-//   QRect nr = QRect(ar.topLeft(), QSize(size.width() / 6, size.height() / 4));
-//   ui->frame->setGeometry(nr);
+   QSize size = event->size();
+   QRect ar = ui->remainingCards->rect();
+   ar.setTopLeft(QPoint(5, 5));
+   QRect nr = QRect(ar.topLeft(), QSize((size.width() / 7) * 2 + 10, size.height() / 4));
+   ui->remainingCards->setGeometry(nr);
+
 
 }
 

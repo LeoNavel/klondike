@@ -7,7 +7,11 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
     ui(new Ui::RemainingPackView)
 {
     ui->setupUi(this);
+
 }
+
+
+
 
 RemainingPackView::~RemainingPackView()
 {

@@ -31,14 +31,18 @@ namespace card {
     private:
         sign card_sign;
         int number;
+        bool visible;
     public:
         bool operator ==(Card other);
         bool operator !=(Card other);
         Card(int number, sign card_sign);
+        Card(int number, sign card_sign, bool visible);
         void set_number(int number);
         void set_sign(sign card_sign);
         int get_number() const;
         sign get_sign() const;
+        bool isVisible();
+        void turnUp();
     };
 
     /**

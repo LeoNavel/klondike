@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include "CardStacks.hpp"
+#include <QDebug>
 
 namespace Ui {
 class RemainingPackView;

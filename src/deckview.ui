@@ -19,7 +19,7 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <widget class="RemainingPackView" name="frame">
+  <widget class="RemainingPackView" name="remainingCards">
    <property name="geometry">
     <rect>
      <x>40</x>
