@@ -57,7 +57,7 @@ namespace card {
         return !(this->operator==(other));
     }
 
-    bool Card::isVisible() {
+    bool Card::isTurnedUp() {
         return this->visible;
     }
 

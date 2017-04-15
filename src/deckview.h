@@ -3,7 +3,9 @@
 
 #include <QFrame>
 #include <QResizeEvent>
+#include <vector>
 #include "CardStacks.hpp"
+#include "workingpackview.h"
 #include "Card.hpp"
 
 namespace Ui {
@@ -22,6 +24,7 @@ public:
 
 private:
     Ui::DeckView *ui;
+    std::vector<WorkingPackView *> workingPacks;
 };
 
 #endif // DECKVIEW_H

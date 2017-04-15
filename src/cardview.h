@@ -10,7 +10,7 @@ namespace Ui {
 class CardView;
 }
 
-class CardView : public QFrame, card::Card
+class CardView : public QFrame, public card::Card
 {
     Q_OBJECT
 public:

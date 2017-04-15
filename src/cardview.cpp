@@ -31,7 +31,7 @@ void CardView::set_sign(card::sign card_sign) {
 
 void CardView::redrawCard() {
     ui->back->hide();
-    if(Card::isVisible()){
+    if(Card::isTurnedUp()){
         int value = Card::get_number();
         card::sign sign = Card::get_sign();
         QString valueS;
