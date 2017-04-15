@@ -13,6 +13,7 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
     this->currentCardView = new CardView(1, card::sign::CLUBS, this);
     this->currentCardView->turnUp();
     ui->frame->installEventFilter(this);
+    currentCardView->installEventFilter(this);
 //    setMouseTracking(true);
 
 
@@ -20,16 +21,39 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
 
 void RemainingPackView::nextCard() {
     CardStacks::RemainingPack::nextCard();
-    redraw();
+    update();
 }
 
 bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
     if(obj == ui->frame && e->type() == QEvent::MouseButtonPress){
         if(allCardVisible()){
             turnPack();
-            redraw();
+            update();
         } else
             nextCard();
+        return true;
+    }
+    if(obj == currentCardView && e->type() == QEvent::MouseButtonPress){
+        if(selectionDelegate->isEmpty()){
+            try{
+                selectionDelegate->push(topAndPopCurrent());
+            } catch (ErrorException err) {
+                qDebug() << err.get_message().c_str();
+            }
+            QMouseEvent * me = static_cast<QMouseEvent*>(e);
+            QPoint p = currentCardView->pos();
+//            p = QPoint(p.x(), p.y());
+            selectionDelegate->setGeometry(QRect(p,currentCardView->rect().size()));
+            selectionDelegate->setSourcePack(this);
+//            selectionDelegate->setGeometry(currentCardView->rect());
+            selectionDelegate->raise();
+            selectionDelegate->setOffset(me->pos());
+            selectionDelegate->setWpv(false);
+            selectionDelegate->show();
+            update();
+        } else {
+            qDebug() << "chyba";
+        }
         return true;
     }
     return QWidget::eventFilter(obj, e);
@@ -42,10 +66,11 @@ void RemainingPackView::initWithStack(CardStacks::GenericCardStack stack){
         s1.push(stack.topAndPop());
     while(!s1.isEmpty())
         RemainingPack::push(s1.topAndPop());
-    redraw();
+    update();
 }
 
-void RemainingPackView::redraw() {
+void RemainingPackView::paintEvent(QPaintEvent *e){
+    QFrame::paintEvent(e);
     if(!RemainingPack::isEmpty()) {
         if(isSetCurrent()) {
             currentCardView->show();

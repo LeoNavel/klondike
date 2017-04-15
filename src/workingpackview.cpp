@@ -119,17 +119,14 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 selectionDelegate->setStyleSheet("background-color: #ff0;");
                 QMouseEvent * me = static_cast<QMouseEvent*>(e);
                 QPoint p = this->pos();
-                qDebug() << p;
-                qDebug() << cp;
                 p = QPoint(p.x(), p.y() + cp.y());
-                qDebug() << p;
                 selectionDelegate->setGeometry(QRect(p,QSize(130,300)));
                 qDebug() << me->pos();
                 selectionDelegate->push(gs);
-//                selectionDelegate->update();
                 selectionDelegate->raise();
                 selectionDelegate->setSourcePack(this);
                 selectionDelegate->setOffset(me->pos());
+                selectionDelegate->setWpv(true);
 
                 update();
                 return true;

@@ -68,6 +68,8 @@ namespace CardStacks{
         void push(card::Card card);
         void push_invisible(card::Card card);
 
+        bool anyVisible();
+
         void pop();
         void popInvisible();
 
@@ -90,6 +92,7 @@ namespace CardStacks{
         // v klude metody premenuj ja som to len tak z hlavy strelil :D
         bool isSetCurrent(); // na zistenie ci je aspon jedna karta uz pretocena
         card::Card currentCard(); // na zistenie aka karta je current
+        void insertCurrent(card::Card);
         void nextCard(); // na zobrazenie dalsej karty (treba riesit aj to ked uz budu vsetky pretocene)
         bool allCardVisible(); // na zistenie ci sa uz vsetky karty pretocili
 

@@ -16,7 +16,6 @@ DeckView::DeckView(QWidget *parent) :
 
     cardDeck.shuffleCards();
 
-    ui->remainingCards->initWithStack(cardDeck);
 
     for(int i = 0; i < 7; i++){
         WorkingPackView * nwpv = new WorkingPackView(this);
@@ -28,6 +27,10 @@ DeckView::DeckView(QWidget *parent) :
         workingPacks[i]->push_invisible(cardDeck.topAndPop());
         workingPacks[i]->turn_invisible();
     }
+
+
+    ui->remainingCards->initWithStack(cardDeck);
+    ui->remainingCards->selectionDelegate = cardSelection;
 
 
 //    CardView *cv1 = new CardView(this);

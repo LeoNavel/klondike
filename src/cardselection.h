@@ -28,6 +28,7 @@ public:
     void setOffset(QPoint p);
     void mouseMoveEvent(QMouseEvent *event);
     void rollBack();
+    void setWpv(bool);
 //    void mousePressEvent(QMouseEvent * event);
     ~CardSelection();
 
@@ -35,6 +36,7 @@ private:
     Ui::CardSelection *ui;
     QPoint offset;
     void * sourcePack;
+    bool wpv;
     std::vector<CardView *> cards;
 };
 

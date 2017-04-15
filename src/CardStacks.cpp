@@ -123,6 +123,10 @@ namespace CardStacks {
         }
     }
 
+    bool WorkingPack::anyVisible() {
+        return visible_cards.size() > 0;
+    }
+
     /**
      * @brief Adding new card to invisible cards.
      * @param card Card
@@ -220,12 +224,19 @@ namespace CardStacks {
         return (current_card >= 0);
     }
 
+    void RemainingPack::insertCurrent(card::Card c) {
+        current_card++;
+        card_stack.insert(card_stack.begin() + current_card, c);
+
+    }
+
     /**
      * @brief Pop card where pointer is pointing.
      */
     void RemainingPack::popCurrent() {
-        if (card_stack.size() < current_card and current_card != -1){
+        if (card_stack.size() > current_card && current_card != -1){
             card_stack.erase(card_stack.begin() + current_card);
+            current_card--;
         }
         else {
             throw ErrorException(E_REM_PACK_POP, "using popCurrent() with out set current pointer or out of range");

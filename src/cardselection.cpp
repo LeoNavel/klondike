@@ -1,6 +1,7 @@
 #include "cardselection.h"
 #include "ui_cardselection.h"
 #include "workingpackview.h"
+#include "remainingpackview.h"
 
 CardSelection::CardSelection(QWidget *parent) :
     QFrame(parent),
@@ -45,6 +46,9 @@ void CardSelection::push(card::Card c) {
     CardView * ncv = new CardView(c.get_number(), c.get_sign(), this);
     ncv->turnUp();
     cards.push_back(ncv);
+    this->setMouseTracking(true);
+    for(CardView * c:cards)
+        c->setMouseTracking(true);
 }
 
 void CardSelection::push(CardStacks::GenericCardStack stack){
@@ -53,7 +57,8 @@ void CardSelection::push(CardStacks::GenericCardStack stack){
         push(stack.topAndPop());
 
     this->setMouseTracking(true);
-    cards[cards.size()-1]->setMouseTracking(true);
+    for(CardView * c:cards)
+        c->setMouseTracking(true);
 //    this->setAttribute(Qt::WA_Hover);
 //    cards[cards.size()-1]->setAttribute(Qt::WA_Hover);
 }
@@ -75,22 +80,31 @@ CardStacks::GenericCardStack CardSelection::getAll(){
     return gs;
 }
 
+void CardSelection::setWpv(bool wpv){
+    this->wpv = wpv;
+}
+
 void CardSelection::rollBack() {
-    WorkingPackView * wpv = static_cast<WorkingPackView *>(sourcePack);
-    CardView * fc = cards[cards.size()-1];
-    cards.pop_back();
-    wpv->push_invisible(card::Card(fc->get_number(), fc->get_sign()));
-    wpv->turn_invisible();
-    for(int i = cards.size()-1; i > -1; i--){
-        wpv->push(card::Card(cards[i]->get_number(), cards[i]->get_sign(), true));
+    if(wpv){
+        WorkingPackView * wpv = static_cast<WorkingPackView *>(sourcePack);
+        if(!wpv->anyVisible()){
+            CardView * fc = cards[cards.size()-1];
+            cards.pop_back();
+            wpv->push_invisible(card::Card(fc->get_number(), fc->get_sign()));
+            wpv->turn_invisible();
+        }
+        for(int i = cards.size()-1; i > -1; i--){
+            wpv->push(card::Card(cards[i]->get_number(), cards[i]->get_sign(), true));
+        }
+    } else {
+        RemainingPackView * rpv = static_cast<RemainingPackView *>(sourcePack);
+        CardView * vw = cards[0];
+        rpv->insertCurrent(card::Card(vw->get_number(), vw->get_sign(), true));
+        rpv->update();
     }
     clear();
     hide();
 }
-
-//void CardSelection::mousePressEvent(QMouseEvent * event){
-//    if()
-//}
 
 void CardSelection::setSourcePack(void *wpv){
     sourcePack = wpv;
