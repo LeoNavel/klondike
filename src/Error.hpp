@@ -3,10 +3,11 @@
 
 #include <iostream>
 
-#define E_TARGET_PACK_PUSH  1
-#define E_WORK_PACK_POP     2
-#define E_WORK_PACK_PUSH    3
-#define E_REM_PACK_POP      4
+#define E_TARGET_PACK_PUSH          1
+#define E_WORK_PACK_POP             2
+#define E_WORK_PACK_PUSH            3
+#define E_REM_PACK_POP              4
+#define E_POP_FROM_EMPTY_STACK      5
 
 class ErrorException {
 private:

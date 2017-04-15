@@ -12,9 +12,8 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
     backCard->setStyleSheet("background-color: rgba(1,1,1,0);");
     this->currentCardView = new CardView(1, card::sign::CLUBS, this);
     this->currentCardView->turnUp();
-//    this->installEventFilter(ui->frame);
     ui->frame->installEventFilter(this);
-    setMouseTracking(true);
+//    setMouseTracking(true);
 
 
 }

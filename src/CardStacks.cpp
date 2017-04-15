@@ -75,7 +75,7 @@ namespace CardStacks {
         if (!isEmpty()) {
             return this->card_stack[size() - 1];
         } else {
-            throw "Stack: is empty";
+            throw ErrorException(E_POP_FROM_EMPTY_STACK, "Stack: is empty");
         }
     }
 

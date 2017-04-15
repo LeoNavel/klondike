@@ -7,6 +7,7 @@
 #include "CardStacks.hpp"
 #include "workingpackview.h"
 #include "Card.hpp"
+#include "cardselection.h"
 
 namespace Ui {
 class DeckView;
@@ -20,6 +21,7 @@ public:
     explicit DeckView(QWidget *parent = 0);
     void resizeEvent(QResizeEvent* event);
     void mouseReleaseEvent(QMouseEvent *e);
+    CardSelection * cardSelection;
     ~DeckView();
 
 private:

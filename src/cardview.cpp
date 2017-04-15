@@ -39,13 +39,13 @@ void CardView::redrawCard() {
         case 1:
             valueS = "A";
             break;
-        case 10:
+        case 11:
             valueS = "J";
             break;
-        case 11:
+        case 12:
             valueS = "Q";
             break;
-        case 12:
+        case 13:
             valueS = "K";
             break;
         default:
