@@ -1,5 +1,6 @@
 #include "cardview.h"
 #include "ui_cardview.h"
+#include "remainingpackview.h"
 #include <QDebug>
 
 CardView::CardView(QWidget *parent) :
@@ -15,6 +16,16 @@ CardView::CardView(QWidget *parent) :
 CardView::CardView(int value, card::sign sign, QWidget *parent): CardView(parent){
     Card::set_number(value);
     Card::set_sign(sign);
+    redrawCard();
+}
+
+void CardView::set_number(int number) {
+    Card::set_number(number);
+    redrawCard();
+}
+
+void CardView::set_sign(card::sign card_sign) {
+    Card::set_sign(card_sign);
     redrawCard();
 }
 
@@ -121,20 +132,20 @@ void CardView::setGeometry(const QRect &r) {
     ui->back->setGeometry(QRect(QPoint(0,0), nr.size()));
 }
 
-void CardView::mousePressEvent(QMouseEvent *event) {
-    qDebug() << "asda";
-//    qDebug() << event->pos();
-    offset = event->pos();
-    raise();
-}
+//void CardView::mousePressEvent(QMouseEvent *event) {
+//    qDebug() << "asda";
+////    qDebug() << event->pos();
+//    offset = event->pos();
+//    raise();
+//}
 
-void CardView::mouseMoveEvent(QMouseEvent *event)
-{
-    if(event->buttons() & Qt::LeftButton)
-    {
-        this->move(mapToParent(event->pos() - offset));
-    }
-}
+//void CardView::mouseMoveEvent(QMouseEvent *event)
+//{
+//    if(event->buttons() & Qt::LeftButton)
+//    {
+//        this->move(mapToParent(event->pos() - offset));
+//    }
+//}
 
 void CardView::turnUp() {
     Card::turnUp();

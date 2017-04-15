@@ -13,9 +13,14 @@ DeckView::DeckView(QWidget *parent) :
 
     cardDeck.shuffleCards();
 
+    CardStacks::GenericCardStack gs = CardStacks::GenericCardStack();
+    CardStacks::GenericCardStack gs1 = CardStacks::GenericCardStack();
+
     while(!cardDeck.isEmpty())
-        ui->remainingCards->push(cardDeck.topAndPop());
-    ui->remainingCards->update();
+        gs.push(cardDeck.topAndPop());
+    while(!gs.isEmpty())
+        gs1.push(gs.topAndPop());
+    ui->remainingCards->initWithStack(gs1);
 
     CardView *cv1 = new CardView(this);
     cv1->setGeometry(QRect(0, 100, 200, 150));

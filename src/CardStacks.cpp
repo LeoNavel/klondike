@@ -144,7 +144,7 @@ namespace CardStacks {
      * @brief Remove card from invisible
      * @pre There are no visible cards.
      */
-    void WorkingPack::popInvisivle() {
+    void WorkingPack::popInvisible() {
         if (!invisible_cards.isEmpty() && visible_cards.isEmpty()) {
             invisible_cards.pop();
         }
@@ -155,7 +155,7 @@ namespace CardStacks {
      * @brief Get card from visibles.
      * @return Card
      */
-    card::Card WorkingPack::topVisivle() {
+    card::Card WorkingPack::topVisible() {
         return visible_cards.top();
     }
 
@@ -163,7 +163,7 @@ namespace CardStacks {
      * @rief Get card from invisible stack
      * @return Card
      */
-    card::Card WorkingPack::topInvisivle() {
+    card::Card WorkingPack::topInvisible() {
         return invisible_cards.top();
     }
 

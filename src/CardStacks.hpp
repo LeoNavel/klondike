@@ -69,10 +69,10 @@ namespace CardStacks{
         void push_invisible(card::Card card);
 
         void pop();
-        void popInvisivle();
+        void popInvisible();
 
-        card::Card topVisivle();
-        card::Card topInvisivle();
+        card::Card topVisible();
+        card::Card topInvisible();
 
         void turn_invisible();
     };
@@ -92,7 +92,6 @@ namespace CardStacks{
         card::Card currentCard(); // na zistenie aka karta je current
         void nextCard(); // na zobrazenie dalsej karty (treba riesit aj to ked uz budu vsetky pretocene)
         bool allCardVisible(); // na zistenie ci sa uz vsetky karty pretocili
-        // to ze namiesto visiBle pises obcas visiVle je schvalne? :D
 
         void turnPack();
 

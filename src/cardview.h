@@ -23,9 +23,11 @@ public:
 //    void setCard();
     void setGeometry(const QRect &r);
     void redrawCard();
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+//    void mousePressEvent(QMouseEvent *event);
+//    void mouseMoveEvent(QMouseEvent *event);
     void turnUp();
+    void set_sign(card::sign card_sign);
+    void set_number(int number);
 
     ~CardView();
 
