@@ -214,7 +214,7 @@ namespace CardStacks {
      * @return bool if all card are visible
      */
     bool RemainingPack::allCardVisible() {
-        return current_card == card_stack.size();
+        return current_card == (signed)card_stack.size();
     }
 
     /**
@@ -234,7 +234,7 @@ namespace CardStacks {
      * @brief Pop card where pointer is pointing.
      */
     void RemainingPack::popCurrent() {
-        if (card_stack.size() > current_card && current_card != -1){
+        if ((signed)card_stack.size() > current_card && current_card != -1){
             card_stack.erase(card_stack.begin() + current_card);
             current_card--;
         }

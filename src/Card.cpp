@@ -37,9 +37,9 @@ namespace card {
         Card::number = number;
     }
 
-    Card::Card(int number = 0, sign card_sign = SPADES):Card(number, card_sign, false){}
+    Card::Card(int number, sign card_sign):Card(number, card_sign, false){}
 
-    Card::Card(int number = 0, sign card_sign = SPADES, bool visible = false){
+    Card::Card(int number, sign card_sign, bool visible){
         this->number = number;
         this->card_sign = card_sign;
         this->visible = visible;

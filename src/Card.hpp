@@ -35,7 +35,7 @@ namespace card {
     public:
         bool operator ==(Card other);
         bool operator !=(Card other);
-        Card(int number, sign card_sign);
+        Card(int number = 0, sign card_sign = SPADES);
         Card(int number, sign card_sign, bool visible);
         void set_number(int number);
         void set_sign(sign card_sign);
