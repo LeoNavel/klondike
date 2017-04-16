@@ -8,6 +8,7 @@
 #include "workingpackview.h"
 #include "Card.hpp"
 #include "cardselection.h"
+#include "targetpackview.h"
 
 namespace Ui {
 class DeckView;
@@ -27,6 +28,7 @@ public:
 private:
     Ui::DeckView *ui;
     std::vector<WorkingPackView *> workingPacks;
+    std::vector<TargetPackView *> targetPacks;
 };
 
 #endif // DECKVIEW_H

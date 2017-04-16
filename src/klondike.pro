@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     cardview.cpp \
     remainingpackview.cpp \
     workingpackview.cpp \
-    cardselection.cpp
+    cardselection.cpp \
+    targetpackview.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -34,14 +35,16 @@ HEADERS  += mainwindow.h \
     cardview.h \
     remainingpackview.h \
     workingpackview.h \
-    cardselection.h
+    cardselection.h \
+    targetpackview.h
 
 FORMS    += mainwindow.ui \
     deckview.ui \
     cardview.ui \
     remainingpackview.ui \
     workingpackview.ui \
-    cardselection.ui
+    cardselection.ui \
+    targetpackview.ui
 
 RESOURCES += \
     icons.qrc

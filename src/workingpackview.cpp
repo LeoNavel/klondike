@@ -132,19 +132,10 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 return true;
             }
         } else {
-//            qDebug() << "tato";
-
-//            QMouseEvent * me = static_cast<QMouseEvent*>(e);
-//            qDebug() << me->pos();
             QPoint ep = mapToGlobal(selectionDelegate->pos());
             ep.setX(ep.x() + 20);
             ep.setY(ep.y() + 20);
             QPoint p = mapToGlobal(pos());
-//            qDebug() << ep;
-//            qDebug() << p;
-//            qDebug() << "rect " << rect();
-//            qDebug() << "rec1 " << selectionDelegate->pos();
-//            qDebug() << mapFrom(selectionDelegate, me->pos());
             if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
                 return false;
 //            qDebug() << "mam to";

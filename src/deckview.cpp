@@ -34,24 +34,12 @@ DeckView::DeckView(QWidget *parent) :
     ui->remainingCards->initWithStack(cardDeck);
     ui->remainingCards->selectionDelegate = cardSelection;
 
-
-//    CardView *cv1 = new CardView(this);
-//    cv1->setGeometry(QRect(0, 100, 200, 150));
-
-//    CardView *cv2 = new CardView(5, card::sign::HEART, this);
-//    cv2->setGeometry(QRect(160, 100, 200, 150));
-//    cv2->turnUp();
-
-//    CardView *cv3 = new CardView(10, card::sign::SPADES, this);
-//    cv3->setGeometry(QRect(160 * 2, 100, 200, 150));
-
-//    CardView *cv4 = new CardView(12, card::sign::DIAMONDS, this);
-//    cv4->setGeometry(QRect(160 * 3, 100, 200, 150));
-
-//    CardView *cv5 = new CardView(1, card::sign::CLUBS, this);
-//    cv5->setGeometry(QRect(160 * 4, 100, 200, 150));
-
-//    setCentralWidget()
+    for(int i = 0; i < 4; i++) {
+        TargetPackView * tpv = new TargetPackView(this);
+        tpv->selectionDelegate = cardSelection;
+        targetPacks.push_back(tpv);
+        cardSelection->installEventFilter(targetPacks[i]);
+    }
 }
 
 void DeckView::resizeEvent(QResizeEvent* event)
@@ -64,6 +52,16 @@ void DeckView::resizeEvent(QResizeEvent* event)
    ui->remainingCards->setGeometry(nr);
 
    int index = 0;
+   for(TargetPackView * pack: targetPacks){
+       int pw = size.width() / 7;
+       QRect npr = QRect(size.width() - 5 - index * (pw + 10) - pw, 5, pw, size.height() / 4);
+       pack->setGeometry(npr);
+       index++;
+   }
+
+
+
+   index = 0;
    int wid = (size.width() / 7) - 5;
    QPoint newTopLeft = nr.bottomLeft();
    newTopLeft.setY(newTopLeft.y() + 10);
@@ -74,6 +72,8 @@ void DeckView::resizeEvent(QResizeEvent* event)
 //       pack->setGeometry(QRect(newTopLeft,QSize((size.width() / 7) - 5, (size.height() / 4))));
 
    }
+
+
 
 }
 
