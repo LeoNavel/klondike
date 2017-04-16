@@ -69,15 +69,15 @@ void CardSelection::clear() {
     cards.clear();
 }
 
-CardStacks::GenericCardStack CardSelection::getAll(){
-    CardStacks::GenericCardStack gs = CardStacks::GenericCardStack();
+std::vector<card::Card> CardSelection::getAll(){
+    std::vector<card::Card> vc = std::vector<card::Card>();
     for(int i = cards.size()-1; i > -1; i--){
         CardView * c = cards[i];
-        gs.push(card::Card(c->get_number(), c->get_sign()));
+        vc.push_back(card::Card(c->get_number(), c->get_sign()));
     }
 //    clear();
 //    hide();
-    return gs;
+    return vc;
 }
 
 void CardSelection::setWpv(bool wpv){

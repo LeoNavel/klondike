@@ -148,10 +148,11 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
             if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
                 return false;
 //            qDebug() << "mam to";
-            CardStacks::GenericCardStack gs_p;
+            std::vector<card::Card> gs_p;
             gs_p = selectionDelegate->getAll();
             try {
-                push(gs_p.top());
+                for(auto c:gs_p)
+                    push(c);
             } catch (ErrorException err) {
                 qDebug() << err.get_message().c_str();
                 selectionDelegate->rollBack();

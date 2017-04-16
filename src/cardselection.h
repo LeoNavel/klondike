@@ -24,7 +24,7 @@ public:
     void setSourcePack(void * wpv);
     void push(card::Card c);
     void push(CardStacks::GenericCardStack stack);
-    CardStacks::GenericCardStack getAll();
+    std::vector<card::Card> getAll();
     void setOffset(QPoint p);
     void mouseMoveEvent(QMouseEvent *event);
     void rollBack();

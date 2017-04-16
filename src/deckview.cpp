@@ -26,6 +26,8 @@ DeckView::DeckView(QWidget *parent) :
 
         workingPacks[i]->push_invisible(cardDeck.topAndPop());
         workingPacks[i]->turn_invisible();
+
+        cardSelection->installEventFilter(workingPacks[i]);
     }
 
 
