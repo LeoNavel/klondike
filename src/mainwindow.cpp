@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     games.push_back(ui->framik);
 
     games[0]->setGeometry(this->rect());
+    games[0]->prepareDeck(0 + 1);
 
 //    ui->gridLayout->addWidget(all);
 //    ui->gridLayout->addLayout(new DeckView, 0, 1);
@@ -62,9 +63,17 @@ void MainWindow::on_actionMore_games_triggered()
     QString optionName = changeGamesNumberOption->text();
     if(optionName == moreGames) {
         changeGamesNumberOption->setText(oneGame);
-        games.push_back(new DeckView);
-        games.push_back(new DeckView);
-        games.push_back(new DeckView);
+        DeckView * ndv = new DeckView(this);
+        ndv->prepareDeck(2);
+        games.push_back(ndv);
+
+        ndv = new DeckView(this);
+        ndv->prepareDeck(3);
+        games.push_back(ndv);
+
+        ndv = new DeckView(this);
+        ndv->prepareDeck(4);
+        games.push_back(ndv);
 
         games[0]->setStyleSheet("background-color:#f00;");
         games[1]->setStyleSheet("background-color:#0f0;");

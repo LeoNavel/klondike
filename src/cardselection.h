@@ -29,6 +29,7 @@ public:
     void mouseMoveEvent(QMouseEvent *event);
     void rollBack();
     void setWpv(bool);
+    QPoint getOffset();
 //    void mousePressEvent(QMouseEvent * event);
     ~CardSelection();
 

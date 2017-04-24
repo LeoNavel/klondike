@@ -12,10 +12,17 @@ DeckView::DeckView(QWidget *parent) :
     this->cardSelection = new CardSelection(this);
     cardSelection->hide();
 
+
+
+
+
+}
+
+void DeckView::prepareDeck(unsigned char shuffles) {
     CardStacks::CardDeck cardDeck = CardStacks::CardDeck();
 
-    cardDeck.shuffleCards();
-
+    for(int i = 0; i < shuffles; i++)
+        cardDeck.shuffleCards();
 
     for(int i = 0; i < 7; i++){
         WorkingPackView * nwpv = new WorkingPackView(this);
@@ -38,7 +45,6 @@ DeckView::DeckView(QWidget *parent) :
         TargetPackView * tpv = new TargetPackView(this);
         tpv->selectionDelegate = cardSelection;
         targetPacks.push_back(tpv);
-//        cardSelection->installEventFilter(targetPacks[i]);
     }
 }
 
@@ -69,32 +75,10 @@ void DeckView::resizeEvent(QResizeEvent* event)
        newTopLeft.setX(nr.x() + (wid + 5) * index);
        pack->setGeometry(QRect(newTopLeft,QSize(wid, ((size.height() / 4) * 3 - 20))));
        index++;
-//       pack->setGeometry(QRect(newTopLeft,QSize((size.width() / 7) - 5, (size.height() / 4))));
-
    }
 
 
 
-}
-
-
-void DeckView::mouseReleaseEvent(QMouseEvent *e)
-{
-  if (e->button() == Qt::LeftButton)    // Left button...
-  {
-    // Do something related to the left button
-      qDebug() << "a";
-  }
-  else if (e->button() == Qt::RightButton)   // Right button...
-  {
-    // Do something related to the right button
-      qDebug() << "a";
-  }
-  else if (e->button() == Qt::MidButton)   // Middle button...
-  {
-    // Do something related to the middle button
-      qDebug() << "a";
-  }
 }
 
 DeckView::~DeckView()

@@ -128,6 +128,10 @@ void CardSelection::setOffset(QPoint p){
     offset = p;
 }
 
+QPoint CardSelection::getOffset() {
+    return offset;
+}
+
 CardSelection::~CardSelection()
 {
     delete ui;

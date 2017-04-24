@@ -21,7 +21,7 @@ class DeckView : public QFrame
 public:
     explicit DeckView(QWidget *parent = 0);
     void resizeEvent(QResizeEvent* event);
-    void mouseReleaseEvent(QMouseEvent *e);
+    void prepareDeck(unsigned char shuffles);
     CardSelection * cardSelection;
     ~DeckView();
 

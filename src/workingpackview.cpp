@@ -129,9 +129,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 selectionDelegate->setWpv(true);
 
                 QPixmap cursor_pixmap = selectionDelegate->grab();
-
                 QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
-//                DeckView * dv = static_cast<DeckView *>(&parent);
                 QApplication::setOverrideCursor(cursor_default);
 
                 update();
