@@ -20,7 +20,7 @@ public:
     explicit TargetPackView(QWidget *parent = 0);
     bool eventFilter(QObject *obj, QEvent *e);
     CardSelection * selectionDelegate;
-
+    void mouseReleaseEvent(QMouseEvent *e);
     void setGeometry(const QRect &r);
     void paintEvent(QPaintEvent * e);
     ~TargetPackView();

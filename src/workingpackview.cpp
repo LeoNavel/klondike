@@ -1,6 +1,6 @@
 #include "workingpackview.h"
 #include "ui_workingpackview.h"
-
+#include "deckview.h"
 WorkingPackView::WorkingPackView(QWidget *parent) :
     QFrame(parent),
     WorkingPack(),
@@ -80,7 +80,7 @@ void WorkingPackView::pop() {
 }
 
 bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
-    selectionDelegate->installEventFilter(this);
+//    selectionDelegate->installEventFilter(this);
     if(e->type() == QEvent::MouseButtonPress){
         if(selectionDelegate->isEmpty()){
 
@@ -115,7 +115,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 while(!gs1.isEmpty())
                     gs.push(gs1.topAndPop());
                 qDebug() << gs.size();
-                selectionDelegate->show();
+//                selectionDelegate->show();
                 selectionDelegate->setStyleSheet("background-color: #ff0;");
                 QMouseEvent * me = static_cast<QMouseEvent*>(e);
                 QPoint p = this->pos();
@@ -128,17 +128,36 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 selectionDelegate->setOffset(me->pos());
                 selectionDelegate->setWpv(true);
 
+                QPixmap cursor_pixmap = selectionDelegate->grab();
+
+                QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
+//                DeckView * dv = static_cast<DeckView *>(&parent);
+                QApplication::setOverrideCursor(cursor_default);
+                selectionDelegate->hide();
+
                 update();
                 return true;
             }
         } else {
-            QPoint ep = mapToGlobal(selectionDelegate->pos());
-            ep.setX(ep.x() + 20);
-            ep.setY(ep.y() + 20);
-            QPoint p = mapToGlobal(pos());
-            if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
-                return false;
+            return false;
+        }
+    }
+    return QWidget::eventFilter(obj, e);
+}
+
+void WorkingPackView::mouseReleaseEvent(QMouseEvent *e){
+    if (e->button() == Qt::LeftButton) {
+        if(!selectionDelegate->isEmpty()){
+            QMouseEvent * me = static_cast<QMouseEvent*>(e);
+//            QPoint p = mapToGlobal
+//            QPoint ep = mapToGlobal(selectionDelegate->pos());
+//            ep.setX(ep.x() + 20);
+//            ep.setY(ep.y() + 20);
+//            QPoint p = mapToGlobal(pos());
+//            if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
+//                return false;
 //            qDebug() << "mam to";
+//            qDebug() << "clickik";
             std::vector<card::Card> gs_p;
             gs_p = selectionDelegate->getAll();
             try {
@@ -147,6 +166,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
             } catch (ErrorException err) {
                 qDebug() << err.get_message().c_str();
                 selectionDelegate->rollBack();
+                update();
 //            } catch (char const* err) {
 //                qDebug() << err;
             }
@@ -155,11 +175,10 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
 //            selectionDelegate->update();
 //            update();
 //            repaint();
-            return true;
-
+            QApplication::restoreOverrideCursor();
+//            return true;
         }
     }
-    return QWidget::eventFilter(obj, e);
 }
 
 WorkingPackView::~WorkingPackView()

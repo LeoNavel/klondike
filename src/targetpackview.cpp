@@ -28,38 +28,50 @@ void TargetPackView::setGeometry(const QRect &r) {
 }
 
 bool TargetPackView::eventFilter(QObject *obj, QEvent *e) {
-    if(e->type() == QEvent::MouseButtonPress){
-        if(!selectionDelegate->isEmpty()){
-            QPoint ep = mapToGlobal(selectionDelegate->pos());
-            ep.setX(ep.x() + 20);
-            ep.setY(ep.y() + 20);
-            QPoint p = mapToGlobal(pos());
-            if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
-                return false;
-            std::vector<card::Card> gs_p;
-            gs_p = selectionDelegate->getAll();
-            if(gs_p.size() > 1)
-                return false;
-            try {
-                card::Card c = gs_p[0];
-                push(c);
-                currentCardView->set_number(c.get_number());
-                currentCardView->set_sign(c.get_sign());
-            } catch (ErrorException err) {
-                qDebug() << err.get_message().c_str();
-                selectionDelegate->rollBack();
-            }
-            selectionDelegate->clear();
-            selectionDelegate->hide();
-            update();
-            return true;
-
-        }
-    }
+    qDebug() << "tuto som";
 
 
     return QWidget::eventFilter(obj, e);
 }
+
+void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
+{
+  if (e->button() == Qt::LeftButton)    // Left button...
+  {
+      if(!selectionDelegate->isEmpty()){
+//            QPoint ep = mapToGlobal(selectionDelegate->pos());
+//            ep.setX(ep.x() + 20);
+//            ep.setY(ep.y() + 20);
+//            QPoint p = mapToGlobal(pos());
+//            if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
+//                return false;
+          std::vector<card::Card> gs_p;
+          gs_p = selectionDelegate->getAll();
+          if(gs_p.size() > 1)
+              selectionDelegate->rollBack();
+          else {
+              try {
+                  card::Card c = gs_p[0];
+                  push(c);
+                  currentCardView->set_number(c.get_number());
+                  currentCardView->set_sign(c.get_sign());
+              } catch (ErrorException err) {
+                  qDebug() << err.get_message().c_str();
+
+              }
+          }
+
+          QApplication::restoreOverrideCursor();
+          selectionDelegate->clear();
+          selectionDelegate->hide();
+          update();
+
+      }
+  }
+
+
+}
+
 
 TargetPackView::~TargetPackView()
 {

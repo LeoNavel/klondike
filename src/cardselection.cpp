@@ -96,12 +96,14 @@ void CardSelection::rollBack() {
         for(int i = cards.size()-1; i > -1; i--){
             wpv->push(card::Card(cards[i]->get_number(), cards[i]->get_sign(), true));
         }
+        wpv->update();
     } else {
         RemainingPackView * rpv = static_cast<RemainingPackView *>(sourcePack);
         CardView * vw = cards[0];
         rpv->insertCurrent(card::Card(vw->get_number(), vw->get_sign(), true));
         rpv->update();
     }
+
     clear();
     hide();
 }

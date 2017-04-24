@@ -27,7 +27,7 @@ DeckView::DeckView(QWidget *parent) :
         workingPacks[i]->push_invisible(cardDeck.topAndPop());
         workingPacks[i]->turn_invisible();
 
-        cardSelection->installEventFilter(workingPacks[i]);
+//        cardSelection->installEventFilter(workingPacks[i]);
     }
 
 
@@ -38,7 +38,7 @@ DeckView::DeckView(QWidget *parent) :
         TargetPackView * tpv = new TargetPackView(this);
         tpv->selectionDelegate = cardSelection;
         targetPacks.push_back(tpv);
-        cardSelection->installEventFilter(targetPacks[i]);
+//        cardSelection->installEventFilter(targetPacks[i]);
     }
 }
 

@@ -26,11 +26,15 @@ void RemainingPackView::nextCard() {
 
 bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
     if(obj == ui->frame && e->type() == QEvent::MouseButtonPress){
+        if(!selectionDelegate->isEmpty())
+            return false;
         if(allCardVisible()){
             turnPack();
             update();
-        } else
+        } else{
             nextCard();
+            update();
+        }
         return true;
     }
     if(obj == currentCardView && e->type() == QEvent::MouseButtonPress){
@@ -49,7 +53,11 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
             selectionDelegate->raise();
             selectionDelegate->setOffset(me->pos());
             selectionDelegate->setWpv(false);
-            selectionDelegate->show();
+//            selectionDelegate->show();
+            QPixmap cursor_pixmap = selectionDelegate->grab();
+
+            QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
+            QApplication::setOverrideCursor(cursor_default);
             update();
         } else {
             qDebug() << "chyba";

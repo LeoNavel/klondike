@@ -26,6 +26,7 @@ public:
     void pop();
     void push(card::Card card);
     CardSelection * selectionDelegate;
+    void mouseReleaseEvent(QMouseEvent *e);
     ~WorkingPackView();
 
 private:
