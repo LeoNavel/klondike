@@ -64,9 +64,6 @@
    <property name="text">
     <string>undo</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
-   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
