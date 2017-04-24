@@ -45,12 +45,27 @@
     </property>
     <addaction name="actionMore_games"/>
    </widget>
+   <widget class="QMenu" name="menuUndo">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+   </widget>
    <addaction name="menuFILE"/>
+   <addaction name="menuUndo"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMore_games">
    <property name="text">
     <string>More games</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
    </property>
   </action>
  </widget>

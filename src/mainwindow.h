@@ -33,6 +33,8 @@ private slots:
 
     void on_actionMore_games_triggered();
 
+    void on_actionUndo_triggered();
+
 private:
     Ui::MainWindow *ui;
     myDialog *mDialog;
