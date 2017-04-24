@@ -24,6 +24,7 @@ public:
     void setGeometry(const QRect &r);
     bool eventFilter(QObject *obj, QEvent *e);
     void paintEvent(QPaintEvent *e);
+    void mousePressEvent(QMouseEvent *e);
     void nextCard();
     CardSelection * selectionDelegate;
     ~RemainingPackView();

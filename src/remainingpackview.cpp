@@ -60,7 +60,9 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
             QApplication::setOverrideCursor(cursor_default);
             update();
         } else {
-            qDebug() << "chyba";
+            selectionDelegate->rollBack();
+            selectionDelegate->clear();
+            QApplication::restoreOverrideCursor();
         }
         return true;
     }
@@ -107,6 +109,15 @@ void RemainingPackView::setGeometry(const QRect &r) {
     backCard->setGeometry(QRect(QPoint(0,0), currentCardView->rect().size()));
 }
 
+void RemainingPackView::mousePressEvent(QMouseEvent *e){
+    if (e->button() == Qt::LeftButton) {
+        if(!selectionDelegate->isEmpty()) {
+            selectionDelegate->rollBack();
+            selectionDelegate->clear();
+            QApplication::restoreOverrideCursor();
+        }
+    }
+}
 
 RemainingPackView::~RemainingPackView()
 {

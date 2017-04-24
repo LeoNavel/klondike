@@ -8,6 +8,8 @@ CardSelection::CardSelection(QWidget *parent) :
     ui(new Ui::CardSelection)
 {
     ui->setupUi(this);
+    setObjectName("CardSelection");
+    setStyleSheet("#CardSelection{background-color: rgba(1,1,1,0); border:none}");
 }
 
 void CardSelection::paintEvent(QPaintEvent *e){

@@ -116,13 +116,13 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                     gs.push(gs1.topAndPop());
                 qDebug() << gs.size();
 //                selectionDelegate->show();
-                selectionDelegate->setStyleSheet("background-color: #ff0;");
                 QMouseEvent * me = static_cast<QMouseEvent*>(e);
+
+                selectionDelegate->push(gs);
                 QPoint p = this->pos();
                 p = QPoint(p.x(), p.y() + cp.y());
-                selectionDelegate->setGeometry(QRect(p,QSize(130,300)));
+                selectionDelegate->setGeometry(QRect(p, size()));
                 qDebug() << me->pos();
-                selectionDelegate->push(gs);
                 selectionDelegate->raise();
                 selectionDelegate->setSourcePack(this);
                 selectionDelegate->setOffset(me->pos());
@@ -133,7 +133,6 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
 //                DeckView * dv = static_cast<DeckView *>(&parent);
                 QApplication::setOverrideCursor(cursor_default);
-                selectionDelegate->hide();
 
                 update();
                 return true;
