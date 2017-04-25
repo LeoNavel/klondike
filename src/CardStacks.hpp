@@ -78,6 +78,7 @@ namespace CardStacks{
         card::Card topInvisible();
 
         void turn_invisible();
+        void turn_back_invisible();
 
         void print();
     };
@@ -97,9 +98,11 @@ namespace CardStacks{
         card::Card currentCard(); // na zistenie aka karta je current
         void insertCurrent(card::Card);
         void nextCard(); // na zobrazenie dalsej karty (treba riesit aj to ked uz budu vsetky pretocene)
+        void prevCard(); // predchadzajuca karta
         bool allCardVisible(); // na zistenie ci sa uz vsetky karty pretocili
 
         void turnPack();
+        void turnBack();
 
     };
 

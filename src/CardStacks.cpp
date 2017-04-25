@@ -203,6 +203,12 @@ namespace CardStacks {
         GenericCardStack::printContent();
     }
 
+    void WorkingPack::turn_back_invisible() {
+        card::Card top_card = this->topInvisible();
+        top_card.turnDown();
+        GenericCardStack::push(top_card);
+    }
+
     /**
      * @brief Constructor
      */
@@ -227,10 +233,21 @@ namespace CardStacks {
     }
 
     /**
+     * @brief Moving pointer to previous card.
+     */
+    void RemainingPack::prevCard() {
+        current_card--;
+    }
+
+    /**
      * @brief Set card pointer to 1 card befora start
      */
     void RemainingPack::turnPack() {
         current_card = -1;
+    }
+
+    void RemainingPack::turnBack() {
+        current_card = static_cast<signed>(card_stack.size());
     }
 
     /**
@@ -238,7 +255,7 @@ namespace CardStacks {
      * @return bool if all card are visible
      */
     bool RemainingPack::allCardVisible() {
-        return current_card == (signed)card_stack.size();
+        return current_card == static_cast<signed>(card_stack.size());
     }
 
     /**

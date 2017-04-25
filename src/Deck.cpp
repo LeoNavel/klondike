@@ -1,4 +1,4 @@
-
+#include "Error.hpp"
 #include "Deck.hpp"
 
 using namespace CardStacks;
@@ -45,4 +45,33 @@ Deck::~Deck() {
         targetPacks.pop_back();
     }
 
+}
+
+void Deck::turn_card(int id_work_pack) {
+    if (!(id_work_pack < 7) and (id_work_pack >= 0)) throw ErrorException(E_OUT_OF_RANGE, "id work pack is not in stacks <Deck::turn_card(int id_work_pack)>");
+    workingPacks[id_work_pack]->turn_invisible();
+}
+
+void Deck::force_turn_card(int id_work_pack) {
+    workingPacks[id_work_pack]->turn_back_invisible();
+}
+
+void Deck::get_next_remmaining_card() {
+    remaining_pack->nextCard();
+}
+
+void Deck::get_previous_remaining_card() {
+    remaining_pack->prevCard();
+}
+
+void Deck::roll_rem_pack() {
+    remaining_pack->turnPack();
+}
+
+void Deck::roll_back_rem_pack() {
+    remaining_pack->turnBack();
+}
+
+void Deck::move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) {
+    return;
 }

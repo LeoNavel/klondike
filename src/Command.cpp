@@ -66,16 +66,22 @@ void Command::undo_command() {
 
     switch (last_cmd.type){
         case CMD_TYPE_MOVE:
+            deck->move_from_to(
+                    last_cmd.command.destination_stack,
+                    last_cmd.command.source_stack,
+                    last_cmd.command.num_of_cards
+            );
             break;
         case CMD_TYPE_TURN:
             deck->force_turn_card(last_cmd.command.destination_stack.id_stack);
             break;
         case CMD_TYPE_ROLL:
+            deck->roll_back_rem_pack();
             break;
         case CMD_TYPE_NEXT:
             deck->get_previous_remaining_card();
             break;
         default:
-            throw ErrorException(234,"Unknown command");
+            throw ErrorException(E_UNKNOWN_COMMAND,"Unknown command");
     }
 }

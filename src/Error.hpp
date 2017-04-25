@@ -12,6 +12,8 @@
 #define E_PUSH_ON_INVISIBLE         7
 #define E_NOT_VISIBLE               8
 #define E_NOT_INVISIBLE             9
+#define E_UNKNOWN_COMMAND           10
+#define E_OUT_OF_RANGE              11
 
 
 class ErrorException {
