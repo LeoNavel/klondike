@@ -19,12 +19,12 @@ typedef struct {
 typedef struct {
     int type;
     cmd_t command;
-} inner_cmt_t;
+} inner_cmd_t;
 
 class Command {
 private:
     Deck *deck;
-    std::vector<inner_cmt_t> previous_commands;
+    std::vector<inner_cmd_t> previous_commands;
 
 
 public:

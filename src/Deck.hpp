@@ -5,11 +5,6 @@
 #include <iostream>
 #include "CardStacks.hpp"
 
-#define WORKING 0
-#define REMMAINING 1
-#define TARGET 2
-
-
 typedef struct {
     int type_stack;
     int id_stack;
@@ -39,11 +34,49 @@ public:
      */
     void prepareDeck(unsigned char shuffles);
 
+    /**
+     * Move n card from stack src to stack dst, if it is possible.
+     * Throw exception on error.
+     * @param src
+     * @param dst
+     * @param num_of_cards
+     */
     void move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards);
 
+    /**
+     * Make card visible on working pack with id 'id_stack'.
+     * Counting from 0.
+     * Check if card is already visible.
+     * @param id_work_pack
+     */
     void turn_card(int id_work_pack);
 
+    /**
+     * same as turn_card, but with out check.
+     * @param id_work_pack
+     */
+    void force_turn_card(int id_work_pack);
+
+    /**
+     * If remaining pack is o the end, you can turn pack tiwh this function and go to
+     * begining of pack.
+     */
+    void roll_rem_pack();
+
+    /**
+     * Get remaining pack back to end.
+     */
+    void roll_back_rem_pack();
+
+    /**
+     * Show next card in remaining pack.
+     */
     void get_next_remmaining_card();
+
+    /**
+     * Show previous card in remaining pack.
+     */
+    void get_previous_remaining_card();
 };
 
 

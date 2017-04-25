@@ -14,6 +14,11 @@
 #include <vector>
 #include "Card.hpp"
 
+#define WORKING_STACK 0
+#define REMMAINING_STACK 1
+#define TARGET_STACK 2
+
+
 /**
  * This is sepaate namespace for stacks
  */
