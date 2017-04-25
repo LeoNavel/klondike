@@ -95,8 +95,12 @@ int main(){
         card::Card card3(3, card::DIAMONDS);
 
         working_pack.push_invisible(card1);
+        working_pack.push_invisible(card1);
+        working_pack.push_invisible(card1);
         working_pack.turn_invisible();
+        card2.turnUp();
         working_pack.push(card2);
+        card3.turnUp();
         working_pack.push(card3);
 
         //pushing picovinas
