@@ -8,6 +8,11 @@
 #define E_WORK_PACK_PUSH            3
 #define E_REM_PACK_POP              4
 #define E_POP_FROM_EMPTY_STACK      5
+#define E_POP_INVISIBLE             6
+#define E_PUSH_ON_INVISIBLE         7
+#define E_NOT_VISIBLE               8
+#define E_NOT_INVISIBLE             9
+
 
 class ErrorException {
 private:
