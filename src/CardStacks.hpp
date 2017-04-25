@@ -15,7 +15,7 @@
 #include "Card.hpp"
 
 #define WORKING_STACK 0
-#define REMMAINING_STACK 1
+#define REMAINING_STACK 1
 #define TARGET_STACK 2
 
 

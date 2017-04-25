@@ -41,7 +41,7 @@ public:
      * @param dst
      * @param num_of_cards
      */
-    void move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards);
+    void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards);
 
     /**
      * Make card visible on working pack with id 'id_stack'.

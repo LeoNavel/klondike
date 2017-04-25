@@ -72,6 +72,23 @@ void Deck::roll_back_rem_pack() {
     remaining_pack->turnBack();
 }
 
-void Deck::move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) {
-    return;
+void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
+    GenericCardStack tmp_stack = GenericCardStack();
+
+    switch (src.type_stack){
+        case TARGET_STACK:
+
+            break;
+        case WORKING_STACK:
+
+            break;
+        case REMAINING_STACK:
+            if (num_of_cards < 2) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from TARGET_STACK");
+            tmp_stack.push(remaining_pack->currentCard());
+            break;
+
+
+    }
+
+
 }
