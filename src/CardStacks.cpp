@@ -63,7 +63,8 @@ namespace CardStacks {
      */
     void GenericCardStack::printContent() {
         for (auto &i:card_stack) {
-            std::cout << "card-color:" << i.get_sign() << "  Number:" << i.get_number() << std::endl;
+            std::cout << "card-color:" << i.get_sign() << "  Number:" << i.get_number() <<
+                      "visible : "<< i.isTurnedUp() << std::endl;
         }
     }
 
@@ -107,24 +108,30 @@ namespace CardStacks {
      * @pre Color_top != Color_new_card and top_card_num = new_card_num + 1
      */
     void WorkingPack::push(card::Card card) {
-        if (visible_cards.isEmpty() && invisible_cards.isEmpty()) {
+        if (GenericCardStack::isEmpty()) {
             if (card.get_number() == card::KING) {
-                visible_cards.push(card);
+                GenericCardStack::push(card);
             } else throw ErrorException(E_WORK_PACK_PUSH, "First card might be king");
         } else {
             int tmp;
-            card::Card top_card = visible_cards.top();
+            card::Card top_card = GenericCardStack::top();
+            if (!GenericCardStack::top().isTurnedUp()){
+                throw ErrorException(E_PUSH_ON_INVISIBLE, "You cannot push card on invisible");
+            }
             if (card::get_card_color(top_card) != card::get_card_color(card) &&
                     (tmp=(card.get_number() + 1)) == top_card.get_number())
             {
-                visible_cards.push(card);
+                GenericCardStack::push(card);
             }
             else throw ErrorException(E_WORK_PACK_PUSH, "Color match or numbers of cards are not in order");
         }
     }
 
     bool WorkingPack::anyVisible() {
-        return visible_cards.size() > 0;
+        if (card_stack.size() > 0){
+            return card_stack[card_stack.size() -1].isTurnedUp();
+        }
+        return false;
     }
 
     /**
@@ -132,16 +139,18 @@ namespace CardStacks {
      * @param card Card
      */
     void WorkingPack::push_invisible(card::Card card) {
-        invisible_cards.push(card);
+        card.turnDown();
+        GenericCardStack::push(card);
     }
 
     /**
      * @brief Removing card from visible cards.
      */
     void WorkingPack::pop() {
-        if (!visible_cards.isEmpty()) {
-            visible_cards.pop();
+        if (GenericCardStack::top().isTurnedUp()){
+            return GenericCardStack::pop();
         }
+        throw ErrorException(E_POP_INVISIBLE,"Poping invisible <WorkingPack::pop() >");
     }
 
     /**
@@ -149,8 +158,9 @@ namespace CardStacks {
      * @pre There are no visible cards.
      */
     void WorkingPack::popInvisible() {
-        if (!invisible_cards.isEmpty() && visible_cards.isEmpty()) {
-            invisible_cards.pop();
+        card::Card top_card = GenericCardStack::top();
+        if (!top_card.isTurnedUp()){
+            GenericCardStack::pop();
         }
         else throw ErrorException(E_WORK_PACK_POP, "popping invisible card over visible");
     }
@@ -160,7 +170,11 @@ namespace CardStacks {
      * @return Card
      */
     card::Card WorkingPack::topVisible() {
-        return visible_cards.top();
+        card::Card top_card = GenericCardStack::top();
+        if (top_card.isTurnedUp()){
+            return top_card;
+        }
+        else throw ErrorException(E_NOT_VISIBLE, "There is no visible card");
     }
 
     /**
@@ -168,15 +182,25 @@ namespace CardStacks {
      * @return Card
      */
     card::Card WorkingPack::topInvisible() {
-        return invisible_cards.top();
-    }
+        card::Card top_card = GenericCardStack::top();
+        if (!top_card.isTurnedUp()){
+            return top_card;
+        }
+        else throw ErrorException(E_NOT_INVISIBLE, "There is no invisible card");    }
 
     /**
      * @brief Get card from invisible and put it to visible.
      * @pre Visible card stack si empty
      */
     void WorkingPack::turn_invisible() {
-        visible_cards.push(invisible_cards.topAndPop());
+        card::Card top_card = this->topInvisible();
+        top_card.turnUp();
+        GenericCardStack::push(top_card);
+    }
+
+    void WorkingPack::print() {
+        std::cout << "Working pack : " << std::endl;
+        GenericCardStack::printContent();
     }
 
     /**

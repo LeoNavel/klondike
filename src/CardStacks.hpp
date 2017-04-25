@@ -59,11 +59,7 @@ namespace CardStacks{
     };
 
 
-    class WorkingPack{
-    private:
-        GenericCardStack invisible_cards;
-        GenericCardStack visible_cards;
-
+    class WorkingPack : public GenericCardStack{
     public:
         void push(card::Card card);
         void push_invisible(card::Card card);
@@ -77,6 +73,8 @@ namespace CardStacks{
         card::Card topInvisible();
 
         void turn_invisible();
+
+        void print();
     };
 
 
