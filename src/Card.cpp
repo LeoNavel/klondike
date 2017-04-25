@@ -65,4 +65,8 @@ namespace card {
         this->visible = true;
     }
 
+    void Card::turnDown() {
+        this->visible = false;
+    }
+
 }

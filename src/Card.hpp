@@ -43,6 +43,7 @@ namespace card {
         sign get_sign() const;
         bool isTurnedUp();
         void turnUp();
+        void turnDown();
     };
 
     /**
