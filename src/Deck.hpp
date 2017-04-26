@@ -48,13 +48,13 @@ public:
      * Save game into configuration file.
      * @param output_file Name of file.
      */
-    void save(std::string output_file);
+    void save(std::string output_file); // TODO
 
     /**
      * Load game from configuration file.
      * @param input_file Name of file.
      */
-    void load(std::string input_file){}
+    void load(std::string input_file){} //TODO
 
     /**
      * This function creates a deck of cards, shuffle cards 'shuffles' times and
@@ -70,7 +70,7 @@ public:
      * @param dst
      * @param num_of_cards
      */
-    void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards);
+    void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards); // TODO and TEST
 
     /**
      * Make card visible on working pack with id 'id_stack'.
@@ -112,7 +112,7 @@ public:
      * @param stack ID of stack, see stack_id_t
      * @return GenericCardStack object with cards copied from specified stack.
      */
-    CardStacks::GenericCardStack get_pack(stack_id_t stack); // TODO
+    CardStacks::GenericCardStack get_pack(stack_id_t stack);
 
     /**
      * Get top card from specified target pack.
