@@ -21,11 +21,33 @@ public: // TODO after debugging make private
 
 
 public:
+    /**
+     * Initialize stacks for deck.
+     */
     Deck();
-    Deck(std::string); // TODO
+
+    /**
+     * Call Deck().
+     * Call load(input_file);
+     * @param input_file Configuration file with saved game.
+     */
+    Deck(std::string input_file);
+
+    /**
+     * Dele all dynamically allocated stacks.
+     */
     ~Deck();
 
+    /**
+     * Save game into configuration file.
+     * @param output_file Name of file.
+     */
     void save(std::string output_file);
+
+    /**
+     * Load game from configuration file.
+     * @param input_file Name of file.
+     */
     void load(std::string input_file);
 
     /**
@@ -79,13 +101,26 @@ public:
      */
     void get_previous_remaining_card();
 
-
+    /**
+     * Get copy of specified stack.
+     * @param stack ID of stack, see stack_id_t
+     * @return GenericCardStack object with cards copied from specified stack.
+     */
     CardStacks::GenericCardStack get_working_pac(stack_id_t stack); // TODO
 
+    /**
+     * Get top card from specified target pack.
+     * @param id_pack ID of remaining pack.
+     * @return Card
+     */
     card::Card get_top_card_from_target_pack(int id_pack);
 
+    /**
+     * Get ptr to remaining pack. It does't need to be specified, because this stack is only one.
+     * @return pointer to Remaining pack.
+     */
     CardStacks::RemainingPack *get_ptr_2_rem_pack();
 };
 
 
-#endif //DEcK
+#endif //DECK

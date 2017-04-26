@@ -32,6 +32,11 @@ Deck::Deck() {
     remaining_pack = new RemainingPack();
 }
 
+Deck::Deck(std::string input_file) {
+    this->Deck();
+    this->load(input_file);
+}
+
 Deck::~Deck() {
     delete remaining_pack;
 
@@ -92,3 +97,5 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
 
 }
+
+
