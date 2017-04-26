@@ -10,6 +10,8 @@
 #ifndef CARD
 #define CARD
 
+#include <iostream>
+
 namespace card {
 
 
@@ -44,6 +46,8 @@ namespace card {
         bool isTurnedUp();
         void turnUp();
         void turnDown();
+
+        std::string print_card();
     };
 
     /**

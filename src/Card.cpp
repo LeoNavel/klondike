@@ -69,4 +69,13 @@ namespace card {
         this->visible = false;
     }
 
+    std::string Card::print_card() {
+        std::string ret_str;
+        ret_str =  "card-color: " ;
+        ret_str += std::to_string(get_sign());
+        ret_str += "  Number: " + std::to_string(get_number());
+        ret_str += " visible : " + std::to_string(isTurnedUp());
+        return ret_str;
+    }
+
 }
