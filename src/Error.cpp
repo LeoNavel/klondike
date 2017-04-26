@@ -3,6 +3,9 @@
 ErrorException::ErrorException(int error, std::string message) {
     this->error_code = error;
     this->msg = message;
+    #ifdef DEBUG
+    std::cerr << "Error : " << error << " MSG : " << message << std::endl;
+    #endif
 }
 
 int ErrorException::get_err_code() {
