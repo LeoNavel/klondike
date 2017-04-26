@@ -21,19 +21,11 @@ void Deck::prepareDeck(unsigned char shuffles) {
 }
 
 Deck::Deck() {
-    for (int i = 0; i < 7; ++i) {
-        workingPacks.push_back(new CardStacks::WorkingPack());
-    }
-
-    for (int j = 0; j < 4; ++j) {
-        targetPacks.push_back(new CardStacks::TargetPack());
-    }
-
-    remaining_pack = new RemainingPack();
+    init();
 }
 
 Deck::Deck(std::string input_file) {
-    this->Deck();
+    init();
     this->load(input_file);
 }
 
@@ -98,4 +90,48 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
 }
 
+CardStacks::RemainingPack *Deck::get_ptr_2_rem_pack() {
+    return remaining_pack;
+}
 
+card::Card Deck::get_top_card_from_target_pack(int id_pack) {
+    return targetPacks[id_pack]->top();
+}
+
+CardStacks::GenericCardStack Deck::get_pack(stack_id_t stack) {
+    GenericCardStack gen_stack = GenericCardStack();
+    GenericCardStack *src_pack;
+    switch (stack.type_stack) {
+        case WORKING_STACK:
+            src_pack = workingPacks[stack.id_stack];
+            break;
+
+        case TARGET_STACK:
+            src_pack = targetPacks[stack.id_stack];
+            break;
+
+        case REMAINING_STACK:
+            src_pack = targetPacks[stack.id_stack];
+            break;
+
+        default:
+            throw ErrorException(E_UNKNOWN_STACK_TYPE, "Unknown stack type in <CardStacks::GenericCardStack Deck::get_pack(stack_id_t stack)>");
+            break;
+    }
+
+    for (int i = 0 ; i < src_pack->size(); i++) gen_stack.push((*src_pack)[i]);
+
+    return gen_stack;
+}
+
+void Deck::init() {
+    for (int i = 0; i < 7; ++i) {
+        workingPacks.push_back(new CardStacks::WorkingPack());
+    }
+
+    for (int j = 0; j < 4; ++j) {
+        targetPacks.push_back(new CardStacks::TargetPack());
+    }
+
+    remaining_pack = new RemainingPack();
+}

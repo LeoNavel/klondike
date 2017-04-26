@@ -18,16 +18,22 @@ public: // TODO after debugging make private
     std::vector<CardStacks::TargetPack *> targetPacks;
     CardStacks::RemainingPack *remaining_pack;
 
+private:
+    /**
+     * Initialize inner vectors of objects.
+     */
+    void init();
 
 
 public:
     /**
      * Initialize stacks for deck.
+     * Call init();
      */
     Deck();
 
     /**
-     * Call Deck().
+     * Call init().
      * Call load(input_file);
      * @param input_file Configuration file with saved game.
      */
@@ -48,7 +54,7 @@ public:
      * Load game from configuration file.
      * @param input_file Name of file.
      */
-    void load(std::string input_file);
+    void load(std::string input_file){}
 
     /**
      * This function creates a deck of cards, shuffle cards 'shuffles' times and
@@ -106,7 +112,7 @@ public:
      * @param stack ID of stack, see stack_id_t
      * @return GenericCardStack object with cards copied from specified stack.
      */
-    CardStacks::GenericCardStack get_working_pac(stack_id_t stack); // TODO
+    CardStacks::GenericCardStack get_pack(stack_id_t stack); // TODO
 
     /**
      * Get top card from specified target pack.

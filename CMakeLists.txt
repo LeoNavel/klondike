@@ -3,6 +3,8 @@ project(klondike)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_CXX_FLAGS -DDEBUG)
+
 set(SOURCE_FILES src/Card.hpp src/CardStacks.cpp src/CardStacks.hpp src/Card.cpp
         src/Error.cpp src/Error.hpp src/Deck.cpp src/Deck.hpp src/Command.cpp src/Command.hpp
         )

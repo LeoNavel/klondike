@@ -14,6 +14,7 @@
 #define E_NOT_INVISIBLE             9
 #define E_UNKNOWN_COMMAND           10
 #define E_OUT_OF_RANGE              11
+#define E_UNKNOWN_STACK_TYPE        12
 
 
 class ErrorException {
