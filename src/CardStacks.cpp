@@ -80,6 +80,10 @@ namespace CardStacks {
         }
     }
 
+    card::Card GenericCardStack::operator[](int i) {
+        return card_stack[i];
+    }
+
     /**
      * @brief Add card to stack, if preconditions are OK
      * @param card Card to add
