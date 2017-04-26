@@ -54,6 +54,8 @@ namespace CardStacks{
         // debug function
         void printContent();
 
+
+        card::Card operator[](int i);
     };
 
 

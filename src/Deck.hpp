@@ -22,6 +22,7 @@ public: // TODO after debugging make private
 
 public:
     Deck();
+    Deck(std::string); // TODO
     ~Deck();
 
     void save(std::string output_file);
@@ -77,6 +78,13 @@ public:
      * Show previous card in remaining pack.
      */
     void get_previous_remaining_card();
+
+
+    CardStacks::GenericCardStack get_working_pac(stack_id_t stack); // TODO
+
+    card::Card get_top_card_from_target_pack(int id_pack);
+
+    CardStacks::RemainingPack *get_ptr_2_rem_pack();
 };
 
 
