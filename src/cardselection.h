@@ -32,6 +32,8 @@ public:
     void mouseMoveEvent(QMouseEvent *event);
     void rollBack();
     void setWpv(bool);
+    bool isWpv();
+    void * getSourcePack();
     QPoint getOffset();
     DeckView * mainView = nullptr;
     void setMainView(DeckView *mainView);

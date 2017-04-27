@@ -18,6 +18,13 @@ DeckView::DeckView(QWidget *parent) :
     remainingPackView->selectionDelegate = cardSelection;
     remainingPackView->show();
 
+    for(int i = 0; i < 4; i++){
+        TargetPackView *tpv = new TargetPackView(this);
+        tpv->selectionDelegate = cardSelection;
+        tpv->show();
+        targetPacks.push_back(tpv);
+    }
+    QFrame::update();
 }
 
 void DeckView::getNext(){
@@ -27,11 +34,34 @@ void DeckView::turnRemainingCards(){
     controller->roll_rem_pack();
 }
 
+void DeckView::moveCards(RemainingPackView *from, TargetPackView *to, int count){
+    cmd_t cmd;
+    stack_id_t dest;
+    stack_id_t src;
+
+    src.type_stack = REMAINING_STACK;
+    src.id_stack = 0;
+
+    dest.type_stack = TARGET_STACK;
+    int i = 0;
+    for(TargetPackView *tpv: targetPacks){
+        if(tpv == to)
+            break;
+        i++;
+    }
+    src.id_stack = i;
+
+    cmd.num_of_cards = count;
+    cmd.source_stack = src;
+    cmd.destination_stack = dest;
+    controller->move_card(cmd);
+}
+
 void DeckView::update(CardStacks::RemainingPack *remainigPack) {
     remainingPackView->initWithStack(remainigPack);
-    qDebug() << "som tuta";
     QFrame::update();
 }
+
 
 //DeckView::DeckView(Controller *controller, QWidget *parent):
 //    QFrame(parent),
@@ -82,13 +112,13 @@ void DeckView::resizeEvent(QResizeEvent* event)
    QRect nr = QRect(ar.topLeft(), QSize((size.width() / 7) * 2 + 10, size.height() / 4));
    remainingPackView->setGeometry(nr);
 
-//   int index = 0;
-//   for(TargetPackView * pack: targetPacks){
-//       int pw = size.width() / 7;
-//       QRect npr = QRect(size.width() - 5 - index * (pw + 10) - pw, 5, pw, size.height() / 4);
-//       pack->setGeometry(npr);
-//       index++;
-//   }
+   int index = 0;
+   for(TargetPackView * pack: targetPacks){
+       int pw = size.width() / 7;
+       QRect npr = QRect(size.width() - 5 - index * (pw + 10) - pw, 5, pw, size.height() / 4);
+       pack->setGeometry(npr);
+       index++;
+   }
 
 
 
@@ -105,6 +135,7 @@ void DeckView::resizeEvent(QResizeEvent* event)
 
 
 }
+
 
 DeckView::~DeckView()
 {

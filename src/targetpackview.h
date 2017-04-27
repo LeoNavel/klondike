@@ -18,11 +18,12 @@ class TargetPackView : public QFrame, public CardStacks::TargetPack
 
 public:
     explicit TargetPackView(QWidget *parent = 0);
-    bool eventFilter(QObject *obj, QEvent *e);
+//    bool eventFilter(QObject *obj, QEvent *e);
     CardSelection * selectionDelegate;
     void mouseReleaseEvent(QMouseEvent *e);
     void setGeometry(const QRect &r);
     void paintEvent(QPaintEvent * e);
+    void setTopCard(card::Card *card);
     ~TargetPackView();
 
 private:

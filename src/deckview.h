@@ -29,6 +29,7 @@ public:
     virtual void update(CardStacks::RemainingPack *rp);
     void getNext();
     void turnRemainingCards();
+    void moveCards(RemainingPackView *from, TargetPackView * to, int count);
     ~DeckView();
 
 private:

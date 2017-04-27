@@ -8,8 +8,9 @@ Controller::Controller(Deck *deck, GenericView *view) {
     this->command = new Command(deck);
 
     CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
-    qDebug() << "blaha";
-    for(int i = 0; i < 22; i++)
+
+    rp->push(card::Card(1, card::sign::HEART));
+    for(int i = 0; i < 25; i++)
         get_next();
     view->update(rp);
 
@@ -17,8 +18,33 @@ Controller::Controller(Deck *deck, GenericView *view) {
 }
 
 void Controller::move_card(cmd_t cmd) {
-    command->move_card(cmd);
-    // todo update
+    qDebug() << "Moving with cards";
+    try{
+        command->move_card(cmd);
+    } catch(ErrorException e){
+        qDebug() << e.get_message().c_str();
+    }
+    switch(cmd.source_stack.type_stack){
+    case REMAINING_STACK:
+        break;
+    case TARGET_STACK:
+        break;
+    default:
+        CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
+        view->update(rp);
+        break;
+    }
+
+    switch (cmd.destination_stack.type_stack) {
+    case REMAINING_STACK:
+
+        break;
+    case TARGET_STACK:
+
+        break;
+    default:
+        break;
+    }
 }
 
 void Controller::turn_card(int id_stack) {
@@ -30,7 +56,6 @@ void Controller::turn_card(int id_stack) {
  * Show next card in remaining pack.
  */
 void Controller::get_next() {
-    qDebug() << "Getting next card...";
     try{
         command->get_next();
     } catch(ErrorException e){
@@ -48,7 +73,6 @@ void Controller::get_next() {
  * begining of pack.
  */
 void Controller::roll_rem_pack() {
-    qDebug() << "Rolling rem pack";
     try{
         command->roll_rem_pack();
     }  catch(ErrorException e){

@@ -44,6 +44,13 @@ void CardSelection::setGeometry(const QRect &r) {
     update();
 }
 
+bool CardSelection::isWpv(){
+    return this->wpv;
+}
+
+void * CardSelection::getSourcePack(){
+    return sourcePack;
+}
 
 bool CardSelection::isEmpty(){
     return cards.size() == 0;
