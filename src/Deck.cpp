@@ -111,7 +111,7 @@ CardStacks::GenericCardStack Deck::get_pack(stack_id_t stack) {
             break;
 
         case REMAINING_STACK:
-            src_pack = targetPacks[stack.id_stack];
+            src_pack = remaining_pack;
             break;
 
         default:

@@ -9,12 +9,15 @@
 #include "Card.hpp"
 #include "cardselection.h"
 #include "targetpackview.h"
+#include "Controller.hpp"
+#include "remainingpackview.h"
+#include "View.hpp"
 
 namespace Ui {
 class DeckView;
 }
 
-class DeckView : public QFrame
+class DeckView : public QFrame, public GenericView
 {
     Q_OBJECT
 
@@ -23,12 +26,16 @@ public:
     void resizeEvent(QResizeEvent* event);
     void prepareDeck(unsigned char shuffles);
     CardSelection * cardSelection;
+    virtual void update(CardStacks::RemainingPack *rp);
+    void getNext();
+    void turnRemainingCards();
     ~DeckView();
 
 private:
     Ui::DeckView *ui;
     std::vector<WorkingPackView *> workingPacks;
     std::vector<TargetPackView *> targetPacks;
+    RemainingPackView * remainingPackView;
 };
 
 #endif // DECKVIEW_H

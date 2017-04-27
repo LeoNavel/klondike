@@ -34,6 +34,10 @@ void CardSelection::paintEvent(QPaintEvent *e){
         c->show();
     }
 }
+void CardSelection::setMainView(DeckView * mainView){
+    this->mainView = mainView;
+}
+
 
 void CardSelection::setGeometry(const QRect &r) {
     QFrame::setGeometry(r);

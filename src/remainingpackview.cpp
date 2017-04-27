@@ -1,5 +1,6 @@
 #include "remainingpackview.h"
 #include "ui_remainingpackview.h"
+#include "deckview.h"
 
 RemainingPackView::RemainingPackView(QWidget *parent) :
     QFrame(parent),
@@ -12,15 +13,25 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
     backCard->setStyleSheet("background-color: rgba(1,1,1,0);");
     this->currentCardView = new CardView(1, card::sign::CLUBS, this);
     this->currentCardView->turnUp();
+
+//    this->
+
     ui->frame->installEventFilter(this);
     currentCardView->installEventFilter(this);
 //    setMouseTracking(true);
 
+//    for(int i = 0; i < 20; i++)
+//        nextCard();
 
 }
 
 void RemainingPackView::nextCard() {
-    CardStacks::RemainingPack::nextCard();
+    selectionDelegate->mainView->getNext();
+    update();
+}
+
+void RemainingPackView::turnPack(){
+    selectionDelegate->mainView->turnRemainingCards();
     update();
 }
 
@@ -28,13 +39,21 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
     if(obj == ui->frame && e->type() == QEvent::MouseButtonPress){
         if(!selectionDelegate->isEmpty())
             return false;
-        if(allCardVisible()){
-            turnPack();
-            update();
-        } else{
+        if(isEmpty())
+            return false;
+        if(!allCardVisible()){
             nextCard();
-            update();
+        } else {
+            turnPack();
         }
+//        selectionDelegate->mainView->cont
+//        if(allCardVisible()){
+//            turnPack();
+//            update();
+//        } else{
+//            nextCard();
+//            update();
+//        }
         return true;
     }
     if(obj == currentCardView && e->type() == QEvent::MouseButtonPress){
@@ -70,12 +89,27 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
 }
 
 
-void RemainingPackView::initWithStack(CardStacks::GenericCardStack stack){
-    GenericCardStack s1;
-    while(!stack.isEmpty())
-        s1.push(stack.topAndPop());
-    while(!s1.isEmpty())
-        RemainingPack::push(s1.topAndPop());
+void RemainingPackView::initWithStack(CardStacks::RemainingPack *stack){
+    while(isSetCurrent()){
+        popCurrent();
+    }
+    while(!isEmpty())
+        pop();
+
+    if(stack->isEmpty()){
+
+    } else {
+        for(unsigned int i = 0; i < stack->size(); i++){
+            card::Card c = (*stack)[i];
+            push(c);
+        }
+        if(stack->isSetCurrent()){
+            do{
+                RemainingPack::nextCard();
+            }while(stack->currentCard() != currentCard());
+        }
+    }
+
     update();
 }
 

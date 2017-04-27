@@ -145,7 +145,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
 void WorkingPackView::mouseReleaseEvent(QMouseEvent *e){
     if (e->button() == Qt::LeftButton) {
         if(!selectionDelegate->isEmpty()){
-            QMouseEvent * me = static_cast<QMouseEvent*>(e);
+//            QMouseEvent * me = static_cast<QMouseEvent*>(e);
 //            QPoint p = mapToGlobal
 //            QPoint ep = mapToGlobal(selectionDelegate->pos());
 //            ep.setX(ep.x() + 20);

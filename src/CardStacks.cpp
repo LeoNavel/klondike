@@ -259,7 +259,7 @@ namespace CardStacks {
      * @return bool if all card are visible
      */
     bool RemainingPack::allCardVisible() {
-        return current_card == static_cast<signed>(card_stack.size());
+        return current_card == static_cast<signed>(card_stack.size()-1);
     }
 
     /**

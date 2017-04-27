@@ -1,9 +1,22 @@
 #include "View.hpp"
 
-GenericView::GenericView(Controller *controller){
+
+void GenericView::update(CardStacks::RemainingPack *remainigPack){
+    qDebug() << "omg..";
+}
+
+void GenericView::update(CardStacks::TargetPack *targetPack){
+
+}
+
+void GenericView::update(CardStacks::WorkingPack *workingPack){
+
+}
+
+void GenericView::setController(Controller *controller){
     this->controller = controller;
 }
 
-void GenericView::update() {
+GenericView::~GenericView(){
 
 }

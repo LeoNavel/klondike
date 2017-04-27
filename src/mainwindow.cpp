@@ -11,10 +11,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    games.push_back(ui->framik);
+//    games.push_back(ui->framik);
+    Deck *theDeck = new Deck();
+    theDeck->prepareDeck(1);
+    DeckView *theView = new DeckView(this);
+    theView->setGeometry(this->rect());
+    Controller *theController = new Controller(theDeck, theView);
 
-    games[0]->setGeometry(this->rect());
-    games[0]->prepareDeck(0 + 1);
+
+    controllers.push_back(theController);
+
+//    games[0]->setGeometry(this->rect());
+//    games[0]->prepareDeck(0 + 1);
 
 //    ui->gridLayout->addWidget(all);
 //    ui->gridLayout->addLayout(new DeckView, 0, 1);
@@ -50,68 +58,68 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
 void MainWindow::on_actionMore_games_triggered()
 {
-    qDebug() << "blah";
-    QVBoxLayout *all = new QVBoxLayout;
-    all->setAlignment(Qt::AlignCenter);
+//    qDebug() << "blah";
+//    QVBoxLayout *all = new QVBoxLayout;
+//    all->setAlignment(Qt::AlignCenter);
 
-    QHBoxLayout *top = new QHBoxLayout;
+//    QHBoxLayout *top = new QHBoxLayout;
 
-//    top->setAlignment(Qt::AlignLeading);
-    QString moreGames = "More games";
-    QString oneGame = "One game";
-    QAction * changeGamesNumberOption = ui->menuBar->actions()[0]->menu()->actions()[0];
-    QString optionName = changeGamesNumberOption->text();
-    if(optionName == moreGames) {
-        changeGamesNumberOption->setText(oneGame);
-        DeckView * ndv = new DeckView(this);
-        ndv->prepareDeck(2);
-        games.push_back(ndv);
+////    top->setAlignment(Qt::AlignLeading);
+//    QString moreGames = "More games";
+//    QString oneGame = "One game";
+//    QAction * changeGamesNumberOption = ui->menuBar->actions()[0]->menu()->actions()[0];
+//    QString optionName = changeGamesNumberOption->text();
+//    if(optionName == moreGames) {
+//        changeGamesNumberOption->setText(oneGame);
+//        DeckView * ndv = new DeckView(this);
+//        ndv->prepareDeck(2);
+//        games.push_back(ndv);
 
-        ndv = new DeckView(this);
-        ndv->prepareDeck(3);
-        games.push_back(ndv);
+//        ndv = new DeckView(this);
+//        ndv->prepareDeck(3);
+//        games.push_back(ndv);
 
-        ndv = new DeckView(this);
-        ndv->prepareDeck(4);
-        games.push_back(ndv);
+//        ndv = new DeckView(this);
+//        ndv->prepareDeck(4);
+//        games.push_back(ndv);
 
-        games[0]->setStyleSheet("background-color:#f00;");
-        games[1]->setStyleSheet("background-color:#0f0;");
-        games[2]->setStyleSheet("background-color:#00f;");
-        games[3]->setStyleSheet("background-color:#0ff;");
+//        games[0]->setStyleSheet("background-color:#f00;");
+//        games[1]->setStyleSheet("background-color:#0f0;");
+//        games[2]->setStyleSheet("background-color:#00f;");
+//        games[3]->setStyleSheet("background-color:#0ff;");
 
 
-        top->addWidget(games[0]);
-        top->addWidget(games[1]);
+//        top->addWidget(games[0]);
+//        top->addWidget(games[1]);
 
-        QHBoxLayout *bot = new QHBoxLayout;
-        bot->addWidget(games[2]);
-        bot->addWidget(games[3]);
+//        QHBoxLayout *bot = new QHBoxLayout;
+//        bot->addWidget(games[2]);
+//        bot->addWidget(games[3]);
 
-        all->addLayout(top);
-        all->addLayout(bot);
+//        all->addLayout(top);
+//        all->addLayout(bot);
 
-        ui->gridLayout->addLayout(all, 0, 0);
-        games[0]->setGeometry(games[0]->rect());
-        games[1]->setGeometry(games[0]->rect());
-        games[2]->setGeometry(games[0]->rect());
-        games[3]->setGeometry(games[0]->rect());
+//        ui->gridLayout->addLayout(all, 0, 0);
+//        games[0]->setGeometry(games[0]->rect());
+//        games[1]->setGeometry(games[0]->rect());
+//        games[2]->setGeometry(games[0]->rect());
+//        games[3]->setGeometry(games[0]->rect());
 
-    } else {
-        changeGamesNumberOption->setText(moreGames);
-        qDebug() << "deleting";
+//    } else {
+//        changeGamesNumberOption->setText(moreGames);
+//        qDebug() << "deleting";
 
-        while(games.size() > 1) {
-            DeckView * item = games.at(games.size() - 1);
-            qDebug() << "bam";
-            games.pop_back();
-            delete item;
-        }
+//        while(games.size() > 1) {
+//            DeckView * item = games.at(games.size() - 1);
+//            qDebug() << "bam";
+//            games.pop_back();
+//            delete item;
+//        }
 
-        ui->gridLayout->addWidget(ui->framik);
+//        ui->gridLayout->addWidget(ui->framik);
 
-        games[0]->setGeometry(this->rect());
-    }
+//        games[0]->setGeometry(this->rect());
+//    }
 }
 
 

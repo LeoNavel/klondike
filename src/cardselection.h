@@ -1,12 +1,15 @@
+
+
 #ifndef CARDSELECTION_H
 #define CARDSELECTION_H
 
 #include <QFrame>
 #include <vector>
 #include "CardStacks.hpp"
+//#include "deckview.h"
 #include "cardview.h"
 #include <QDebug>
-
+class DeckView;
 namespace Ui {
 class CardSelection;
 }
@@ -30,6 +33,8 @@ public:
     void rollBack();
     void setWpv(bool);
     QPoint getOffset();
+    DeckView * mainView = nullptr;
+    void setMainView(DeckView *mainView);
 //    void mousePressEvent(QMouseEvent * event);
     ~CardSelection();
 

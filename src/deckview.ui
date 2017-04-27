@@ -19,31 +19,7 @@
   <property name="frameShadow">
    <enum>QFrame::Raised</enum>
   </property>
-  <widget class="RemainingPackView" name="remainingCards">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>91</width>
-     <height>101</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-  </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>RemainingPackView</class>
-   <extends>QFrame</extends>
-   <header>remainingpackview.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

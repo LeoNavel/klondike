@@ -7,6 +7,7 @@
 #include <QResizeEvent>
 #include "mydialog.h"
 #include "deckview.h"
+#include "Controller.hpp"
 #include <vector>
 
 namespace Ui {
@@ -39,6 +40,7 @@ private:
     Ui::MainWindow *ui;
     myDialog *mDialog;
     std::vector<DeckView *> games;
+    std::vector<Controller *> controllers;
 
 };
 

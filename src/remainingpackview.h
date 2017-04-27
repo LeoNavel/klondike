@@ -20,12 +20,13 @@ class RemainingPackView : public QFrame, public CardStacks::RemainingPack
 
 public:
     explicit RemainingPackView(QWidget *parent = 0);
-    void initWithStack(CardStacks::GenericCardStack stack);
+    void initWithStack(CardStacks::RemainingPack *stack);
     void setGeometry(const QRect &r);
     bool eventFilter(QObject *obj, QEvent *e);
     void paintEvent(QPaintEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void nextCard();
+    void turnPack();
     CardSelection * selectionDelegate;
     ~RemainingPackView();
 
@@ -36,6 +37,7 @@ private:
     QFrame * backCard;
 //    CardView * getCurrentCardView();
     CardView * currentCardView;
+    CardView * previousCard;
 //    std::vector<CardView *> turnedCards;
 };
 

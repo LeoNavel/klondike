@@ -4,6 +4,8 @@
 #include "Deck.hpp"
 #include "View.hpp"
 #include "Command.hpp"
+#include "QDebug"
+#include "Error.hpp"
 
 class Controller {
 private:
@@ -12,6 +14,8 @@ private:
     GenericView *view;
 
 public:
+
+    Controller(Deck *deck, GenericView *view);
     /**
      * Move 'num_of_cards' number of cards from 'source_stack' to 'destination_stack'
      * specified in command.
@@ -46,6 +50,8 @@ public:
     void save(std::string output_file);
 
     void load(std::string input_file);
+
+    ~Controller();
 
 };
 
