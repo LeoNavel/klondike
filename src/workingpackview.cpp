@@ -121,7 +121,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 selectionDelegate->push(gs);
                 QPoint p = this->pos();
                 p = QPoint(p.x(), p.y() + cp.y());
-                selectionDelegate->setGeometry(QRect(p, size()));
+                selectionDelegate->setGeometry(QRect(p, QWidget::size()));
                 qDebug() << me->pos();
                 selectionDelegate->raise();
                 selectionDelegate->setSourcePack(this);

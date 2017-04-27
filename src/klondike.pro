@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     remainingpackview.cpp \
     workingpackview.cpp \
     cardselection.cpp \
-    targetpackview.cpp
+    targetpackview.cpp \
+    Command.cpp \
+    Deck.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -36,7 +38,11 @@ HEADERS  += mainwindow.h \
     remainingpackview.h \
     workingpackview.h \
     cardselection.h \
-    targetpackview.h
+    targetpackview.h \
+    Deck.hpp \
+    Command.hpp \
+    View.hpp \
+    Controller.hpp
 
 FORMS    += mainwindow.ui \
     deckview.ui \

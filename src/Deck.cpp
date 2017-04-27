@@ -119,7 +119,7 @@ CardStacks::GenericCardStack Deck::get_pack(stack_id_t stack) {
             break;
     }
 
-    for (int i = 0 ; i < src_pack->size(); i++) gen_stack.push((*src_pack)[i]);
+    for (unsigned int i = 0 ; i < src_pack->size(); i++) gen_stack.push((*src_pack)[i]);
 
     return gen_stack;
 }
