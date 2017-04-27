@@ -5,6 +5,8 @@
 class Controller; // TODO try to compile
 
 class GenericView {
+private:
+    Controller * controller;
 public:
     GenericView(Controller *controller);
     ~GenericView();

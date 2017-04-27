@@ -34,5 +34,6 @@ cmake-build-debug
 
 #fuck user
 *klondike.pro.user*
+build-klondike-Desktop-Debug/
 #macos
 .DS_Store

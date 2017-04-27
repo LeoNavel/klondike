@@ -17,30 +17,30 @@ public:
      * specified in command.
      * @param command
      */
-    void move_card(cmd_t cmd) {command->move_card(cmd);}
+    void move_card(cmd_t cmd);
 
     /**
      * Make card visible on working pack with id 'id_stack'.
      * Counting from 0.
      * @param id_stack
      */
-    void turn_card(int id_stack) {command->turn_card(id_stack);}
+    void turn_card(int id_stack);
 
     /**
      * Show next card in remaining pack.
      */
-    void get_next() {command->get_next();}
+    void get_next();
 
     /**
      * If remaining pack is o the end, you can turn pack tiwh this function and go to
      * begining of pack.
      */
-    void roll_rem_pack() {command->roll_rem_pack();}
+    void roll_rem_pack();
 
     /**
      * Revert previous commands.
      */
-    void undo_command() {command->undo_command();};
+    void undo_command();
 
 
     void save(std::string output_file);

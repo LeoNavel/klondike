@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     cardselection.cpp \
     targetpackview.cpp \
     Command.cpp \
-    Deck.cpp
+    Deck.cpp \
+    Controller.cpp \
+    View.cpp
 
 
 HEADERS  += mainwindow.h \
