@@ -70,6 +70,28 @@ int main(){
     std::cout << "w1" << std::endl;
     deck->workingPacks[1]->printContent();
 
+
+    card::Card carda = card::Card(1, card::DIAMONDS, true);
+    card::Card card2 = card::Card(2, card::DIAMONDS, true);
+    card::Card card3d = card::Card(3, card::DIAMONDS, true);
+
+
+    deck->workingPacks[3]->force_push(carda);
+    deck->workingPacks[4]->force_push(card2);
+    deck->workingPacks[5]->force_push(card3d);
+
+
+    std::cout <<"target pack 0"<< std::endl;
+    deck->targetPacks[0]->printContent();
+
+
+    deck->move_from_to(StackID(WORKING_STACK, 3),StackID(TARGET_STACK, 0),1);
+    deck->move_from_to(StackID(WORKING_STACK, 4),StackID(TARGET_STACK, 0),1);
+    deck->move_from_to(StackID(WORKING_STACK, 5),StackID(TARGET_STACK, 0),1);
+
+    std::cout <<"target pack 0"<< std::endl;
+    deck->targetPacks[0]->printContent();
+
     delete cmd;
     delete deck;
     return EXIT_SUCCESS;

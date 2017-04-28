@@ -8,8 +8,15 @@
 typedef struct {
     int type_stack;
     int id_stack;
+
 } stack_id_t;
 
+class StackID {
+public:
+    int type_stack;
+    int id_stack;
+    StackID(int type, int id):type_stack(type),id_stack(id){};
+};
 
 class Deck {
 
@@ -71,6 +78,8 @@ public:
      * @param num_of_cards
      */
     void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards); // TODO and TEST
+
+    void move_from_to(StackID src, StackID dst, unsigned num_of_cards);
 
     /**
      * Make card visible on working pack with id 'id_stack'.

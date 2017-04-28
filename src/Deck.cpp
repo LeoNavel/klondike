@@ -149,6 +149,85 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
     }
 }
 
+void Deck::move_from_to(StackID src, StackID dst, unsigned num_of_cards) {
+    GenericCardStack tmp_stack = GenericCardStack();
+    // GenericCardStack *src_stack, *dst_stack;
+
+    int id_last;
+
+    switch (src.type_stack){
+        case TARGET_STACK:
+            id_last = targetPacks[src.id_stack]->size() - 1;
+            for (int i = 0; i < num_of_cards; i++){
+                tmp_stack.push(targetPacks[src.id_stack]->operator[](id_last - i));
+            }
+            break;
+
+        case WORKING_STACK:
+            id_last = workingPacks[src.id_stack]->size() - 1;
+            for (int i = 0; i < num_of_cards; i++){
+                tmp_stack.push(workingPacks[src.id_stack]->operator[](id_last - i));
+            }
+
+            break;
+        case REMAINING_STACK:
+            if (num_of_cards < 2) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from TARGET_STACK");
+            tmp_stack.push(remaining_pack->currentCard());
+            break;
+
+
+    }
+
+    int already_pushed = 0;
+
+    try {
+        for (already_pushed = 0; already_pushed < num_of_cards; already_pushed++){
+            switch (dst.type_stack){
+                case WORKING_STACK:
+                    workingPacks[dst.id_stack]->push(tmp_stack.topAndPop());
+                    break;
+                case REMAINING_STACK:
+                    remaining_pack->push(tmp_stack.topAndPop());
+                    break;
+                case TARGET_STACK:
+                    targetPacks[dst.id_stack]->push(tmp_stack.topAndPop());
+                    break;
+            }
+        }
+    }
+    catch (ErrorException * error){
+        for (int i = 0 ; i <already_pushed; i++){
+            switch (dst.type_stack){
+                case WORKING_STACK:
+                    workingPacks[dst.id_stack]->pop();
+                    break;
+                case REMAINING_STACK:
+                    remaining_pack->pop();
+                    break;
+                case TARGET_STACK:
+                    targetPacks[dst.id_stack]->pop();
+                    break;
+            }
+        }
+        throw error;
+    }
+
+    for (int i = 0; i < num_of_cards; i++) {
+        switch (src.type_stack) {
+            case WORKING_STACK:
+                workingPacks[src.id_stack]->pop();
+                break;
+            case REMAINING_STACK:
+                remaining_pack->popCurrent();
+                break;
+            case TARGET_STACK:
+                targetPacks[src.id_stack]->pop();
+                break;
+        }
+    }
+}
+
+
 CardStacks::RemainingPack *Deck::get_ptr_2_rem_pack() {
     return remaining_pack;
 }

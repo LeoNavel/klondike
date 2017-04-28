@@ -64,7 +64,7 @@ namespace CardStacks {
     void GenericCardStack::printContent() {
         for (auto &i:card_stack) {
             std::cout << "card-color:" << i.get_sign() << "  Number: " << i.get_number() <<
-                      "visible : "<< i.isTurnedUp() << std::endl;
+                      " visible : "<< i.isTurnedUp() << std::endl;
         }
     }
 
