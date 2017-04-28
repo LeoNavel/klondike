@@ -100,8 +100,6 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
     }
 
-    tmp_stack.printContent();
-
     int already_pushed = 0;
 
     try {
