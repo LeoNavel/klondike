@@ -46,6 +46,7 @@ public:
      */
     void undo_command();
 
+    void updateAll();
 
     void save(std::string output_file);
 

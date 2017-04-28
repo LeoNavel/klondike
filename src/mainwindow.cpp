@@ -126,4 +126,6 @@ void MainWindow::on_actionMore_games_triggered()
 void MainWindow::on_actionUndo_triggered()
 {
     qDebug() << "cmd z";
+    Controller * controller = controllers[0];
+    controller->undo_command();
 }

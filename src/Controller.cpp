@@ -119,8 +119,41 @@ void Controller::roll_rem_pack() {
  * Revert previous commands.
  */
 void Controller::undo_command() {
-    command->undo_command();
-    // todo update
+    try{
+        command->undo_command();
+    }  catch(ErrorException e){
+        qDebug() << e.get_message().c_str();
+    }
+    updateAll();
+}
+
+void Controller::updateAll(){
+    CardStacks::RemainingPack * rp;
+    card::Card c;
+    CardStacks::GenericCardStack wp;
+
+    rp = deck->get_ptr_2_rem_pack();
+    view->update(rp);
+    for(int i = 0; i < 4; i++){
+        try{
+            c = deck->get_top_card_from_target_pack(i);
+            view->update(i, &c);
+        } catch(ErrorException e){
+            if(e.get_err_code() == E_POP_FROM_EMPTY_STACK){
+                view->update(i, nullptr);
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    stack_id_t stack_id;
+    stack_id.type_stack = WORKING_STACK;
+    for(int i = 0; i < 7; i++){
+        stack_id.id_stack = i;
+        wp = deck->get_pack(stack_id);
+        view->update(i, wp);
+    }
 }
 
 
