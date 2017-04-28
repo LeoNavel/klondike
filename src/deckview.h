@@ -28,9 +28,15 @@ public:
     CardSelection * cardSelection;
     virtual void update(CardStacks::RemainingPack *rp);
     virtual void update(int id, card::Card * topTargetCard);
+    virtual void update(int id, CardStacks::GenericCardStack workingPack);
     void getNext();
     void turnRemainingCards();
-    void moveCards(RemainingPackView *from, TargetPackView * to, int count);
+    void moveCardsFromRemainingPack(TargetPackView * to);
+    void moveCardsFromRemainingPack(WorkingPackView *to);
+    void moveCardsToTargetPack(WorkingPackView* from, TargetPackView * to, unsigned int count);
+    void moveCards(WorkingPackView * from, WorkingPackView *to, unsigned int count);
+
+    void turnCard(WorkingPackView * on);
     ~DeckView();
 
 private:

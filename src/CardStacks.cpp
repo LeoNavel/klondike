@@ -201,7 +201,7 @@ namespace CardStacks {
      * @pre Visible card stack si empty
      */
     void WorkingPack::turn_invisible() {
-        card::Card top_card = this->topInvisible();
+        card::Card top_card = this->topAndPop();
         top_card.turnUp();
         GenericCardStack::push(top_card);
     }

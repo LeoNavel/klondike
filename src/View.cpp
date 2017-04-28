@@ -9,7 +9,7 @@ void GenericView::update(int id, card::Card * topTargetCard){
 
 }
 
-void GenericView::update(CardStacks::WorkingPack *workingPack){
+void GenericView::update(int id, CardStacks::GenericCardStack workingPack){
 
 }
 

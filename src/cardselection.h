@@ -34,6 +34,7 @@ public:
     void setWpv(bool);
     bool isWpv();
     void * getSourcePack();
+    unsigned int getSize();
     QPoint getOffset();
     DeckView * mainView = nullptr;
     void setMainView(DeckView *mainView);

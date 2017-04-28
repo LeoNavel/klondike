@@ -14,7 +14,7 @@ public:
     ~GenericView();
 
     virtual void update(int id, card::Card * topTargetCard);
-    virtual void update(CardStacks::WorkingPack * workingPack);
+    virtual void update(int id, CardStacks::GenericCardStack workingPack);
     virtual void update(CardStacks::RemainingPack *remainigPack);
 };
 

@@ -24,6 +24,14 @@ DeckView::DeckView(QWidget *parent) :
         tpv->show();
         targetPacks.push_back(tpv);
     }
+
+    for(int i = 0; i < 7; i++){
+        WorkingPackView * wpv = new WorkingPackView(this);
+        wpv->selectionDelegate = cardSelection;
+        wpv->show();
+        workingPacks.push_back(wpv);
+    }
+
     QFrame::update();
 }
 
@@ -34,7 +42,30 @@ void DeckView::turnRemainingCards(){
     controller->roll_rem_pack();
 }
 
-void DeckView::moveCards(RemainingPackView *from, TargetPackView *to, int count){
+void DeckView::moveCardsFromRemainingPack(WorkingPackView *to){
+    cmd_t cmd;
+    stack_id_t dest;
+    stack_id_t src;
+
+    src.type_stack = REMAINING_STACK;
+    src.id_stack = 0;
+
+    dest.type_stack = WORKING_STACK;
+    int i = 0;
+    for(WorkingPackView *wpv: workingPacks){
+        if(wpv == to)
+            break;
+        i++;
+    }
+    dest.id_stack = i;
+
+    cmd.num_of_cards = 1;
+    cmd.source_stack = src;
+    cmd.destination_stack = dest;
+    controller->move_card(cmd);
+}
+
+void DeckView::moveCardsFromRemainingPack(TargetPackView *to){
     cmd_t cmd;
     stack_id_t dest;
     stack_id_t src;
@@ -51,7 +82,66 @@ void DeckView::moveCards(RemainingPackView *from, TargetPackView *to, int count)
     }
     dest.id_stack = i;
 
+    cmd.num_of_cards = 1;
+    cmd.source_stack = src;
+    cmd.destination_stack = dest;
+    controller->move_card(cmd);
+}
+
+void DeckView::moveCardsToTargetPack(WorkingPackView *from, TargetPackView *to, unsigned int count){
+    cmd_t cmd;
+    stack_id_t dest;
+    stack_id_t src;
+
+    src.type_stack = WORKING_STACK;
+    int i = 0;
+    for(WorkingPackView *wpv: workingPacks){
+        if(wpv == from)
+            break;
+        i++;
+    }
+    src.id_stack = i;
+
+    dest.type_stack = TARGET_STACK;
+    i = 0;
+    for(TargetPackView *tpv: targetPacks){
+        if(tpv == to)
+            break;
+        i++;
+    }
+
+    dest.id_stack = i;
+
     cmd.num_of_cards = count;
+    cmd.source_stack = src;
+    cmd.destination_stack = dest;
+    controller->move_card(cmd);
+}
+
+void DeckView::moveCards(WorkingPackView *from, WorkingPackView *to, unsigned int count){
+    cmd_t cmd;
+    stack_id_t dest;
+    stack_id_t src;
+
+    src.type_stack = WORKING_STACK;
+    int i = 0;
+    for(WorkingPackView *wpv: workingPacks){
+        if(wpv == from)
+            break;
+        i++;
+    }
+    src.id_stack = i;
+
+    dest.type_stack = WORKING_STACK;
+    i = 0;
+    for(WorkingPackView *wpv: workingPacks){
+        if(wpv == to)
+            break;
+        i++;
+    }
+    dest.id_stack = i;
+
+    cmd.num_of_cards = (signed) count;
     cmd.source_stack = src;
     cmd.destination_stack = dest;
     controller->move_card(cmd);
@@ -65,6 +155,11 @@ void DeckView::update(CardStacks::RemainingPack *remainigPack) {
 void DeckView::update(int id, card::Card *topTargetCard){
     TargetPackView * tpv = targetPacks[id];
     tpv->setTopCard(topTargetCard);
+}
+
+void DeckView::update(int id, CardStacks::GenericCardStack workingPack){
+    WorkingPackView * wpv = workingPacks[id];
+    wpv->setCards(workingPack);
 }
 
 //DeckView::DeckView(Controller *controller, QWidget *parent):
@@ -107,6 +202,16 @@ void DeckView::update(int id, card::Card *topTargetCard){
 //    }
 //}
 
+void DeckView::turnCard(WorkingPackView *on){
+    int i = 0;
+    for(WorkingPackView * wpv:workingPacks){
+        if(wpv == on)
+            break;
+        i++;
+    }
+    controller->turn_card(i);
+}
+
 void DeckView::resizeEvent(QResizeEvent* event)
 {
    QFrame::resizeEvent(event);
@@ -124,20 +229,15 @@ void DeckView::resizeEvent(QResizeEvent* event)
        index++;
    }
 
-
-
-//   index = 0;
-//   int wid = (size.width() / 7) - 5;
-//   QPoint newTopLeft = nr.bottomLeft();
-//   newTopLeft.setY(newTopLeft.y() + 10);
-//   for(WorkingPackView * pack: workingPacks){
-//       newTopLeft.setX(nr.x() + (wid + 5) * index);
-//       pack->setGeometry(QRect(newTopLeft,QSize(wid, ((size.height() / 4) * 3 - 20))));
-//       index++;
-//   }
-
-
-
+   index = 0;
+   int wid = (size.width() / 7) - 5;
+   QPoint newTopLeft = nr.bottomLeft();
+   newTopLeft.setY(newTopLeft.y() + 10);
+   for(WorkingPackView * pack: workingPacks){
+       newTopLeft.setX(nr.x() + (wid + 5) * index);
+       pack->setGeometry(QRect(newTopLeft,QSize(wid, ((size.height() / 4) * 3 - 20))));
+       index++;
+   }
 }
 
 
