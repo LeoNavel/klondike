@@ -1,6 +1,7 @@
 #include "Error.hpp"
 #include "Deck.hpp"
 #include <iostream>
+#include <fstream>
 
 using namespace CardStacks;
 
@@ -193,4 +194,69 @@ void Deck::init() {
     }
 
     remaining_pack = new RemainingPack();
+}
+
+void Deck::save(std::string output_file) {
+    std::ofstream out_file;
+    out_file.open(output_file);
+
+    for (int i = 0 ; i < 7; i++){
+        out_file << workingPacks[i]->size() << std::endl;
+        for (int j = 0 ; j < workingPacks[i]->size(); j++){
+            out_file << std::to_string(workingPacks[i]->operator[](j).get_number()) + " ";
+            out_file << std::to_string(workingPacks[i]->operator[](j).get_sign()) + " ";
+            out_file << std::to_string(workingPacks[i]->operator[](j).get_visibility());
+            out_file << std::endl;
+        }
+    }
+
+    for (int i = 0 ; i < 4; i++){
+        out_file << targetPacks[i]->size() << std::endl;
+        for (int j = 0 ; j < targetPacks[i]->size(); j++){
+            out_file << std::to_string(targetPacks[i]->operator[](j).get_number()) + " ";
+            out_file << std::to_string(targetPacks[i]->operator[](j).get_sign()) + " ";
+            out_file << std::to_string(targetPacks[i]->operator[](j).get_visibility());
+            out_file << std::endl;
+        }
+    }
+
+    out_file << remaining_pack->size() << std::endl;
+    for (int j = 0 ; j < remaining_pack->size(); j++){
+        out_file << std::to_string(remaining_pack->operator[](j).get_number()) + " ";
+        out_file << std::to_string(remaining_pack->operator[](j).get_sign()) + " ";
+        out_file << std::to_string(remaining_pack->operator[](j).get_visibility());
+        out_file << std::endl;
+    }
+}
+
+void Deck::load(std::string input_file) {
+    std::ifstream input_file_stream;
+    input_file_stream.open(input_file);
+    int num_of_cards, card_sign, card_num, card_vis;
+
+    for (int i = 0 ; i < 7 ; i++){
+
+        input_file_stream >> num_of_cards;
+        for (int j = 0 ; j < num_of_cards ; j++) {
+            input_file_stream >> card_num >> card_sign >> card_vis;
+            workingPacks[i]->force_push(card::Card(card_num, static_cast<card::sign>(card_sign), card_vis));
+        }
+    }
+
+
+    for (int i = 0 ; i < 4 ; i++){
+
+        input_file_stream >> num_of_cards;
+        for (int j = 0 ; j < num_of_cards ; j++) {
+            input_file_stream >> card_num >> card_sign >> card_vis;
+            targetPacks[i]->force_push(card::Card(card_num, static_cast<card::sign>(card_sign), card_vis));
+        }
+    }
+
+    input_file_stream >> num_of_cards;
+    for (int j = 0 ; j < num_of_cards ; j++) {
+        input_file_stream >> card_num >> card_sign >> card_vis;
+        remaining_pack->force_push(card::Card(card_num, static_cast<card::sign>(card_sign), card_vis));
+    }
+
 }

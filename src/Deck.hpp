@@ -48,13 +48,13 @@ public:
      * Save game into configuration file.
      * @param output_file Name of file.
      */
-    void save(std::string output_file); // TODO
+    void save(std::string output_file);
 
     /**
      * Load game from configuration file.
      * @param input_file Name of file.
      */
-    void load(std::string input_file){} //TODO
+    void load(std::string input_file);
 
     /**
      * This function creates a deck of cards, shuffle cards 'shuffles' times and
