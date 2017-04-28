@@ -13,7 +13,7 @@ public:
     void setController(Controller *controller);
     ~GenericView();
 
-    virtual void update(CardStacks::TargetPack * targetPack);
+    virtual void update(int id, card::Card * topTargetCard);
     virtual void update(CardStacks::WorkingPack * workingPack);
     virtual void update(CardStacks::RemainingPack *remainigPack);
 };

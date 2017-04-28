@@ -49,7 +49,7 @@ void DeckView::moveCards(RemainingPackView *from, TargetPackView *to, int count)
             break;
         i++;
     }
-    src.id_stack = i;
+    dest.id_stack = i;
 
     cmd.num_of_cards = count;
     cmd.source_stack = src;
@@ -59,9 +59,13 @@ void DeckView::moveCards(RemainingPackView *from, TargetPackView *to, int count)
 
 void DeckView::update(CardStacks::RemainingPack *remainigPack) {
     remainingPackView->initWithStack(remainigPack);
-    QFrame::update();
+//    QFrame::update();
 }
 
+void DeckView::update(int id, card::Card *topTargetCard){
+    TargetPackView * tpv = targetPacks[id];
+    tpv->setTopCard(topTargetCard);
+}
 
 //DeckView::DeckView(Controller *controller, QWidget *parent):
 //    QFrame(parent),

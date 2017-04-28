@@ -92,7 +92,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
             break;
         case REMAINING_STACK:
-            if (num_of_cards < 2) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from TARGET_STACK");
+            if (num_of_cards > 1) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from REMAINING_STACK");
             tmp_stack.push(remaining_pack->currentCard());
             break;
 
@@ -141,7 +141,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
                 workingPacks[src.id_stack]->pop();
                 break;
             case REMAINING_STACK:
-                remaining_pack->pop();
+                remaining_pack->popCurrent();
                 break;
             case TARGET_STACK:
                 targetPacks[src.id_stack]->pop();

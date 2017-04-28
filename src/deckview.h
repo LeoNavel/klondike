@@ -27,6 +27,7 @@ public:
     void prepareDeck(unsigned char shuffles);
     CardSelection * cardSelection;
     virtual void update(CardStacks::RemainingPack *rp);
+    virtual void update(int id, card::Card * topTargetCard);
     void getNext();
     void turnRemainingCards();
     void moveCards(RemainingPackView *from, TargetPackView * to, int count);
