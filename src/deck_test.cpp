@@ -37,20 +37,38 @@ int main(){
 
     deck->targetPacks[0]->pop();
 
+    deck->save("jj.conf");
+
+    //creating cards and push them onstack to test move()
+    card::Card card3 = card::Card(3, card::DIAMONDS, true);
+    card::Card card4 = card::Card(4, card::CLUBS, true);
+    card::Card card5 = card::Card(5, card::DIAMONDS, true);
+
+    deck->workingPacks[0]->force_push(card5);
+    deck->workingPacks[1]->force_push(card4);
+    deck->workingPacks[1]->force_push(card3);
+
+    stack_id_t w0, w1;
+    w0.type_stack = WORKING_STACK;
+    w0.id_stack = 0;
+    w1.type_stack = WORKING_STACK;
+    w1.id_stack = 1;
+
+    std::cout << "before" << std::endl;
+    std::cout << "w0" << std::endl;
+    deck->workingPacks[0]->printContent();
+    std::cout << "w1" << std::endl;
+    deck->workingPacks[1]->printContent();
+
+    deck->move_from_to(w1, w0,2);
 
 
 
-    cout << "test move 1" << endl;
-    stack_id_t st1, st2;
-    st1.type_stack = WORKING_STACK;
-    st1.id_stack = 0;
-    st2.type_stack = REMAINING_STACK;
-    st2.id_stack = 0;
-    deck->move_from_to(st2, st1, 2);
-
-
-
-
+    std::cout << "after" << std::endl;
+    std::cout << "w0" << std::endl;
+    deck->workingPacks[0]->printContent();
+    std::cout << "w1" << std::endl;
+    deck->workingPacks[1]->printContent();
 
     delete cmd;
     delete deck;

@@ -73,6 +73,7 @@ void Deck::roll_back_rem_pack() {
 
 void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
     GenericCardStack tmp_stack = GenericCardStack();
+    // GenericCardStack *src_stack, *dst_stack;
 
     int id_last;
 
@@ -87,7 +88,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
         case WORKING_STACK:
             id_last = workingPacks[src.id_stack]->size() - 1;
             for (int i = 0; i < num_of_cards; i++){
-                tmp_stack.push(targetPacks[src.id_stack]->operator[](id_last - i));
+                tmp_stack.push(workingPacks[src.id_stack]->operator[](id_last - i));
             }
 
             break;
@@ -107,13 +108,13 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
         for (already_pushed = 0; already_pushed < num_of_cards; already_pushed++){
             switch (dst.type_stack){
                 case WORKING_STACK:
-                    workingPacks[dst.id_stack]->push(tmp_stack[already_pushed]);
+                    workingPacks[dst.id_stack]->push(tmp_stack.topAndPop());
                     break;
                 case REMAINING_STACK:
-                    remaining_pack->push(tmp_stack[already_pushed]);
+                    remaining_pack->push(tmp_stack.topAndPop());
                     break;
                 case TARGET_STACK:
-                    targetPacks[dst.id_stack]->push(tmp_stack[already_pushed]);
+                    targetPacks[dst.id_stack]->push(tmp_stack.topAndPop());
                     break;
             }
         }
