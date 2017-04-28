@@ -78,4 +78,8 @@ namespace card {
         return ret_str;
     }
 
+    bool Card::get_visibility() {
+        return visible;
+    }
+
 }

@@ -43,6 +43,7 @@ namespace card {
         void set_sign(sign card_sign);
         int get_number() const;
         sign get_sign() const;
+        bool get_visibility();
         bool isTurnedUp();
         void turnUp();
         void turnDown();

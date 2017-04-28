@@ -35,6 +35,7 @@ namespace CardStacks{
         // add card to top of stack
         void push(card::Card card);
 
+        void force_push(card::Card card);
         // remove card from top fo stack
         void pop();
 
