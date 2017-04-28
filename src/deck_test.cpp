@@ -34,6 +34,24 @@ int main(){
     cout << deck->targetPacks[0]->top().print_card() << endl;
     cout << "get top card of 0 target <get_top_card_from_target_pack()>"<< endl;
     cout << deck->get_top_card_from_target_pack(0).print_card() << endl;
+
+    deck->targetPacks[0]->pop();
+
+
+
+
+    cout << "test move 1" << endl;
+    stack_id_t st1, st2;
+    st1.type_stack = WORKING_STACK;
+    st1.id_stack = 0;
+    st2.type_stack = REMAINING_STACK;
+    st2.id_stack = 0;
+    deck->move_from_to(st2, st1, 2);
+
+
+
+
+
     delete cmd;
     delete deck;
     return EXIT_SUCCESS;
