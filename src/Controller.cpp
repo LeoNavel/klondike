@@ -9,10 +9,26 @@ Controller::Controller(Deck *deck, GenericView *view) {
 
     CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
 
-    rp->push(card::Card(1, card::sign::HEART));
-    for(int i = 0; i < 25; i++)
-        get_next();
+//    rp->push(card::Card(1, card::sign::HEART));
+//    rp->push(card::Card(1, card::sign::DIAMONDS));
+//    rp->push(card::Card(1, card::sign::CLUBS));
+//    for(int i = 0; i < 27; i++)
+//        get_next();
+
+//    for(int i = 0; i < 23; i++){
+//        get_next();
+//        if(rp->currentCard().get_number() == 1)
+//            break;
+//    }
+
     view->update(rp);
+    stack_id_t stackId;
+    stackId.type_stack = WORKING_STACK;
+    for(int i = 0; i < 7; i++){
+        stackId.id_stack = i;
+        CardStacks::GenericCardStack gs = deck->get_pack(stackId);
+        view->update(stackId.id_stack, gs);
+    }
 
 
 }
@@ -24,23 +40,39 @@ void Controller::move_card(cmd_t cmd) {
     } catch(ErrorException e){
         qDebug() << e.get_message().c_str();
     }
+    CardStacks::RemainingPack *rp;
+    card::Card c;
+    CardStacks::GenericCardStack wp;
+
     switch(cmd.source_stack.type_stack){
     case REMAINING_STACK:
+        rp = deck->get_ptr_2_rem_pack();
+        view->update(rp);
         break;
-    case TARGET_STACK:
+    case WORKING_STACK:
+        wp = deck->get_pack(cmd.source_stack);
+        view->update(cmd.source_stack.id_stack, wp);
         break;
     default:
-        CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
-        view->update(rp);
         break;
     }
 
     switch (cmd.destination_stack.type_stack) {
-    case REMAINING_STACK:
-
-        break;
     case TARGET_STACK:
-
+        try{
+            c = deck->get_top_card_from_target_pack(cmd.destination_stack.id_stack);
+            view->update(cmd.destination_stack.id_stack, &c);
+        } catch(ErrorException e){
+            if(e.get_err_code() == E_POP_FROM_EMPTY_STACK){
+                view->update(cmd.destination_stack.id_stack, nullptr);
+            } else {
+                throw e;
+            }
+        }
+        break;
+    case WORKING_STACK:
+        wp = deck->get_pack(cmd.destination_stack);
+        view->update(cmd.destination_stack.id_stack, wp);
         break;
     default:
         break;
@@ -49,7 +81,8 @@ void Controller::move_card(cmd_t cmd) {
 
 void Controller::turn_card(int id_stack) {
     command->turn_card(id_stack);
-    // todo update
+    CardStacks::GenericCardStack wp = deck->get_pack({WORKING_STACK, id_stack});
+    view->update(id_stack, wp);
 }
 
 /**

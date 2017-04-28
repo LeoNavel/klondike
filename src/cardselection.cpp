@@ -38,6 +38,10 @@ void CardSelection::setMainView(DeckView * mainView){
     this->mainView = mainView;
 }
 
+unsigned int CardSelection::getSize(){
+    return cards.size();
+}
+
 
 void CardSelection::setGeometry(const QRect &r) {
     QFrame::setGeometry(r);

@@ -26,7 +26,8 @@ public:
     void pop();
     void push(card::Card card);
     CardSelection * selectionDelegate;
-    void mouseReleaseEvent(QMouseEvent *e);
+    void setCards(CardStacks::GenericCardStack stack);
+    void mousePressEvent(QMouseEvent *e);
     ~WorkingPackView();
 
 private:

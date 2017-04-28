@@ -80,7 +80,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
     switch (src.type_stack){
         case TARGET_STACK:
             id_last = targetPacks[src.id_stack]->size() - 1;
-            for (int i = 0; i < num_of_cards; i++){
+            for (unsigned int i = 0; i < num_of_cards; i++){
                 tmp_stack.push(targetPacks[src.id_stack]->operator[](id_last - i));
             }
             break;
@@ -93,14 +93,16 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
             break;
         case REMAINING_STACK:
-            if (num_of_cards < 2) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from TARGET_STACK");
-            tmp_stack.push(remaining_pack->currentCard());
+            if (num_of_cards > 1) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from REMAINING_STACK");
+            card::Card c = remaining_pack->currentCard();
+            c.turnUp();
+            tmp_stack.push(c);
             break;
 
 
     }
 
-    int already_pushed = 0;
+    unsigned int already_pushed = 0;
 
     try {
         for (already_pushed = 0; already_pushed < num_of_cards; already_pushed++){
@@ -140,7 +142,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
                 workingPacks[src.id_stack]->pop();
                 break;
             case REMAINING_STACK:
-                remaining_pack->pop();
+                remaining_pack->popCurrent();
                 break;
             case TARGET_STACK:
                 targetPacks[src.id_stack]->pop();

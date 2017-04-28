@@ -7,17 +7,33 @@ WorkingPackView::WorkingPackView(QWidget *parent) :
     ui(new Ui::WorkingPackView)
 {
     ui->setupUi(this);
-
 }
 
 
+void WorkingPackView::setCards(CardStacks::GenericCardStack stack){
+    for(auto c: cards)
+        delete c;
+    cards.clear();
+    for(int i = 0; i < stack.size(); i++){
+        card::Card c = stack[i];
+        CardView *cv = new CardView(c.get_number(), c.get_sign(), this);
+        if(c.isTurnedUp())
+            cv->turnUp();
+
+        cv->installEventFilter(this);
+        cv->show();
+        cards.push_back(cv);
+    }
+    update();
+}
+
 void WorkingPackView::push_invisible(card::Card card) {
-    WorkingPack::push_invisible(card);
+//    WorkingPack::push_invisible(card);
     cards.push_back(new CardView(card.get_number(), card.get_sign(), this));
 }
 
 void WorkingPackView::push(card::Card card) {
-    WorkingPack::push(card);
+//    WorkingPack::push(card);
     CardView * cv = new CardView(card.get_number(), card.get_sign(), this);
     cv->turnUp();
     cards.push_back(cv);
@@ -66,14 +82,12 @@ void WorkingPackView::paintEvent(QPaintEvent *e){
         c->setGeometry(nr);
 
 //        if(c->isTurnedUp())
-        c->installEventFilter(this);
-        c->show();
         index++;
     }
 }
 
 void WorkingPackView::pop() {
-    WorkingPack::pop();
+//    WorkingPack::pop();
     CardView * c = cards[cards.size()-1];
     cards.pop_back();
     delete c;
@@ -83,19 +97,18 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
 //    selectionDelegate->installEventFilter(this);
     if(e->type() == QEvent::MouseButtonPress){
         if(selectionDelegate->isEmpty()){
-
+            qDebug() << "sata";
             CardStacks::GenericCardStack gs, gs1;
             bool found = false;
-            if(cards.size() > 0){
-                qDebug() << "mama";
-                if(cards[cards.size() - 1] == obj && !cards[cards.size()-1]->isTurnedUp()){
-                    turn_invisible();
-                    update();
-                    return true;
-                }
+            if(cards.size() == 0)
+                return false;
+            CardView * lastCard = cards[cards.size() - 1];
+            if(lastCard == obj && !lastCard->isTurnedUp()){
+                selectionDelegate->mainView->turnCard(this);
+//                    turn_invisible();
+//                    update();
+                return true;
             }
-
-
 
             found = false;
             QPoint cp;
@@ -107,8 +120,13 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                     found = true;
                 }
                 if (found){
-                    gs1.push(WorkingPack::topVisible());
-                    pop();
+                    CardView * topCard = cards[cards.size() - 1];
+                    card::Card leCard = card::Card(topCard->get_number(), topCard->get_sign(), true);
+                    gs1.push(leCard);
+                    cards.pop_back();
+                    delete topCard;
+//                    gs1.push(WorkingPack::topVisible());
+//                    pop();
                 }
             }
             if(found){
@@ -142,31 +160,27 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
     return QWidget::eventFilter(obj, e);
 }
 
-void WorkingPackView::mouseReleaseEvent(QMouseEvent *e){
+void WorkingPackView::mousePressEvent(QMouseEvent *e){
     if (e->button() == Qt::LeftButton) {
         if(!selectionDelegate->isEmpty()){
-//            QMouseEvent * me = static_cast<QMouseEvent*>(e);
-//            QPoint p = mapToGlobal
-//            QPoint ep = mapToGlobal(selectionDelegate->pos());
-//            ep.setX(ep.x() + 20);
-//            ep.setY(ep.y() + 20);
-//            QPoint p = mapToGlobal(pos());
-//            if(ep.x() < p.x() || ep.y() < p.y() || ep.x() > p.x() + rect().width() || ep.y() > p.y() + rect().height())
-//                return false;
-//            qDebug() << "mam to";
-//            qDebug() << "clickik";
-            std::vector<card::Card> gs_p;
-            gs_p = selectionDelegate->getAll();
-            try {
-                for(auto c:gs_p)
-                    push(c);
-            } catch (ErrorException err) {
-                qDebug() << err.get_message().c_str();
-                selectionDelegate->rollBack();
-                update();
-//            } catch (char const* err) {
-//                qDebug() << err;
+            if(selectionDelegate->isWpv()){
+                WorkingPackView *wpv = static_cast<WorkingPackView *>(selectionDelegate->getSourcePack());
+                selectionDelegate->mainView->moveCards(wpv, this, selectionDelegate->getSize());
+            } else {
+                selectionDelegate->mainView->moveCardsFromRemainingPack(this);
             }
+//            std::vector<card::Card> gs_p;
+//            gs_p = selectionDelegate->getAll();
+//            try {
+//                for(auto c:gs_p)
+//                    push(c);
+//            } catch (ErrorException err) {
+//                qDebug() << err.get_message().c_str();
+//                selectionDelegate->rollBack();
+//                update();
+////            } catch (char const* err) {
+////                qDebug() << err;
+//            }
             selectionDelegate->clear();
             selectionDelegate->hide();
 //            selectionDelegate->update();

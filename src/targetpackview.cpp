@@ -52,15 +52,14 @@ void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
 //                return false;
           std::vector<card::Card> gs_p;
           gs_p = selectionDelegate->getAll();
-          if(gs_p.size() > 1)
-              selectionDelegate->rollBack();
-          else {
+//          if(gs_p.size() > 1)
+//              selectionDelegate->rollBack();
+//          else {
               if(selectionDelegate->isWpv()){
                   WorkingPackView *wpv = static_cast<WorkingPackView *>(selectionDelegate->getSourcePack());
-                  // todo
+                  selectionDelegate->mainView->moveCardsToTargetPack(wpv, this, selectionDelegate->getSize());
               } else {
-                  RemainingPackView * rpv = static_cast<RemainingPackView *>(selectionDelegate->getSourcePack());
-                  selectionDelegate->mainView->moveCards(rpv, this, 1);
+                  selectionDelegate->mainView->moveCardsFromRemainingPack(this);
               }
 
 
@@ -73,7 +72,7 @@ void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
 //                  qDebug() << err.get_message().c_str();
 
 //              }
-          }
+//          }
 
           QApplication::restoreOverrideCursor();
           selectionDelegate->clear();
