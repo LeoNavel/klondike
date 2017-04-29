@@ -256,7 +256,7 @@ namespace CardStacks {
     }
 
     void RemainingPack::turnBack() {
-        current_card = static_cast<signed>(card_stack.size());
+        current_card = static_cast<signed>(card_stack.size() -1);
     }
 
     /**
