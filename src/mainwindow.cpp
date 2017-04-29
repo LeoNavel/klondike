@@ -16,7 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
     Deck *theDeck = new Deck();
     theDeck->prepareDeck(1);
     DeckView *theView = new DeckView(this);
-    theView->setGeometry(this->rect());
+    QRect r = this->rect();
+    r.setY(50);
+    theView->setGeometry(r);
     Controller *theController = new Controller(theDeck, theView);
 
     views.push_back(theView);
@@ -60,9 +62,12 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     if(controllers.size() == 1) {
         DeckView *dv = views[0];
 //        dv->resizeEvent(event);
-        dv->setGeometry(this->rect());
+
+        QRect r = this->rect();
+        r.setY(30);
+        dv->setGeometry(r);
     } else {
-        int h = ns.height() / 2;
+        int h = (ns.height() - 30) / 2;
         int w = ns.width() / 2;
         for(unsigned int i = 0; i < controllers.size(); i++){
             DeckView * dv = views[i];
@@ -71,7 +76,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
                 dv->move(w,dv->pos().y());
             }
             if(i == 2 || i == 3){
-                dv->move(dv->pos().x(), h);
+                dv->move(dv->pos().x(), h + 30);
             }
         }
     }
@@ -109,6 +114,7 @@ void MainWindow::on_actionMore_games_triggered()
         unsigned int size = controllers.size();
         enableUndo(size);
         QRect r = this->rect();
+        r.setY(30);
         r.setWidth(r.width() / 2);
         r.setHeight(r.height() / 2);
 
@@ -118,7 +124,7 @@ void MainWindow::on_actionMore_games_triggered()
             Deck * newDeck = new Deck();
             newDeck->prepareDeck(3);
             DeckView *newView = new DeckView(this);
-            r.moveTo(r.width(), 0);
+            r.moveTo(r.width(), 30);
             newView->setGeometry(r);
             newView->show();
 
@@ -129,7 +135,7 @@ void MainWindow::on_actionMore_games_triggered()
             Deck * newDeck = new Deck();
             newDeck->prepareDeck(3);
             DeckView *newView = new DeckView(this);
-            r.moveTo(0, r.height());
+            r.moveTo(0, r.height() + 30);
             newView->setGeometry(r);
             newView->show();
 
@@ -137,16 +143,16 @@ void MainWindow::on_actionMore_games_triggered()
             views.push_back(newView);
             controllers.push_back(newController);
         } else if(size == 3){
-        Deck * newDeck = new Deck();
-        newDeck->prepareDeck(3);
-        DeckView *newView = new DeckView(this);
-        r.moveTo(r.width(), r.height());
-        newView->setGeometry(r);
-        newView->show();
+            Deck * newDeck = new Deck();
+            newDeck->prepareDeck(3);
+            DeckView *newView = new DeckView(this);
+            r.moveTo(r.width(), r.height() + 30);
+            newView->setGeometry(r);
+            newView->show();
 
-        Controller *newController = new Controller(newDeck, newView);
-        views.push_back(newView);
-        controllers.push_back(newController);
+            Controller *newController = new Controller(newDeck, newView);
+            views.push_back(newView);
+            controllers.push_back(newController);
         }
     }
     if(controllers.size() == 4){
