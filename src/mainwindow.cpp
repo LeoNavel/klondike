@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     statusBar()->hide();
-//    games.push_back(ui->framik);
     Deck *theDeck = new Deck();
     theDeck->prepareDeck(1);
     DeckView *theView = new DeckView(this);
@@ -205,4 +204,11 @@ void MainWindow::on_actionFourth_game_triggered()
 {
     Controller *controller = controllers[3];
     controller->undo_command();
+}
+
+void MainWindow::on_actionSave_first_game_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Save game"), "",
+            tr("game (*.abk);;All Files (*)"));
 }

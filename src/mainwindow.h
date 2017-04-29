@@ -8,6 +8,7 @@
 #include "mydialog.h"
 #include "deckview.h"
 #include "Controller.hpp"
+#include "QFileDialog"
 #include <vector>
 
 namespace Ui {
@@ -45,6 +46,8 @@ private slots:
     void on_actionThird_game_triggered();
 
     void on_actionFourth_game_triggered();
+
+    void on_actionSave_first_game_triggered();
 
 private:
     void enableNewGame();
