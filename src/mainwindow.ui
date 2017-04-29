@@ -30,6 +30,7 @@
      <string>File</string>
     </property>
     <addaction name="actionMore_games"/>
+    <addaction name="actionRemove_game"/>
    </widget>
    <widget class="QMenu" name="menuUndo">
     <property name="title">
@@ -43,12 +44,17 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMore_games">
    <property name="text">
-    <string>More games</string>
+    <string>Add game</string>
    </property>
   </action>
   <action name="actionUndo">
    <property name="text">
     <string>undo</string>
+   </property>
+  </action>
+  <action name="actionRemove_game">
+   <property name="text">
+    <string>Remove game</string>
    </property>
   </action>
  </widget>

@@ -125,14 +125,11 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                     gs1.push(leCard);
                     cards.pop_back();
                     delete topCard;
-//                    gs1.push(WorkingPack::topVisible());
-//                    pop();
                 }
             }
             if(found){
                 while(!gs1.isEmpty())
                     gs.push(gs1.topAndPop());
-                qDebug() << gs.size();
 //                selectionDelegate->show();
                 QMouseEvent * me = static_cast<QMouseEvent*>(e);
 
@@ -140,15 +137,16 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 QPoint p = this->pos();
                 p = QPoint(p.x(), p.y() + cp.y());
                 selectionDelegate->setGeometry(QRect(p, QWidget::size()));
-                qDebug() << me->pos();
                 selectionDelegate->raise();
                 selectionDelegate->setSourcePack(this);
                 selectionDelegate->setOffset(me->pos());
                 selectionDelegate->setWpv(true);
 
-                QPixmap cursor_pixmap = selectionDelegate->grab();
-                QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
-                QApplication::setOverrideCursor(cursor_default);
+                selectionDelegate->mainView->updateCursor();
+
+//                QPixmap cursor_pixmap = selectionDelegate->grab();
+//                QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
+//                QApplication::setOverrideCursor(cursor_default);
 
                 update();
                 return true;
@@ -186,7 +184,10 @@ void WorkingPackView::mousePressEvent(QMouseEvent *e){
 //            selectionDelegate->update();
 //            update();
 //            repaint();
-            QApplication::restoreOverrideCursor();
+//            QApplicati
+//            on::restoreOverrideCursor();
+            selectionDelegate->mainView->updateCursor();
+//            return true;
 //            return true;
         }
     }

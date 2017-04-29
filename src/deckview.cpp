@@ -32,6 +32,7 @@ DeckView::DeckView(QWidget *parent) :
         workingPacks.push_back(wpv);
     }
 
+//    setCursor(Qt::ClosedHandCursor);
     QFrame::update();
 }
 
@@ -40,6 +41,19 @@ void DeckView::getNext(){
 }
 void DeckView::turnRemainingCards(){
     controller->roll_rem_pack();
+}
+
+void DeckView::updateCursor(){
+    QCursor newCursor;
+    if(cardSelection->getSize() > 0){
+        QPixmap cursor_pixmap = cardSelection->grab();
+        QPoint me = cardSelection->getOffset();
+        newCursor = QCursor(cursor_pixmap, me.x(), me.y());
+    } else {
+        newCursor = Qt::ArrowCursor;
+    }
+//    QApplication::setOverrideCursor(cursor_default);
+    setCursor(newCursor);
 }
 
 void DeckView::moveCardsFromRemainingPack(WorkingPackView *to){
@@ -160,6 +174,10 @@ void DeckView::update(int id, card::Card *topTargetCard){
 void DeckView::update(int id, CardStacks::GenericCardStack workingPack){
     WorkingPackView * wpv = workingPacks[id];
     wpv->setCards(workingPack);
+}
+
+void DeckView::requestUpdateAll() {
+    controller->updateAll();
 }
 
 //DeckView::DeckView(Controller *controller, QWidget *parent):

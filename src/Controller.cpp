@@ -21,7 +21,7 @@ Controller::Controller(Deck *deck, GenericView *view) {
 //            break;
 //    }
 
-    view->update(rp);
+    this->view->update(rp);
     stack_id_t stackId;
     stackId.type_stack = WORKING_STACK;
     for(int i = 0; i < 7; i++){
