@@ -25,8 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     disableRemoveGame();
-    for(int i = 1; i < 4; i++)
+    for(int i = 1; i < 4; i++){
         disableUndo(i);
+        disableSave(i);
+    }
 }
 
 void MainWindow::disableUndo(unsigned int i){
@@ -41,6 +43,20 @@ void MainWindow::enableUndo(unsigned int i){
     QAction * undo = editAction->menu()->actions()[0];
     QAction * undoItem = undo->menu()->actions()[i];
     undoItem->setEnabled(true);
+}
+
+void MainWindow::enableSave(unsigned int i){
+    QAction * fileAction = ui->menuBar->actions()[0];
+    QAction * save = fileAction->menu()->actions()[2];
+    QAction * saveItem = save->menu()->actions()[i];
+    saveItem->setEnabled(true);
+}
+
+void MainWindow::disableSave(unsigned int i){
+    QAction * fileAction = ui->menuBar->actions()[0];
+    QAction * save = fileAction->menu()->actions()[2];
+    QAction * saveItem = save->menu()->actions()[i];
+    saveItem->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -112,6 +128,7 @@ void MainWindow::on_actionMore_games_triggered()
         enableRemoveGame();
         unsigned int size = controllers.size();
         enableUndo(size);
+        enableSave(size);
         QRect r = this->rect();
         r.setY(30);
         r.setWidth(r.width() / 2);
@@ -172,6 +189,7 @@ void MainWindow::on_actionRemove_game_triggered()
         delete controller;
         controllers.pop_back();
         disableUndo(size - 1);
+        disableSave(size - 1);
     }
     if(size == 1){
         DeckView * dv = views[0];
@@ -206,9 +224,35 @@ void MainWindow::on_actionFourth_game_triggered()
     controller->undo_command();
 }
 
-void MainWindow::on_actionSave_first_game_triggered()
-{
+void MainWindow::save(unsigned int i){
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save game"), "",
-            tr("game (*.abk);;All Files (*)"));
+            tr("game (*.klondike)"));
+    qDebug() << fileName;
+    if(fileName.isEmpty())
+        return;
+    Controller *controller = controllers[i];
+    std::string fn = fileName.toStdString();
+
+    controller->save(fn);
+}
+
+void MainWindow::on_actionSave_first_game_triggered()
+{
+    save(0);
+}
+
+void MainWindow::on_actionSave_second_game_triggered()
+{
+    save(1);
+}
+
+void MainWindow::on_actionSave_third_game_triggered()
+{
+    save(2);
+}
+
+void MainWindow::on_actionSave_fourth_game_triggered()
+{
+    save(3);
 }

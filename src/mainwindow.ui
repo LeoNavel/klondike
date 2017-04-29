@@ -34,6 +34,9 @@
       <string>Save</string>
      </property>
      <addaction name="actionSave_first_game"/>
+     <addaction name="actionSave_second_game"/>
+     <addaction name="actionSave_third_game"/>
+     <addaction name="actionSave_fourth_game"/>
     </widget>
     <addaction name="actionMore_games"/>
     <addaction name="actionRemove_game"/>
@@ -91,6 +94,21 @@
   <action name="actionSave_first_game">
    <property name="text">
     <string>Save first game</string>
+   </property>
+  </action>
+  <action name="actionSave_second_game">
+   <property name="text">
+    <string>Save second game</string>
+   </property>
+  </action>
+  <action name="actionSave_third_game">
+   <property name="text">
+    <string>Save third game</string>
+   </property>
+  </action>
+  <action name="actionSave_fourth_game">
+   <property name="text">
+    <string>Save fourth game</string>
    </property>
   </action>
  </widget>

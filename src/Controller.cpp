@@ -158,6 +158,17 @@ void Controller::updateAll(){
 
 
 void Controller::save(std::string output_file){
+    qDebug() << "saving";
+    std::string fn = output_file;
+    std::string suffix = ".klondike";
+    if(fn.rfind(suffix) != (fn.size()-suffix.size())){
+        if(fn.back() == '.'){
+            fn += "klondike";
+        } else {
+            fn += ".klondike";
+        }
+    }
+    deck->save(fn);
 }
 
 void Controller::load(std::string input_file){
