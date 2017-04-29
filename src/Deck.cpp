@@ -340,3 +340,49 @@ void Deck::load(std::string input_file) {
     }
 
 }
+
+void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) {
+    CardStacks::GenericCardStack *src_pack, *dst_pack;
+
+    switch (src.type_stack) {
+        case WORKING_STACK:
+            src_pack = workingPacks[src.id_stack];
+            break;
+
+        case REMAINING_STACK:
+            src_pack = remaining_pack;
+            break;
+
+        case TARGET_STACK:
+            src_pack = targetPacks[src.id_stack];
+            break;
+
+        default:
+            throw ErrorException(E_UNKNOWN_STACK_TYPE, "error in <force_move_from_to>");
+            break;
+    }
+
+    switch (dst.type_stack) {
+        case WORKING_STACK:
+            dst_pack = workingPacks[dst.id_stack];
+            break;
+
+        case REMAINING_STACK:
+            dst_pack = remaining_pack;
+            break;
+
+        case TARGET_STACK:
+            dst_pack = targetPacks[dst.id_stack];
+            break;
+
+        default:
+            throw ErrorException(E_UNKNOWN_STACK_TYPE, "error in <force_move_from_to>");
+            break;
+    }
+
+
+    for (int i = 0; i < num_of_cards; i++) {
+        dst_pack->force_push(src_pack->topAndPop());
+    }
+
+}

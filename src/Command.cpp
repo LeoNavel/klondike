@@ -66,7 +66,7 @@ void Command::undo_command() {
 
     switch (last_cmd.type){
         case CMD_TYPE_MOVE:
-            deck->move_from_to(
+            deck->force_move_from_to(
                     last_cmd.command.destination_stack,
                     last_cmd.command.source_stack,
                     last_cmd.command.num_of_cards

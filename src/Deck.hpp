@@ -82,6 +82,14 @@ public:
     void move_from_to(StackID src, StackID dst, unsigned num_of_cards);
 
     /**
+     * Force moving n cards from src pack to dst pack.
+     * @param src
+     * @param dst
+     * @param num_of_cards
+     */
+    void force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards);
+
+    /**
      * Make card visible on working pack with id 'id_stack'.
      * Counting from 0.
      * Check if card is already visible.
