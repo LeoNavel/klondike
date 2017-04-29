@@ -36,7 +36,16 @@
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionUndo"/>
+    <widget class="QMenu" name="menuUndo_2">
+     <property name="title">
+      <string>Undo</string>
+     </property>
+     <addaction name="actionFirst_game"/>
+     <addaction name="actionSecond_game"/>
+     <addaction name="actionThird_game"/>
+     <addaction name="actionFourth_game"/>
+    </widget>
+    <addaction name="menuUndo_2"/>
    </widget>
    <addaction name="menuFILE"/>
    <addaction name="menuUndo"/>
@@ -47,14 +56,29 @@
     <string>Add game</string>
    </property>
   </action>
-  <action name="actionUndo">
-   <property name="text">
-    <string>undo</string>
-   </property>
-  </action>
   <action name="actionRemove_game">
    <property name="text">
     <string>Remove game</string>
+   </property>
+  </action>
+  <action name="actionFirst_game">
+   <property name="text">
+    <string>First game</string>
+   </property>
+  </action>
+  <action name="actionSecond_game">
+   <property name="text">
+    <string>Second game</string>
+   </property>
+  </action>
+  <action name="actionThird_game">
+   <property name="text">
+    <string>Third game</string>
+   </property>
+  </action>
+  <action name="actionFourth_game">
+   <property name="text">
+    <string>Fourth game</string>
    </property>
   </action>
  </widget>

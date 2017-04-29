@@ -34,15 +34,25 @@ private slots:
 
     void on_actionMore_games_triggered();
 
-    void on_actionUndo_triggered();
+//    void on_actionUndo_triggered();
 
     void on_actionRemove_game_triggered();
+
+    void on_actionFirst_game_triggered();
+
+    void on_actionSecond_game_triggered();
+
+    void on_actionThird_game_triggered();
+
+    void on_actionFourth_game_triggered();
 
 private:
     void enableNewGame();
     void disableNewGame();
     void enableRemoveGame();
     void disableRemoveGame();
+    void disableUndo(unsigned int i);
+    void enableUndo(unsigned int i);
 
     Ui::MainWindow *ui;
     myDialog *mDialog;
