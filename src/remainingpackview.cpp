@@ -150,11 +150,6 @@ void RemainingPackView::mousePressEvent(QMouseEvent *e){
         selectionDelegate->clear();
         selectionDelegate->mainView->requestUpdateAll();
         selectionDelegate->mainView->updateCursor();
-//        if(!selectionDelegate->isEmpty()) {
-//            selectionDelegate->rollBack();
-//            selectionDelegate->clear();
-//            QApplication::restoreOverrideCursor();
-//        }
     }
 }
 
