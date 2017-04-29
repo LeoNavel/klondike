@@ -74,9 +74,10 @@ void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
 //              }
 //          }
 
-          QApplication::restoreOverrideCursor();
+//          QApplication::restoreOverrideCursor();
           selectionDelegate->clear();
           selectionDelegate->hide();
+          selectionDelegate->mainView->updateCursor();
           update();
 
       }

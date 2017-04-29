@@ -35,6 +35,8 @@ public:
     void moveCardsFromRemainingPack(WorkingPackView *to);
     void moveCardsToTargetPack(WorkingPackView* from, TargetPackView * to, unsigned int count);
     void moveCards(WorkingPackView * from, WorkingPackView *to, unsigned int count);
+    void updateCursor();
+    void requestUpdateAll();
 
     void turnCard(WorkingPackView * on);
     ~DeckView();

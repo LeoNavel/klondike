@@ -73,15 +73,17 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
             selectionDelegate->setOffset(me->pos());
             selectionDelegate->setWpv(false);
 //            selectionDelegate->show();
-            QPixmap cursor_pixmap = selectionDelegate->grab();
+//            QPixmap cursor_pixmap = selectionDelegate->grab();
 
-            QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
-            QApplication::setOverrideCursor(cursor_default);
+//            QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
+//            QApplication::setOverrideCursor(cursor_default);
+            selectionDelegate->mainView->updateCursor();
             update();
         } else {
-            selectionDelegate->rollBack();
-            selectionDelegate->clear();
-            QApplication::restoreOverrideCursor();
+//            selectionDelegate->rollBack();
+//            selectionDelegate->clear();
+//            QApplication::restoreOverrideCursor();
+            return false;
         }
         return true;
     }
@@ -145,11 +147,14 @@ void RemainingPackView::setGeometry(const QRect &r) {
 
 void RemainingPackView::mousePressEvent(QMouseEvent *e){
     if (e->button() == Qt::LeftButton) {
-        if(!selectionDelegate->isEmpty()) {
-            selectionDelegate->rollBack();
-            selectionDelegate->clear();
-            QApplication::restoreOverrideCursor();
-        }
+        selectionDelegate->clear();
+        selectionDelegate->mainView->requestUpdateAll();
+        selectionDelegate->mainView->updateCursor();
+//        if(!selectionDelegate->isEmpty()) {
+//            selectionDelegate->rollBack();
+//            selectionDelegate->clear();
+//            QApplication::restoreOverrideCursor();
+//        }
     }
 }
 

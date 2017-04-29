@@ -36,10 +36,17 @@ private slots:
 
     void on_actionUndo_triggered();
 
+    void on_actionRemove_game_triggered();
+
 private:
+    void enableNewGame();
+    void disableNewGame();
+    void enableRemoveGame();
+    void disableRemoveGame();
+
     Ui::MainWindow *ui;
     myDialog *mDialog;
-    std::vector<DeckView *> games;
+    std::vector<DeckView *> views;
     std::vector<Controller *> controllers;
 
 };
