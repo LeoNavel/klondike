@@ -93,7 +93,9 @@ namespace CardStacks{
 
     public:
         RemainingPack();
+
         void popCurrent();
+        void pushCurrent(card::Card card);
         card::Card topAndPopCurrent();
 
         // v klude metody premenuj ja som to len tak z hlavy strelil :D

@@ -13,13 +13,13 @@ void Deck::prepareDeck(unsigned char shuffles) {
 
     for(int i = 0; i < 7; i++) {
         for (int j = 0; j < i; j++)
-            workingPacks[i]->push_invisible(card_deck.topAndPop());
+            workingPacks[i]->force_push(card_deck.topAndPop());
 
-        workingPacks[i]->push_invisible(card_deck.topAndPop());
+        workingPacks[i]->force_push(card_deck.topAndPop());
         workingPacks[i]->turn_invisible();
     }
 
-    while (!card_deck.isEmpty()) remaining_pack->push(card_deck.topAndPop());
+    while (!card_deck.isEmpty()) remaining_pack->force_push(card_deck.topAndPop());
 }
 
 Deck::Deck() {
@@ -371,7 +371,6 @@ void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) 
             break;
 
         case REMAINING_STACK:
-            dst_pack = remaining_pack;
             break;
 
         case TARGET_STACK:
@@ -383,9 +382,12 @@ void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) 
             break;
     }
 
-
-    for (int i = 0; i < num_of_cards; i++) {
-        dst_pack->force_push(src_pack->topAndPop());
+    if (dst.type_stack == REMAINING_STACK){
+        remaining_pack->pushCurrent(src_pack->topAndPop());
     }
-
+    else {
+        for (int i = 0; i < num_of_cards; i++) {
+            dst_pack->force_push(src_pack->topAndPop());
+        }
+    }
 }

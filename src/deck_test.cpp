@@ -92,6 +92,14 @@ int main(){
     std::cout <<"target pack 0"<< std::endl;
     deck->targetPacks[0]->printContent();
 
+    deck->remaining_pack->set_current_id(4);
+
+    stack_id_t ts0; ts0.type_stack = TARGET_STACK; ts0.id_stack = 0;
+    stack_id_t rem; rem.type_stack = REMAINING_STACK;
+
+    deck->force_move_from_to(ts0, rem, 1);
+
+
     delete cmd;
     delete deck;
     return EXIT_SUCCESS;

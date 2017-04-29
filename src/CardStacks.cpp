@@ -311,6 +311,10 @@ namespace CardStacks {
         current_card = id;
     }
 
+    void RemainingPack::pushCurrent(card::Card card) {
+        card_stack.insert(card_stack.begin() + ++current_card, card);
+    }
+
     /**
      * @brief Crete a deck cards and fill it with cards.
      */
