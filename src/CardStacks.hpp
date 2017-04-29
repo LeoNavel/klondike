@@ -107,6 +107,9 @@ namespace CardStacks{
         void turnPack();
         void turnBack();
 
+        int get_current_id();
+        void set_current_id(int id);
+
     };
 
 

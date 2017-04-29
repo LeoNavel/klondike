@@ -303,6 +303,14 @@ namespace CardStacks {
         return poped_card;
     }
 
+    int RemainingPack::get_current_id() {
+        return current_card;
+    }
+
+    void RemainingPack::set_current_id(int id) {
+        current_card = id;
+    }
+
     /**
      * @brief Crete a deck cards and fill it with cards.
      */
