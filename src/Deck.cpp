@@ -307,12 +307,13 @@ void Deck::save(std::string output_file) {
         out_file << std::to_string(remaining_pack->operator[](j).get_visibility());
         out_file << std::endl;
     }
+    out_file << std::to_string(remaining_pack->get_current_id()) << std::endl;
 }
 
 void Deck::load(std::string input_file) {
     std::ifstream input_file_stream;
     input_file_stream.open(input_file);
-    int num_of_cards, card_sign, card_num, card_vis;
+    int num_of_cards, card_sign, card_num, card_vis, ptr_id;
 
     for (int i = 0 ; i < 7 ; i++){
 
@@ -339,6 +340,8 @@ void Deck::load(std::string input_file) {
         remaining_pack->force_push(card::Card(card_num, static_cast<card::sign>(card_sign), card_vis));
     }
 
+    input_file_stream >> ptr_id;
+    remaining_pack->set_current_id(ptr_id);
 }
 
 void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) {
