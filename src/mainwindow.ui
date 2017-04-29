@@ -38,9 +38,19 @@
      <addaction name="actionSave_third_game"/>
      <addaction name="actionSave_fourth_game"/>
     </widget>
+    <widget class="QMenu" name="menuLoad">
+     <property name="title">
+      <string>Load</string>
+     </property>
+     <addaction name="actionLoad_to_first_game"/>
+     <addaction name="actionLoad_to_second_game"/>
+     <addaction name="actionLoad_to_third_game"/>
+     <addaction name="actionLoad_to_fourth_game"/>
+    </widget>
     <addaction name="actionMore_games"/>
     <addaction name="actionRemove_game"/>
     <addaction name="menuSave"/>
+    <addaction name="menuLoad"/>
    </widget>
    <widget class="QMenu" name="menuUndo">
     <property name="title">
@@ -109,6 +119,26 @@
   <action name="actionSave_fourth_game">
    <property name="text">
     <string>Save fourth game</string>
+   </property>
+  </action>
+  <action name="actionLoad_to_first_game">
+   <property name="text">
+    <string>Load to first game</string>
+   </property>
+  </action>
+  <action name="actionLoad_to_second_game">
+   <property name="text">
+    <string>Load to second game</string>
+   </property>
+  </action>
+  <action name="actionLoad_to_third_game">
+   <property name="text">
+    <string>Load to third game</string>
+   </property>
+  </action>
+  <action name="actionLoad_to_fourth_game">
+   <property name="text">
+    <string>Load to fourth game</string>
    </property>
   </action>
  </widget>

@@ -55,6 +55,14 @@ private slots:
 
     void on_actionSave_fourth_game_triggered();
 
+    void on_actionLoad_to_first_game_triggered();
+
+    void on_actionLoad_to_second_game_triggered();
+
+    void on_actionLoad_to_third_game_triggered();
+
+    void on_actionLoad_to_fourth_game_triggered();
+
 private:
     void enableNewGame();
     void disableNewGame();
@@ -64,7 +72,10 @@ private:
     void enableUndo(unsigned int i);
     void enableSave(unsigned int i);
     void disableSave(unsigned int i);
+    void enableLoad(unsigned int i);
+    void disableLoad(unsigned int i);
     void save(unsigned int i);
+    void load(unsigned int i);
 
     Ui::MainWindow *ui;
     myDialog *mDialog;

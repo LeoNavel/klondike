@@ -172,6 +172,22 @@ void Controller::save(std::string output_file){
 }
 
 void Controller::load(std::string input_file){
+    Deck * newDeck;
+    try{
+        newDeck = new Deck(input_file);
+        delete deck;
+        delete command;
+        deck = newDeck;
+        command = new Command(newDeck);
+    } catch (ErrorException e){
+        std::cerr << e.get_message();
+    }
+
+    updateAll();
+
+//    delete deck;
+//    delete command
+
     // todo update
 }
 
