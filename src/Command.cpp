@@ -60,6 +60,8 @@ void Command::move_card(cmd_t command) {
 }
 
 void Command::undo_command() {
+    if(previous_commands.size() == 0)
+        return;
     inner_cmd_t last_cmd;
     last_cmd = previous_commands.back();
     previous_commands.pop_back();
