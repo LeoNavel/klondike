@@ -24,6 +24,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     disableRemoveGame();
+    for(int i = 1; i < 4; i++)
+        disableUndo(i);
+}
+
+void MainWindow::disableUndo(unsigned int i){
+    QAction * editAction = ui->menuBar->actions()[1];
+    QAction * undo = editAction->menu()->actions()[0];
+    QAction * undoItem = undo->menu()->actions()[i];
+    undoItem->setEnabled(false);
+}
+
+void MainWindow::enableUndo(unsigned int i){
+    QAction * editAction = ui->menuBar->actions()[1];
+    QAction * undo = editAction->menu()->actions()[0];
+    QAction * undoItem = undo->menu()->actions()[i];
+    undoItem->setEnabled(true);
 }
 
 MainWindow::~MainWindow()
@@ -43,7 +59,8 @@ void MainWindow::resizeEvent(QResizeEvent* event)
 
     if(controllers.size() == 1) {
         DeckView *dv = views[0];
-        dv->resizeEvent(event);
+//        dv->resizeEvent(event);
+        dv->setGeometry(this->rect());
     } else {
         int h = ns.height() / 2;
         int w = ns.width() / 2;
@@ -90,6 +107,7 @@ void MainWindow::on_actionMore_games_triggered()
     if(controllers.size() < 4){
         enableRemoveGame();
         unsigned int size = controllers.size();
+        enableUndo(size);
         QRect r = this->rect();
         r.setWidth(r.width() / 2);
         r.setHeight(r.height() / 2);
@@ -136,31 +154,49 @@ void MainWindow::on_actionMore_games_triggered()
     }
 }
 
-
-void MainWindow::on_actionUndo_triggered()
-{
-    qDebug() << "cmd z";
-    Controller * controller = controllers[0];
-    controller->undo_command();
-}
-
 void MainWindow::on_actionRemove_game_triggered()
 {
-    if(controllers.size() > 1){
+    unsigned int size = controllers.size();
+    if(size > 1){
         enableNewGame();
         DeckView * dv = views[views.size() - 1];
         delete dv;
         views.pop_back();
 
-        Controller * controller = controllers[controllers.size() - 1];
+        Controller * controller = controllers[size - 1];
         delete controller;
         controllers.pop_back();
+        disableUndo(size - 1);
     }
-    if(controllers.size() == 1){
+    if(size == 1){
         DeckView * dv = views[0];
         dv->setGeometry(rect());
     }
-    if(controllers.size() == 1){
+    if(size == 1){
         disableRemoveGame();
     }
+}
+
+void MainWindow::on_actionFirst_game_triggered()
+{
+    Controller *controller = controllers[0];
+    controller->undo_command();
+}
+
+void MainWindow::on_actionSecond_game_triggered()
+{
+    Controller *controller = controllers[1];
+    controller->undo_command();
+}
+
+void MainWindow::on_actionThird_game_triggered()
+{
+    Controller *controller = controllers[2];
+    controller->undo_command();
+}
+
+void MainWindow::on_actionFourth_game_triggered()
+{
+    Controller *controller = controllers[3];
+    controller->undo_command();
 }
