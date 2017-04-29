@@ -276,8 +276,8 @@ void MainWindow::on_actionSave_fourth_game_triggered()
 
 void MainWindow::load(unsigned int i){
     QString fileName = QFileDialog::getOpenFileName(this,
-            tr("Open Address Book"), "",
-            tr("Address Book (*.klondike);;All Files (*)"));
+            tr("Open klondike game"), "",
+            tr("klondike (*.klondike);;All Files (*)"));
     if(fileName.isEmpty())
         return;
     qDebug() << "load";
