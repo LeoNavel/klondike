@@ -4,7 +4,6 @@
 #include "Deck.hpp"
 #include "View.hpp"
 #include "Command.hpp"
-#include "QDebug"
 #include "Error.hpp"
 
 class Controller {

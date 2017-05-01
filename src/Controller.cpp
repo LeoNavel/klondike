@@ -38,12 +38,9 @@ void Controller::findHelp(){
 }
 
 void Controller::move_card(cmd_t cmd) {
-    qDebug() << "Moving with cards";
     try{
         command->move_card(cmd);
-    } catch(ErrorException e){
-        qDebug() << e.get_message().c_str();
-    }
+    } catch(ErrorException e){}
     CardStacks::RemainingPack *rp;
     card::Card c;
     CardStacks::GenericCardStack wp;
@@ -95,9 +92,7 @@ void Controller::turn_card(int id_stack) {
 void Controller::get_next() {
     try{
         command->get_next();
-    } catch(ErrorException e){
-        qDebug() << e.get_message().c_str();
-    }
+    } catch(ErrorException e){}
     CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
     view->update(rp);
 
@@ -112,9 +107,7 @@ void Controller::get_next() {
 void Controller::roll_rem_pack() {
     try{
         command->roll_rem_pack();
-    }  catch(ErrorException e){
-        qDebug() << e.get_message().c_str();
-    }
+    }  catch(ErrorException e){}
     CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
     view->update(rp);
 }
@@ -125,9 +118,7 @@ void Controller::roll_rem_pack() {
 void Controller::undo_command() {
     try{
         command->undo_command();
-    }  catch(ErrorException e){
-        qDebug() << e.get_message().c_str();
-    }
+    }  catch(ErrorException e){}
     updateAll();
 }
 
@@ -162,7 +153,6 @@ void Controller::updateAll(){
 
 
 void Controller::save(std::string output_file){
-    qDebug() << "saving";
     std::string fn = output_file;
     std::string suffix = ".klondike";
     if(fn.rfind(suffix) != (fn.size()-suffix.size())){
