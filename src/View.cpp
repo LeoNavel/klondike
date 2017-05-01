@@ -2,7 +2,6 @@
 
 
 void GenericView::update(CardStacks::RemainingPack *remainigPack){
-    qDebug() << "omg..";
 }
 
 void GenericView::update(int id, card::Card * topTargetCard){
