@@ -3,8 +3,16 @@
 
 int main(){
     Deck *deck = new Deck();
+    deck->prepareDeck(2);
     TerminalView *view = new TerminalView();
     Controller *controller = new Controller(deck, view);
 
-    return view->run();
+    view->run();
+
+
+    delete deck;
+    delete view;
+    delete controller;
+
+    return EXIT_SUCCESS;
 }

@@ -4,10 +4,10 @@
 #include "CardStacks.hpp"
 #include "Card.hpp"
 
-#define CANVAS_WIDTH 70
-#define CANVAS_HEIGHT 20
-#define CARD_WIDTH 8
-#define CARD_HEIGHT 8
+#define CANVAS_WIDTH 90
+#define CANVAS_HEIGHT 40
+#define CARD_WIDTH 10
+#define CARD_HEIGHT 9
 
 #if defined(_WIN32) || defined(__MSDOS__)
     #define CANVAS_SPADE   "\x06"

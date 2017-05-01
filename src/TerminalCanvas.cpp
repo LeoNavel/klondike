@@ -35,8 +35,8 @@ void TerminalCanvas::make_card(int x, int y, card::Card *card) {
     //printing corners
     canvas[y][x] = '/';
     canvas[y][x+CARD_WIDTH-1] = '\\';
-    canvas[y+CARD_WIDTH-1][x] = '\\';
-    canvas[y+CARD_WIDTH-1][x+CARD_WIDTH-1] = '/';
+    canvas[y+CARD_HEIGHT-1][x] = '\\';
+    canvas[y+CARD_HEIGHT-1][x+CARD_WIDTH-1] = '/';
 
     //creating lines
     for (int i = 0 ; i < CARD_WIDTH-2 ; i++){
@@ -95,6 +95,7 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     for (int i = 0 ; i < size - 1 ; i++){
         card::Card card = workingPack[i];
         make_card_title(x,y,&card);
+        y += 2;
     }
 
     if (size > 0) {
