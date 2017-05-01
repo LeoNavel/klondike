@@ -1,16 +1,18 @@
-#ifndef VIEW_H
-#define VIEW_H
+#ifndef TERMINAL_VIEW_H
+#define TERMINAL_VIEW_H
 
-#include "CardStacks.hpp"
+#include "View.hpp"
+#include "TerminalCanvas.hpp"
 
-class Controller; // TODO try to compile
+class TerminalView : public GenericView {
+private:
+    TerminalCanvas canvas;
 
-class GenericView {
-protected:
-    Controller * controller = nullptr;
 public:
-    void setController(Controller *controller);
-    ~GenericView();
+    TerminalView():GenericView() {canvas  = TerminalCanvas();}
+
+    void refresh();
+    int run();
 
     virtual void update(int id, card::Card * topTargetCard);
     virtual void update(int id, CardStacks::GenericCardStack workingPack);
@@ -20,4 +22,4 @@ public:
     virtual void highlightRemainingToTarget(unsigned int id);
 };
 
-#endif //VIEW_H
+#endif //TERMINAL_VIEW_H
