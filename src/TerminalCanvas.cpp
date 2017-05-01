@@ -93,10 +93,13 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     long size = workingPack.size();
 
     for (int i = 0 ; i < size - 1 ; i++){
-        make_card_title(x,y,&workingPack[i]);
+        card::Card card = workingPack[i];
+        make_card_title(x,y,&card);
     }
 
-    make_card(x,y,&workingPack[size-1]);
+
+    card::Card card = workingPack[size -1];
+    make_card(x,y,&card);
 }
 
 char TerminalCanvas::make_num(int num) {
@@ -133,13 +136,14 @@ char TerminalCanvas::make_sign(enum card::sign sign) {
 
 void TerminalCanvas::update(CardStacks::RemainingPack *remainigPack) {
     int x = 1 , y = 1;
+    card::Card card = card::Card();
 
     if (!remainigPack->allCardVisible()){
-        card::Card card = card::Card();
         make_card(x,y,&card);
     }
 
     if (remainigPack->isSetCurrent()){
-        make_card(x,y,&((*remainigPack)[remainigPack->get_current_id()]));
+        card = ((*remainigPack)[remainigPack->get_current_id()]);
+        make_card(x,y,&card);
     }
 }
