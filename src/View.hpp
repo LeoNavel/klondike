@@ -16,6 +16,9 @@ public:
     virtual void update(int id, card::Card * topTargetCard);
     virtual void update(int id, CardStacks::GenericCardStack workingPack);
     virtual void update(CardStacks::RemainingPack *remainigPack);
+    virtual void highlightNextCardCommand();
+    virtual void highlightRemainingToWorking(unsigned int id);
+    virtual void highlightRemainingToTarget(unsigned int id);
 };
 
 #endif //VIEW_H

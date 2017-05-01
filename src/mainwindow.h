@@ -63,6 +63,8 @@ private slots:
 
     void on_actionLoad_to_fourth_game_triggered();
 
+    void on_actionHelp_for_first_game_triggered();
+
 private:
     void enableNewGame();
     void disableNewGame();

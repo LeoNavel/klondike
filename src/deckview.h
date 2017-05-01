@@ -35,6 +35,9 @@ public:
     void moveCardsFromRemainingPack(WorkingPackView *to);
     void moveCardsToTargetPack(WorkingPackView* from, TargetPackView * to, unsigned int count);
     void moveCards(WorkingPackView * from, WorkingPackView *to, unsigned int count);
+    void highlightNextCardCommand();
+    void highlightRemainingToWorking(unsigned int id);
+    void highlightRemainingToTarget(unsigned int id);
     void updateCursor();
     void requestUpdateAll();
 

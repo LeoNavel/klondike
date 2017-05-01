@@ -52,6 +52,8 @@ public:
 
     void load(std::string input_file);
 
+    void findHelp();
+
     ~Controller();
 
 };

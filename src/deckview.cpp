@@ -258,6 +258,21 @@ void DeckView::resizeEvent(QResizeEvent* event)
    }
 }
 
+void DeckView::highlightNextCardCommand(){
+    remainingPackView->highlightNextCardCommand();
+}
+
+void DeckView::highlightRemainingToWorking(unsigned int id){
+    remainingPackView->highlightMove();
+    WorkingPackView * wpv = workingPacks[id];
+    wpv->highlight(1);
+}
+
+void DeckView::highlightRemainingToTarget(unsigned int id){
+    remainingPackView->highlightMove();
+    TargetPackView * tpv = targetPacks[id];
+    tpv->highlight();
+}
 
 DeckView::~DeckView()
 {

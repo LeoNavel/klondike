@@ -13,14 +13,6 @@ TargetPackView::TargetPackView(QWidget *parent) :
     currentCardView->hide();
 }
 
-void TargetPackView::paintEvent(QPaintEvent * e){
-    QFrame::paintEvent(e);
-//    if(!isEmpty()){
-//        if(!currentCardView->isVisible())
-//            currentCardView->show();
-//    }
-}
-
 void TargetPackView::setGeometry(const QRect &r) {
     QFrame::setGeometry(r);
 
@@ -86,6 +78,26 @@ void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
 
 }
 
+void TargetPackView::highlight(){
+    if(currentCardView->isVisible()){
+        QString ss = currentCardView->styleSheet();
+        currentCardView->setStyleSheet("background-color: #d00;");
+        QTime dieTime= QTime::currentTime().addMSecs(250);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        currentCardView->setStyleSheet(ss);
+        update();
+    } else {
+        QFrame * fram = new QFrame(this);
+        fram->setGeometry(currentCardView->rect());
+        fram->setStyleSheet("background-color: #d00;");
+        fram->show();
+        QTime dieTime= QTime::currentTime().addMSecs(250);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        delete fram;
+    }
+}
 
 TargetPackView::~TargetPackView()
 {

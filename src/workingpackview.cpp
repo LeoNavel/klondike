@@ -158,6 +158,35 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
     return QWidget::eventFilter(obj, e);
 }
 
+void WorkingPackView::highlight(unsigned int count){
+    if(cards.size() > 1){
+    std::vector<std::string> css = std::vector<std::string>();
+        for(unsigned int i = 0; i < count; i++){
+            CardView * cv = cards[cards.size() - 1 -i];
+            QString cssQstr = cv->styleSheet();
+            css.push_back(cssQstr.toStdString());
+            cv->setStyleSheet("background-color: #d00");
+        }
+        QTime dieTime= QTime::currentTime().addMSecs(250);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        for(unsigned int i = 0; i < count; i++){
+            CardView * cv = cards[cards.size() - 1 -i];
+            std::string cssStr = css[css.size() - 1];
+            cv->setStyleSheet(cssStr.c_str());
+            css.pop_back();
+        }
+    } else {
+        QString css = this->styleSheet();
+        setStyleSheet("background-color: #d00");
+        QTime dieTime= QTime::currentTime().addMSecs(250);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        setStyleSheet(css);
+    }
+    update();
+}
+
 void WorkingPackView::mousePressEvent(QMouseEvent *e){
     if (e->button() == Qt::LeftButton) {
         if(!selectionDelegate->isEmpty()){
@@ -167,28 +196,9 @@ void WorkingPackView::mousePressEvent(QMouseEvent *e){
             } else {
                 selectionDelegate->mainView->moveCardsFromRemainingPack(this);
             }
-//            std::vector<card::Card> gs_p;
-//            gs_p = selectionDelegate->getAll();
-//            try {
-//                for(auto c:gs_p)
-//                    push(c);
-//            } catch (ErrorException err) {
-//                qDebug() << err.get_message().c_str();
-//                selectionDelegate->rollBack();
-//                update();
-////            } catch (char const* err) {
-////                qDebug() << err;
-//            }
             selectionDelegate->clear();
             selectionDelegate->hide();
-//            selectionDelegate->update();
-//            update();
-//            repaint();
-//            QApplicati
-//            on::restoreOverrideCursor();
             selectionDelegate->mainView->updateCursor();
-//            return true;
-//            return true;
         }
     }
 }

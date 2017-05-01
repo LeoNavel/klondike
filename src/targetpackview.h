@@ -22,9 +22,9 @@ public:
     CardSelection * selectionDelegate;
     void mouseReleaseEvent(QMouseEvent *e);
     void setGeometry(const QRect &r);
-    void paintEvent(QPaintEvent * e);
     void setTopCard(card::Card *card);
     ~TargetPackView();
+    void highlight();
 
 private:
     Ui::TargetPackView *ui;

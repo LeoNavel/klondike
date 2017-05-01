@@ -67,8 +67,21 @@
     </widget>
     <addaction name="menuUndo_2"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>help</string>
+    </property>
+    <widget class="QMenu" name="menuHelp_2">
+     <property name="title">
+      <string>help</string>
+     </property>
+     <addaction name="actionHelp_for_first_game"/>
+    </widget>
+    <addaction name="menuHelp_2"/>
+   </widget>
    <addaction name="menuFILE"/>
    <addaction name="menuUndo"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMore_games">
@@ -139,6 +152,11 @@
   <action name="actionLoad_to_fourth_game">
    <property name="text">
     <string>Load to fourth game</string>
+   </property>
+  </action>
+  <action name="actionHelp_for_first_game">
+   <property name="text">
+    <string>Help for first game </string>
    </property>
   </action>
  </widget>

@@ -28,6 +28,7 @@ public:
     CardSelection * selectionDelegate;
     void setCards(CardStacks::GenericCardStack stack);
     void mousePressEvent(QMouseEvent *e);
+    void highlight(unsigned int count);
     ~WorkingPackView();
 
 private:

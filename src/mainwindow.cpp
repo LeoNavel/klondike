@@ -305,3 +305,9 @@ void MainWindow::on_actionLoad_to_fourth_game_triggered()
 {
     load(3);
 }
+
+void MainWindow::on_actionHelp_for_first_game_triggered()
+{
+    Controller *controller = controllers[0];
+    controller->findHelp();
+}

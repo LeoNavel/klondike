@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "cardselection.h"
 #include "Error.hpp"
+#include <QTime>
 #include <vector>
 
 namespace Ui {
@@ -27,6 +28,8 @@ public:
     void mousePressEvent(QMouseEvent *e);
     void nextCard();
     void turnPack();
+    void highlightNextCardCommand();
+    void highlightMove();
     CardSelection * selectionDelegate;
     ~RemainingPackView();
 

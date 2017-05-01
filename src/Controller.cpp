@@ -29,8 +29,12 @@ Controller::Controller(Deck *deck, GenericView *view) {
         CardStacks::GenericCardStack gs = deck->get_pack(stackId);
         view->update(stackId.id_stack, gs);
     }
+}
 
-
+void Controller::findHelp(){
+//    this->view->highlightNextCardCommand();
+//    this->view->highlightRemainingToWorking(2);
+    this->view->highlightRemainingToWorking(2);
 }
 
 void Controller::move_card(cmd_t cmd) {

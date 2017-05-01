@@ -90,6 +90,25 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
     return QWidget::eventFilter(obj, e);
 }
 
+void RemainingPackView::highlightNextCardCommand(){
+    QString ss = backCard->styleSheet();
+    backCard->setStyleSheet("background-color: #d00;");
+    QTime dieTime= QTime::currentTime().addMSecs(250);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    backCard->setStyleSheet(ss);
+    update();
+}
+
+void RemainingPackView::highlightMove(){
+    QString ss = currentCardView->styleSheet();
+    currentCardView->setStyleSheet("background-color: #d00;");
+    QTime dieTime= QTime::currentTime().addMSecs(250);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    currentCardView->setStyleSheet(ss);
+    update();
+}
 
 void RemainingPackView::initWithStack(CardStacks::RemainingPack *stack){
     while(isSetCurrent()){
@@ -111,6 +130,11 @@ void RemainingPackView::initWithStack(CardStacks::RemainingPack *stack){
             }while(stack->currentCard() != currentCard());
         }
     }
+    if(allCardVisible()){
+        backCard->setStyleSheet("background-color: rgba(1,1,1,0);");
+    } else {
+        backCard->setStyleSheet("background-color: orange;");
+    }
 
     update();
 }
@@ -126,12 +150,15 @@ void RemainingPackView::paintEvent(QPaintEvent *e){
             currentCardView->hide();
         }
         if(allCardVisible()) {
-            backCard->setStyleSheet("background-color: rgba(1,1,1,0);");
+//            QString clr = (highlightedBackCard)?"#d00":"rgba(1,1,1,0)";
+//            backCard->setStyleSheet("background-color: " + clr + ";");
         } else {
-            backCard->setStyleSheet("background-color: orange;");
+//            QString clr = (highlightedBackCard)?"#d00":"orange";
+//            backCard->setStyleSheet("background-color: " + clr +";");
         }
     } else {
-        backCard->setStyleSheet("background-color: rgba(1,1,1,0);");
+//        QString clr = (highlightedBackCard)?"#d00":"rgba(1,1,1,0)";
+//        backCard->setStyleSheet("background-color: " + clr + ";");
         currentCardView->hide();
     }
 }
