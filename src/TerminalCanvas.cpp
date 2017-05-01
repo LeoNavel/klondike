@@ -97,9 +97,10 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
         make_card_title(x,y,&card);
     }
 
-
-    card::Card card = workingPack[size -1];
-    make_card(x,y,&card);
+    if (size > 0) {
+        card::Card card = workingPack[size - 1];
+        make_card(x, y, &card);
+    }
 }
 
 char TerminalCanvas::make_num(int num) {

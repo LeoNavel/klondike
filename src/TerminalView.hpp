@@ -4,12 +4,12 @@
 #include "View.hpp"
 #include "TerminalCanvas.hpp"
 
-class TerminalView : public GenericView {
+class TerminalView  : public GenericView {
 private:
     TerminalCanvas canvas;
 
 public:
-    TerminalView():GenericView() {canvas  = TerminalCanvas();}
+    TerminalView(){canvas  = TerminalCanvas();}
 
     void refresh();
     int run();
