@@ -32,6 +32,7 @@ void CardSelection::paintEvent(QPaintEvent *e){
         nr.setSize(this->rect().size());
         c->setGeometry(nr);
         c->show();
+        c->raise();
     }
 }
 void CardSelection::setMainView(DeckView * mainView){

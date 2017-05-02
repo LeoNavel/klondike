@@ -324,12 +324,20 @@ cmd_t Deck::get_help_command() {
     for (int i = 0 ; i < 4 ; i++){
         if (!targetPacks[i]->isEmpty()){
             dst_card = targetPacks[i]->top();
-            if (src_card.get_sign() == dst_card.get_sign() and src_card.get_number() == dst_card.get_number() + 1){
+            if (src_card.get_sign() == dst_card.get_sign() && src_card.get_number() == dst_card.get_number() + 1){
                 found_command.source_stack.type_stack = REMAINING_STACK;
                 found_command.destination_stack.type_stack = TARGET_STACK;
                 found_command.destination_stack.id_stack = i;
                 found_command.num_of_cards = 1;
 
+                return found_command;
+            }
+        } else {
+            if(src_card.get_number() == 1) {
+                found_command.source_stack.type_stack = REMAINING_STACK;
+                found_command.destination_stack.type_stack = TARGET_STACK;
+                found_command.destination_stack.id_stack = i;
+                found_command.num_of_cards = 1;
                 return found_command;
             }
         }
@@ -342,7 +350,7 @@ cmd_t Deck::get_help_command() {
             if (!dst_card.isTurnedUp()){
                 continue;
             }
-            if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() + 1){
+            if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() - 1){
                 found_command.source_stack.type_stack = REMAINING_STACK;
                 found_command.destination_stack.type_stack = WORKING_STACK;
                 found_command.destination_stack.id_stack = i;
@@ -350,6 +358,13 @@ cmd_t Deck::get_help_command() {
 
                 return found_command;
             }
+        } else if(src_card.get_number() == 13){
+            found_command.source_stack.type_stack = REMAINING_STACK;
+            found_command.destination_stack.type_stack = WORKING_STACK;
+            found_command.destination_stack.id_stack = i;
+            found_command.num_of_cards = 1;
+
+            return found_command;
         }
     }
 
@@ -359,22 +374,24 @@ cmd_t Deck::get_help_command() {
         if (!workingPacks[i]->isEmpty()) {
             src_card = workingPacks[i]->top();
             for (int j = 0; j < 4; j++) {
-                if (!targetPacks[i]->isEmpty()) {
-                    dst_card = targetPacks[i]->top();
+                if (!targetPacks[j]->isEmpty()) {
+                    dst_card = targetPacks[j]->top();
                     if (src_card.get_sign() == dst_card.get_sign() and
                         src_card.get_number() == dst_card.get_number() + 1) {
-                        found_command.source_stack.type_stack = REMAINING_STACK;
+                        found_command.source_stack.id_stack = i;
+                        found_command.source_stack.type_stack = WORKING_STACK;
                         found_command.destination_stack.type_stack = TARGET_STACK;
-                        found_command.destination_stack.id_stack = i;
+                        found_command.destination_stack.id_stack = j;
                         found_command.num_of_cards = 1;
 
                         return found_command;
                     }
                 } else {
                     if (src_card.get_number() == card::ACE) {
-                        found_command.source_stack.type_stack = REMAINING_STACK;
+                        found_command.source_stack.id_stack = i;
+                        found_command.source_stack.type_stack = WORKING_STACK;
                         found_command.destination_stack.type_stack = TARGET_STACK;
-                        found_command.destination_stack.id_stack = i;
+                        found_command.destination_stack.id_stack = j;
                         found_command.num_of_cards = 1;
 
                         return found_command;
@@ -399,18 +416,31 @@ cmd_t Deck::get_help_command() {
 
             for (int k = 0 ; k < 7 ; k++){
                 if (k == i) continue;
-                dst_card = workingPacks[k]->top();
-                if (!dst_card.isTurnedUp()){
-                    continue;
-                }
+                WorkingPack *wp = workingPacks[k];
+                if(wp->isEmpty()){
+                    if(src_card.get_number() == 13){
+                        found_command.source_stack.id_stack = i;
+                        found_command.source_stack.type_stack = WORKING_STACK;
+                        found_command.destination_stack.type_stack = WORKING_STACK;
+                        found_command.destination_stack.id_stack = k;
+                        found_command.num_of_cards = static_cast<int>(size_of_pack - j);
+                        return found_command;
+                    }
+                } else {
+                    dst_card = workingPacks[k]->top();
+                    if (!dst_card.isTurnedUp()){
+                        continue;
+                    }
 
-                if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() + 1){
-                    found_command.source_stack.type_stack = REMAINING_STACK;
-                    found_command.destination_stack.type_stack = WORKING_STACK;
-                    found_command.destination_stack.id_stack = i;
-                    found_command.num_of_cards = static_cast<int>(size_of_pack - j);
+                    if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() - 1){
+                        found_command.source_stack.id_stack = i;
+                        found_command.source_stack.type_stack = WORKING_STACK;
+                        found_command.destination_stack.type_stack = WORKING_STACK;
+                        found_command.destination_stack.id_stack = k;
+                        found_command.num_of_cards = static_cast<int>(size_of_pack - j);
 
-                    return found_command;
+                        return found_command;
+                    }
                 }
             }
         }

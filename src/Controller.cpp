@@ -9,18 +9,6 @@ Controller::Controller(Deck *deck, GenericView *view) {
 
     CardStacks::RemainingPack *rp = deck->get_ptr_2_rem_pack();
 
-//    rp->push(card::Card(1, card::sign::HEART));
-//    rp->push(card::Card(1, card::sign::DIAMONDS));
-//    rp->push(card::Card(1, card::sign::CLUBS));
-//    for(int i = 0; i < 27; i++)
-//        get_next();
-
-//    for(int i = 0; i < 23; i++){
-//        get_next();
-//        if(rp->currentCard().get_number() == 1)
-//            break;
-//    }
-
     this->view->update(rp);
     stack_id_t stackId;
     stackId.type_stack = WORKING_STACK;
@@ -38,6 +26,22 @@ void Controller::findHelp(){
 //    this->view->highlightWorkingToTarget(1, 3);
 //    this->view->highlightWorkingToWorking(1, 2, 0);
 // TODO vyhladanie helpu
+    try{
+        cmd_t cmd = deck->get_help_command();
+        int typeSource = cmd.source_stack.type_stack;
+        int typeDest = cmd.destination_stack.type_stack;
+        if(typeSource == REMAINING_STACK && typeDest == WORKING_STACK){
+            view->highlightRemainingToWorking(cmd.destination_stack.id_stack);
+        } else if(typeSource == REMAINING_STACK && typeDest == TARGET_STACK) {
+            view->highlightRemainingToTarget(cmd.destination_stack.id_stack);
+        } else if(typeSource == WORKING_STACK && typeDest == WORKING_STACK) {
+            view->highlightWorkingToWorking(cmd.source_stack.id_stack, cmd.num_of_cards, cmd.destination_stack.id_stack);
+        } else if(typeSource == WORKING_STACK && typeDest == TARGET_STACK) {
+            view->highlightWorkingToTarget(cmd.source_stack.id_stack, cmd.destination_stack.id_stack);
+        }
+    }catch(ErrorException e) {
+
+    }
 }
 
 void Controller::move_card(cmd_t cmd) {

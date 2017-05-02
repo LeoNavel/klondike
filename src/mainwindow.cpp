@@ -261,7 +261,7 @@ void MainWindow::on_actionFourth_game_triggered()
 void MainWindow::save(unsigned int i){
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save game"), "",
-            tr("game (*.klondike)"));
+            tr("game (*.klondike)"), 0, QFileDialog::DontUseNativeDialog);
     qDebug() << fileName;
     if(fileName.isEmpty())
         return;
@@ -294,7 +294,7 @@ void MainWindow::on_actionSave_fourth_game_triggered()
 void MainWindow::load(unsigned int i){
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open klondike game"), "",
-            tr("klondike (*.klondike);;All Files (*)"));
+            tr("klondike (*.klondike);;All Files (*)"), 0, QFileDialog::DontUseNativeDialog);
     if(fileName.isEmpty())
         return;
     qDebug() << "load";

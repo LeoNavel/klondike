@@ -159,7 +159,7 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
 }
 
 void WorkingPackView::highlight(unsigned int count){
-    if(cards.size() > 1){
+    if(cards.size() > 0){
     std::vector<std::string> css = std::vector<std::string>();
         for(unsigned int i = 0; i < count; i++){
             CardView * cv = cards[cards.size() - 1 -i];
@@ -192,7 +192,11 @@ void WorkingPackView::mousePressEvent(QMouseEvent *e){
         if(!selectionDelegate->isEmpty()){
             if(selectionDelegate->isWpv()){
                 WorkingPackView *wpv = static_cast<WorkingPackView *>(selectionDelegate->getSourcePack());
-                selectionDelegate->mainView->moveCards(wpv, this, selectionDelegate->getSize());
+                if(wpv != this)
+                    selectionDelegate->mainView->moveCards(wpv, this, selectionDelegate->getSize());
+                else{
+                    selectionDelegate->mainView->requestUpdateAll();
+                }
             } else {
                 selectionDelegate->mainView->moveCardsFromRemainingPack(this);
             }
