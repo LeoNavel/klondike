@@ -1,4 +1,5 @@
 #include "TerminalCanvas.hpp"
+#include <cstdlib>
 
 TerminalCanvas::TerminalCanvas() {
     height = CANVAS_HEIGHT;
@@ -73,17 +74,32 @@ void TerminalCanvas::make_card_title(int x, int y, card::Card *card) {
         canvas[y][x+1+i] = '-';
     }
 
+    char sign = make_sign(card->get_sign());
+    char number = make_num(card->get_number());
+
     if (card->isTurnedUp()){
-        canvas[y+1][x+1] = make_sign(card->get_sign());
-        canvas[y+1][x+CARD_WIDTH-1] = make_num(card->get_number());
+        canvas[y + 1][x + 1] = sign;
+
+        if (number != '0'){
+            canvas[y + CARD_HEIGHT - 2][x + 1] = number;
+            canvas[y + CARD_HEIGHT - 2][x + 2] = ' ';
+        }
+        else {
+            canvas[y + CARD_HEIGHT - 2][x + 1] = '1';
+            canvas[y + CARD_HEIGHT - 2][x + 2] = number;
+        }
     }
 
 }
 
 void TerminalCanvas::clrscr() {
-    for (int i = 0 ; i < 5 ; i++) {
-        std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n";
-    }
+    #if defined(_WIN32) || defined(__MSDOS__)
+    #include <conio.h>
+    clrscr();
+    #else
+    system("clear");
+    #endif
+
 }
 
 char TerminalCanvas::make_num(int num) {
@@ -137,7 +153,7 @@ void TerminalCanvas::update(int id, card::Card *topTargetCard) {
 
 void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     int x,y;
-    y = CARD_HEIGHT + 3;
+    y = CARD_HEIGHT + 6;
     x = 1 + id*(CARD_WIDTH + 1);
 
     long size = workingPack.size();
@@ -149,6 +165,7 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
         y += 2;
     }
     delete_card(x,y);
+    delete_card(x,y+CARD_HEIGHT);
 
     if (size > 0) {
         card::Card card = workingPack[size - 1];
