@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "CardStacks.hpp"
+#include "Command.hpp"
 
 typedef struct {
     int type_stack;
@@ -143,6 +144,14 @@ public:
      * @return pointer to Remaining pack.
      */
     CardStacks::RemainingPack *get_ptr_2_rem_pack();
+
+    /**
+     * Find some possible move or command in game.
+     * This is not AI based search for playing game, just find first correct move in game.
+     * @return
+     */
+    cmd_t get_help_command();
+
 };
 
 
