@@ -238,7 +238,8 @@ namespace CardStacks {
      */
     void RemainingPack::nextCard() {
         // casting because size() is unsigned type
-        if (current_card < static_cast<long>(card_stack.size())) current_card++;
+        if (current_card < static_cast<long>(card_stack.size()) -1) current_card++;
+        else throw ErrorException(E_OUT_OF_RANGE, "Remaining pack is in the end, no next4 card");
     }
 
     /**

@@ -17,17 +17,7 @@ void TerminalCanvas::print() {
     for (int y = 0  ; y < height ; y++) {
         std::wcout << canvas[y] << std::endl;
     }
-    std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n";
-}
-
-void TerminalCanvas::update(int id, card::Card *topTargetCard) {
-    //calculating corner point
-    int x,y;
-    y = 1;
-    x =  30 +  (CARD_WIDTH + 2)*id;
-
-    make_card(x,y, topTargetCard);
-
+    std::cout << "\n\n";
 }
 
 void TerminalCanvas::make_card(int x, int y, card::Card *card) {
@@ -55,9 +45,20 @@ void TerminalCanvas::make_card(int x, int y, card::Card *card) {
 
     if (card->isTurnedUp()) {
         canvas[y + 1][x + 1] = sign;
-        canvas[y + CARD_HEIGHT - 2][x + 1] = number;
-        canvas[y + 1][x + CARD_WIDTH - 2] = number;
         canvas[y + CARD_HEIGHT - 2][x + CARD_WIDTH - 2] = sign;
+
+        if (number != '0'){
+            canvas[y + CARD_HEIGHT - 2][x + 1] = number;
+            canvas[y + CARD_HEIGHT - 2][x + 2] = ' ';
+            canvas[y + 1][x + CARD_WIDTH - 2] = number;
+            canvas[y + 1][x + CARD_WIDTH - 3] = ' ';
+        }
+        else {
+            canvas[y + CARD_HEIGHT - 2][x + 1] = '1';
+            canvas[y + CARD_HEIGHT - 2][x + 2] = number;
+            canvas[y + 1][x + CARD_WIDTH - 3] = '1';
+            canvas[y + 1][x + CARD_WIDTH - 2] = number;
+        }
     }
 }
 
@@ -80,27 +81,8 @@ void TerminalCanvas::make_card_title(int x, int y, card::Card *card) {
 }
 
 void TerminalCanvas::clrscr() {
-    for (int i = 0 ; i < 10 ; i++) {
+    for (int i = 0 ; i < 5 ; i++) {
         std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n";
-    }
-}
-
-void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
-    int x,y;
-    y = CARD_HEIGHT + 3;
-    x = 1 + id*(CARD_WIDTH + 1);
-
-    long size = workingPack.size();
-
-    for (int i = 0 ; i < size - 1 ; i++){
-        card::Card card = workingPack[i];
-        make_card_title(x,y,&card);
-        y += 2;
-    }
-
-    if (size > 0) {
-        card::Card card = workingPack[size - 1];
-        make_card(x, y, &card);
     }
 }
 
@@ -108,6 +90,8 @@ char TerminalCanvas::make_num(int num) {
     switch (num){
         case 1:
             return  'A';
+        case 10:
+            return '0';
         case 11:
             return 'J';
         case 12:
@@ -136,6 +120,42 @@ char TerminalCanvas::make_sign(enum card::sign sign) {
     return 'X';
 }
 
+void TerminalCanvas::update(int id, card::Card *topTargetCard) {
+    //calculating corner point
+    int x, y;
+    y = 1;
+    x = 30 + (CARD_WIDTH + 2) * id;
+
+    if (topTargetCard){
+        make_card(x, y, topTargetCard);
+    }
+    else {
+        delete_card(x,y);
+    }
+
+}
+
+void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
+    int x,y;
+    y = CARD_HEIGHT + 3;
+    x = 1 + id*(CARD_WIDTH + 1);
+
+    long size = workingPack.size();
+
+    delete_card(x,y);
+    for (int i = 0 ; i < size - 1 ; i++){
+        card::Card card = workingPack[i];
+        make_card_title(x,y,&card);
+        y += 2;
+    }
+    delete_card(x,y);
+
+    if (size > 0) {
+        card::Card card = workingPack[size - 1];
+        make_card(x, y, &card);
+    }
+}
+
 void TerminalCanvas::update(CardStacks::RemainingPack *remainigPack) {
     int x = 1 , y = 1;
     card::Card card = card::Card();
@@ -143,9 +163,25 @@ void TerminalCanvas::update(CardStacks::RemainingPack *remainigPack) {
     if (!remainigPack->allCardVisible()){
         make_card(x,y,&card);
     }
+    else {
+        delete_card(x,y);
+    }
 
     if (remainigPack->isSetCurrent()){
-        card = ((*remainigPack)[remainigPack->get_current_id()]);
-        make_card(x,y,&card);
+        //card = ((*remainigPack)[remainigPack->get_current_id()]);
+        card = remainigPack->currentCard();
+        card.turnUp();
+        make_card(x + 2 + CARD_WIDTH,y,&card);
+    }
+    else {
+        delete_card(x + 2 + CARD_WIDTH,y);
+    }
+}
+
+void TerminalCanvas::delete_card(int x, int y) {
+    for (int j = 0; j < CARD_HEIGHT; j++) {
+        for (int i = 0 ; i < CARD_WIDTH ; i++) {
+            canvas[y+j][x+i] = ' ';
+        }
     }
 }

@@ -34,17 +34,18 @@ void TerminalView::highlightRemainingToTarget(unsigned int id) {
 
 
 int TerminalView::run() {
-    std::cout<<"allooo" << std::endl;
 
     std::string user_input;
-    std::string command , from , to;
+    std::string command , from , to, rest;
 
 
     getline(std::cin, user_input);
     while (user_input != "quit"){
         //parsing first word
         command = user_input.substr(0,user_input.find(' '));
-
+        if (user_input.length() > 5) {
+            rest = user_input.substr(user_input.find(' ')+1);
+        }
         if (command == "next"){
             controller->get_next();
         }
@@ -55,7 +56,13 @@ int TerminalView::run() {
             controller->undo_command();
         }
         else if (command == "turn"){
-            std::cout << "awwd";
+            controller->roll_rem_pack();
+        }
+        else if (command == "save"){
+            controller->save(rest.substr(0,rest.find(' ')));
+        }
+        else if (command == "load") {
+            controller->load(rest.substr(0, rest.find(' ')));
         }
 
 
