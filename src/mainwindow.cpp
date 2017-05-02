@@ -225,11 +225,13 @@ void MainWindow::on_actionRemove_game_triggered()
         disableLoad(size - 1);
         disableHelp(size - 1);
     }
-    if(size == 1){
-        DeckView * dv = views[0];
-        dv->setGeometry(rect());
+    if(size == 2){
+        DeckView *dv = views[0];
+        QRect r = this->rect();
+        r.setY(30);
+        dv->setGeometry(r);
     }
-    if(size == 1){
+    if(size == 2){
         disableRemoveGame();
     }
 }
