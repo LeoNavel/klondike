@@ -44,6 +44,7 @@ namespace card {
         int get_number() const;
         sign get_sign() const;
         bool get_visibility();
+        color get_color();
         bool isTurnedUp();
         void turnUp();
         void turnDown();

@@ -82,4 +82,12 @@ namespace card {
         return visible;
     }
 
+    color Card::get_color() {
+        if (get_sign() == HEART || get_sign() == DIAMONDS) {
+            return RED;
+        } else {
+            return BLACK;
+        }
+    }
+
 }
