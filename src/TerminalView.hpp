@@ -13,6 +13,7 @@ public:
 
     void refresh();
     int run();
+    void help();
 
     virtual void update(int id, card::Card * topTargetCard);
     virtual void update(int id, CardStacks::GenericCardStack workingPack);
