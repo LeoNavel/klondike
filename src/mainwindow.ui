@@ -76,6 +76,9 @@
       <string>help</string>
      </property>
      <addaction name="actionHelp_for_first_game"/>
+     <addaction name="actionHelp_for_second_game"/>
+     <addaction name="actionHelp_for_third_game"/>
+     <addaction name="actionHelp_for_fourth_game"/>
     </widget>
     <addaction name="menuHelp_2"/>
    </widget>
@@ -157,6 +160,21 @@
   <action name="actionHelp_for_first_game">
    <property name="text">
     <string>Help for first game </string>
+   </property>
+  </action>
+  <action name="actionHelp_for_second_game">
+   <property name="text">
+    <string>Help for second game</string>
+   </property>
+  </action>
+  <action name="actionHelp_for_third_game">
+   <property name="text">
+    <string>Help for third game</string>
+   </property>
+  </action>
+  <action name="actionHelp_for_fourth_game">
+   <property name="text">
+    <string>Help for fourth game</string>
    </property>
   </action>
  </widget>

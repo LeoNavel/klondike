@@ -34,7 +34,10 @@ Controller::Controller(Deck *deck, GenericView *view) {
 void Controller::findHelp(){
 //    this->view->highlightNextCardCommand();
 //    this->view->highlightRemainingToWorking(2);
-    this->view->highlightRemainingToWorking(2);
+//    this->view->highlightRemainingToWorking(2);
+//    this->view->highlightWorkingToTarget(1, 3);
+//    this->view->highlightWorkingToWorking(1, 2, 0);
+// TODO vyhladanie helpu
 }
 
 void Controller::move_card(cmd_t cmd) {

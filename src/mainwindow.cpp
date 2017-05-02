@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
         disableUndo(i);
         disableSave(i);
         disableLoad(i);
+        disableHelp(i);
     }
 }
 
@@ -72,6 +73,20 @@ void MainWindow::enableLoad(unsigned int i){
     QAction * load = fileAction->menu()->actions()[3];
     QAction * loadItem = load->menu()->actions()[i];
     loadItem->setEnabled(true);
+}
+
+void MainWindow::disableHelp(unsigned int i){
+    QAction * helpAction = ui->menuBar->actions()[2];
+    QAction * help = helpAction->menu()->actions()[0];
+    QAction * helpItem = help->menu()->actions()[i];
+    helpItem->setEnabled(false);
+}
+
+void MainWindow::enableHelp(unsigned int i){
+    QAction * helpAction = ui->menuBar->actions()[2];
+    QAction * help = helpAction->menu()->actions()[0];
+    QAction * helpItem = help->menu()->actions()[i];
+    helpItem->setEnabled(true);
 }
 
 MainWindow::~MainWindow()
@@ -145,6 +160,7 @@ void MainWindow::on_actionMore_games_triggered()
         enableUndo(size);
         enableSave(size);
         enableLoad(size);
+        enableHelp(size);
         QRect r = this->rect();
         r.setY(30);
         r.setWidth(r.width() / 2);
@@ -206,7 +222,8 @@ void MainWindow::on_actionRemove_game_triggered()
         controllers.pop_back();
         disableUndo(size - 1);
         disableSave(size - 1);
-        disableLoad(size -1);
+        disableLoad(size - 1);
+        disableHelp(size - 1);
     }
     if(size == 1){
         DeckView * dv = views[0];
@@ -306,8 +323,29 @@ void MainWindow::on_actionLoad_to_fourth_game_triggered()
     load(3);
 }
 
+void MainWindow::findHelp(unsigned int i){
+    Controller * controller = controllers[i];
+    controller->findHelp();
+}
+
 void MainWindow::on_actionHelp_for_first_game_triggered()
 {
-    Controller *controller = controllers[0];
-    controller->findHelp();
+    findHelp(0);
+}
+
+void MainWindow::on_actionHelp_for_second_game_triggered()
+{
+    findHelp(1);
+}
+
+
+
+void MainWindow::on_actionHelp_for_third_game_triggered()
+{
+    findHelp(2);
+}
+
+void MainWindow::on_actionHelp_for_fourth_game_triggered()
+{
+    findHelp(3);
 }

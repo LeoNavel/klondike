@@ -38,6 +38,8 @@ public:
     void highlightNextCardCommand();
     void highlightRemainingToWorking(unsigned int id);
     void highlightRemainingToTarget(unsigned int id);
+    void highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID);
+    void highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID);
     void updateCursor();
     void requestUpdateAll();
 

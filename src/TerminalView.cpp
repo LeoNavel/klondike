@@ -34,6 +34,14 @@ void TerminalView::highlightRemainingToTarget(unsigned int id) {
     GenericView::highlightRemainingToTarget(id);
 }
 
+void TerminalView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
+    
+}
+
+void TerminalView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
+
+}
+
 
 int TerminalView::run() {
 
