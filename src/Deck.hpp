@@ -4,20 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "CardStacks.hpp"
-#include "Command.hpp"
-
-typedef struct {
-    int type_stack;
-    int id_stack;
-
-} stack_id_t;
-
-class StackID {
-public:
-    int type_stack;
-    int id_stack;
-    StackID(int type, int id):type_stack(type),id_stack(id){};
-};
+#include "struct_definitions.hpp"
 
 class Deck {
 
@@ -78,9 +65,7 @@ public:
      * @param dst
      * @param num_of_cards
      */
-    void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards); // TODO and TEST
-
-    void move_from_to(StackID src, StackID dst, unsigned num_of_cards);
+    void move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards);
 
     /**
      * Force moving n cards from src pack to dst pack.

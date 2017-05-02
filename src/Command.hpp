@@ -2,19 +2,13 @@
 #define COMMAND_H
 
 #include <vector>
-#include "Deck.hpp"
+#include "struct_definitions.hpp"
 
 #define CMD_TYPE_MOVE   0
 #define CMD_TYPE_TURN   1
 #define CMD_TYPE_NEXT   2
 #define CMD_TYPE_ROLL   3
 
-
-typedef struct {
-    stack_id_t source_stack;
-    stack_id_t destination_stack;
-    int num_of_cards;
-} cmd_t;
 
 typedef struct {
     int type;

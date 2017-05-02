@@ -1,5 +1,6 @@
 #include "Error.hpp"
 #include "Deck.hpp"
+#include "Command.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -150,85 +151,6 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
         }
     }
 }
-
-void Deck::move_from_to(StackID src, StackID dst, unsigned num_of_cards) {
-    GenericCardStack tmp_stack = GenericCardStack();
-    // GenericCardStack *src_stack, *dst_stack;
-
-    int id_last;
-
-    switch (src.type_stack){
-        case TARGET_STACK:
-            id_last = targetPacks[src.id_stack]->size() - 1;
-            for (int i = 0; i < num_of_cards; i++){
-                tmp_stack.push(targetPacks[src.id_stack]->operator[](id_last - i));
-            }
-            break;
-
-        case WORKING_STACK:
-            id_last = workingPacks[src.id_stack]->size() - 1;
-            for (int i = 0; i < num_of_cards; i++){
-                tmp_stack.push(workingPacks[src.id_stack]->operator[](id_last - i));
-            }
-
-            break;
-        case REMAINING_STACK:
-            if (num_of_cards < 2) throw ErrorException(E_OUT_OF_RANGE, "Too many cards in move from TARGET_STACK");
-            tmp_stack.push(remaining_pack->currentCard());
-            break;
-
-
-    }
-
-    int already_pushed = 0;
-
-    try {
-        for (already_pushed = 0; already_pushed < num_of_cards; already_pushed++){
-            switch (dst.type_stack){
-                case WORKING_STACK:
-                    workingPacks[dst.id_stack]->push(tmp_stack.topAndPop());
-                    break;
-                case REMAINING_STACK:
-                    remaining_pack->push(tmp_stack.topAndPop());
-                    break;
-                case TARGET_STACK:
-                    targetPacks[dst.id_stack]->push(tmp_stack.topAndPop());
-                    break;
-            }
-        }
-    }
-    catch (ErrorException * error){
-        for (int i = 0 ; i <already_pushed; i++){
-            switch (dst.type_stack){
-                case WORKING_STACK:
-                    workingPacks[dst.id_stack]->pop();
-                    break;
-                case REMAINING_STACK:
-                    remaining_pack->pop();
-                    break;
-                case TARGET_STACK:
-                    targetPacks[dst.id_stack]->pop();
-                    break;
-            }
-        }
-        throw error;
-    }
-
-    for (int i = 0; i < num_of_cards; i++) {
-        switch (src.type_stack) {
-            case WORKING_STACK:
-                workingPacks[src.id_stack]->pop();
-                break;
-            case REMAINING_STACK:
-                remaining_pack->popCurrent();
-                break;
-            case TARGET_STACK:
-                targetPacks[src.id_stack]->pop();
-                break;
-        }
-    }
-}
-
 
 CardStacks::RemainingPack *Deck::get_ptr_2_rem_pack() {
     return remaining_pack;
@@ -390,4 +312,110 @@ void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) 
             dst_pack->force_push(src_pack->topAndPop());
         }
     }
+}
+
+cmd_t Deck::get_help_command() {
+    cmd_t found_command;
+
+    card::Card src_card, dst_card;
+
+    //checking if -> from rem to target pack
+    src_card = remaining_pack->currentCard();
+    for (int i = 0 ; i < 4 ; i++){
+        if (!targetPacks[i]->isEmpty()){
+            dst_card = targetPacks[i]->top();
+            if (src_card.get_sign() == dst_card.get_sign() and src_card.get_number() == dst_card.get_number() + 1){
+                found_command.source_stack.type_stack = REMAINING_STACK;
+                found_command.destination_stack.type_stack = TARGET_STACK;
+                found_command.destination_stack.id_stack = i;
+                found_command.num_of_cards = 1;
+
+                return found_command;
+            }
+        }
+    }
+
+    //checking -> rem to working
+    for (int i = 0 ; i < 7 ; i++){
+        if (!workingPacks[i]->isEmpty()){
+            dst_card = workingPacks[i]->top();
+            if (!dst_card.isTurnedUp()){
+                continue;
+            }
+            if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() + 1){
+                found_command.source_stack.type_stack = REMAINING_STACK;
+                found_command.destination_stack.type_stack = WORKING_STACK;
+                found_command.destination_stack.id_stack = i;
+                found_command.num_of_cards = 1;
+
+                return found_command;
+            }
+        }
+    }
+
+
+    // working pack -> target pack
+    for (int i = 0 ; i < 7 ; i++){
+        if (!workingPacks[i]->isEmpty()) {
+            src_card = workingPacks[i]->top();
+            for (int j = 0; j < 4; j++) {
+                if (!targetPacks[i]->isEmpty()) {
+                    dst_card = targetPacks[i]->top();
+                    if (src_card.get_sign() == dst_card.get_sign() and
+                        src_card.get_number() == dst_card.get_number() + 1) {
+                        found_command.source_stack.type_stack = REMAINING_STACK;
+                        found_command.destination_stack.type_stack = TARGET_STACK;
+                        found_command.destination_stack.id_stack = i;
+                        found_command.num_of_cards = 1;
+
+                        return found_command;
+                    }
+                } else {
+                    if (src_card.get_number() == card::ACE) {
+                        found_command.source_stack.type_stack = REMAINING_STACK;
+                        found_command.destination_stack.type_stack = TARGET_STACK;
+                        found_command.destination_stack.id_stack = i;
+                        found_command.num_of_cards = 1;
+
+                        return found_command;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
+
+    // checking working -> working
+    for (int i = 0 ; i < 7 ; i++){
+        long size_of_pack = workingPacks[i]->size();
+        for (long j = size_of_pack -1; j >= 0; j--) {
+            src_card = (*workingPacks[i])[j];
+            if (!src_card.isTurnedUp()){
+                break;
+            }
+
+            for (int k = 0 ; k < 7 ; k++){
+                if (k == i) continue;
+                dst_card = workingPacks[k]->top();
+                if (!dst_card.isTurnedUp()){
+                    continue;
+                }
+
+                if (src_card.get_color() != dst_card.get_color() and src_card.get_number() == dst_card.get_number() + 1){
+                    found_command.source_stack.type_stack = REMAINING_STACK;
+                    found_command.destination_stack.type_stack = WORKING_STACK;
+                    found_command.destination_stack.id_stack = i;
+                    found_command.num_of_cards = static_cast<int>(size_of_pack - j);
+
+                    return found_command;
+                }
+            }
+        }
+    }
+
+    // if no help was found excpetion is raised
+    throw ErrorException(E_NO_MORE_MOVE, "<get_help_command> didn't find any possible command");
 }

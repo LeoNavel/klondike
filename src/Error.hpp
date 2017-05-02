@@ -15,6 +15,7 @@
 #define E_UNKNOWN_COMMAND           10
 #define E_OUT_OF_RANGE              11
 #define E_UNKNOWN_STACK_TYPE        12
+#define E_NO_MORE_MOVE              13
 
 
 class ErrorException {

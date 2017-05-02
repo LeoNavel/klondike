@@ -85,9 +85,6 @@ int main(){
     deck->targetPacks[0]->printContent();
 
 
-    deck->move_from_to(StackID(WORKING_STACK, 3),StackID(TARGET_STACK, 0),1);
-    deck->move_from_to(StackID(WORKING_STACK, 4),StackID(TARGET_STACK, 0),1);
-    deck->move_from_to(StackID(WORKING_STACK, 5),StackID(TARGET_STACK, 0),1);
 
     std::cout <<"target pack 0"<< std::endl;
     deck->targetPacks[0]->printContent();
