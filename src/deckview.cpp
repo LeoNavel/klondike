@@ -274,6 +274,21 @@ void DeckView::highlightRemainingToTarget(unsigned int id){
     tpv->highlight();
 }
 
+void DeckView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
+    WorkingPackView * wpv = workingPacks[workingDeckID];
+    wpv->highlight(1);
+    TargetPackView * tpv = targetPacks[targetDeckID];
+    tpv->highlight();
+}
+
+void DeckView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
+    WorkingPackView *wpv = workingPacks[sourceID];
+    wpv->highlight(count);
+
+    wpv = workingPacks[destinationID];
+    wpv->highlight(1);
+}
+
 DeckView::~DeckView()
 {
     delete ui;

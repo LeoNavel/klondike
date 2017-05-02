@@ -28,6 +28,14 @@ void GenericView::setController(Controller *controller){
     this->controller = controller;
 }
 
+void GenericView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
+
+}
+
+void GenericView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
+
+}
+
 GenericView::~GenericView(){
 
 }

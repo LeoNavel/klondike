@@ -65,6 +65,12 @@ private slots:
 
     void on_actionHelp_for_first_game_triggered();
 
+    void on_actionHelp_for_second_game_triggered();
+
+    void on_actionHelp_for_third_game_triggered();
+
+    void on_actionHelp_for_fourth_game_triggered();
+
 private:
     void enableNewGame();
     void disableNewGame();
@@ -76,8 +82,11 @@ private:
     void disableSave(unsigned int i);
     void enableLoad(unsigned int i);
     void disableLoad(unsigned int i);
+    void enableHelp(unsigned int);
+    void disableHelp(unsigned int);
     void save(unsigned int i);
     void load(unsigned int i);
+    void findHelp(unsigned int i);
 
     Ui::MainWindow *ui;
     myDialog *mDialog;
