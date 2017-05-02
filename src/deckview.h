@@ -8,6 +8,7 @@
 #include "workingpackview.h"
 #include "Card.hpp"
 #include "cardselection.h"
+#include "cardview.h"
 #include "targetpackview.h"
 #include "Controller.hpp"
 #include "remainingpackview.h"
@@ -42,6 +43,7 @@ public:
     void highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID);
     void updateCursor();
     void requestUpdateAll();
+    void finishGame();
 
     void turnCard(WorkingPackView * on);
     ~DeckView();
@@ -50,6 +52,7 @@ private:
     Ui::DeckView *ui;
     std::vector<WorkingPackView *> workingPacks;
     std::vector<TargetPackView *> targetPacks;
+    std::vector<CardView *> finishGameCards;
     RemainingPackView * remainingPackView;
 };
 

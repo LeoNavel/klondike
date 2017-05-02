@@ -20,6 +20,7 @@ public:
     virtual void highlightRemainingToTarget(unsigned int id);
     virtual void highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID);
     virtual void highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID);
+    virtual void finishGame();
 };
 
 #endif //VIEW_H

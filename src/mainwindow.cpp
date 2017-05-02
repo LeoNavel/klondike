@@ -332,7 +332,8 @@ void MainWindow::findHelp(unsigned int i){
 
 void MainWindow::on_actionHelp_for_first_game_triggered()
 {
-    findHelp(0);
+//    findHelp(0);
+    controllers[0]->finishGame();
 }
 
 void MainWindow::on_actionHelp_for_second_game_triggered()

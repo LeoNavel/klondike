@@ -192,6 +192,10 @@ void Controller::load(std::string input_file){
     // todo update
 }
 
+void Controller::finishGame() {
+    view->finishGame();
+}
+
 Controller::~Controller(){
     delete command;
 }

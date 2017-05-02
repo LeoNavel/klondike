@@ -53,6 +53,8 @@ public:
 
     void findHelp();
 
+    void finishGame();
+
     ~Controller();
 
 };
