@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "struct_definitions.hpp"
+#include "Deck.hpp"
 
 #define CMD_TYPE_MOVE   0
 #define CMD_TYPE_TURN   1

@@ -153,6 +153,9 @@ int TerminalView::run() {
                 }
             }
         }
+        else if (command == "hint"){
+
+        }
 
 
         help();

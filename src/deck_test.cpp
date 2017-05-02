@@ -94,7 +94,12 @@ int main(){
     stack_id_t ts0; ts0.type_stack = TARGET_STACK; ts0.id_stack = 0;
     stack_id_t rem; rem.type_stack = REMAINING_STACK;
 
-    deck->force_move_from_to(ts0, rem, 1);
+    //deck->force_move_from_to(ts0, rem, 1);
+
+
+    cmd_t result = deck->get_help_command();
+    result = deck->get_help_command();
+    result = deck->get_help_command();
 
 
     delete cmd;
