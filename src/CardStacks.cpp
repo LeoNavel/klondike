@@ -353,8 +353,8 @@ namespace CardStacks {
      * @brief Randomize order fo cards.
      */
     void CardDeck::shuffleCards() {
-        std::srand(time(0));
-        std::random_shuffle(card_stack.begin(), card_stack.end());
+        std::mt19937 r{std::random_device{}()};
+        std::shuffle(std::begin(card_stack), std::end(card_stack), r);
     }
 
 }
