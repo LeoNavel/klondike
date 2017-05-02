@@ -11,6 +11,19 @@ TerminalCanvas::TerminalCanvas() {
         }
         canvas[y][width -1 ] = '\0';
     }
+
+    canvas[0][CARD_WIDTH +2] = 'r';
+
+    for (int i = 0 ; i < 4 ; i++) {
+        canvas[0][CARD_WIDTH*3 + i*(CARD_WIDTH + 2)] = 't';
+        canvas[0][CARD_WIDTH*3 + i*(CARD_WIDTH + 2) + 1] = 49 + i;
+    }
+
+    for (int i = 0 ; i < 7 ; i++){
+        canvas[13][CARD_WIDTH/2 + i*(CARD_WIDTH + 1)] = 'w';
+        canvas[13][CARD_WIDTH/2 + i*(CARD_WIDTH + 1) +1] = 49 + i;
+    }
+
 }
 
 void TerminalCanvas::print() {

@@ -9,7 +9,7 @@ private:
     TerminalCanvas canvas;
 
 public:
-    TerminalView(){canvas  = TerminalCanvas();}
+    TerminalView();
 
     void refresh();
     int run();

@@ -3,6 +3,10 @@
 #include "Command.hpp"
 #include "Deck.hpp"
 
+TerminalView::TerminalView() {
+    canvas = TerminalCanvas();
+}
+
 void TerminalView::refresh() {
     canvas.print();
 }
@@ -35,13 +39,13 @@ void TerminalView::highlightRemainingToTarget(unsigned int id) {
 }
 
 void TerminalView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
-    
+
 }
+
 
 void TerminalView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
 
 }
-
 
 int TerminalView::run() {
 
