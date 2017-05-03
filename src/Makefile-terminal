@@ -1,7 +1,7 @@
 all: klondike-terminal
 
 CC=g++
-FLAGS= -std=c++11
+CXXFLAGS= -std=c++11
 
 Card.o: Card.cpp Card.hpp
 CardStacks.o : CardStacks.cpp CardStacks.hpp
@@ -15,4 +15,7 @@ TerminalView.o : TerminalView.cpp TerminalView.hpp
 View.o : View.cpp View.hpp
 
 klondike-terminal: Card.o CardStacks.o Command.o Controller.o Deck.o Error.o TerminalCanvas.o TerminalView.o View.o main_terminal.o
-	$(CC) -o $@ Card.o CardStacks.o Command.o Command.o Deck.o Error.o main_terminal.o TerminalView.o TerminalView.o View.o 
+	$(CC) -o $@ $(CXXFLAGS) Card.o CardStacks.o Controller.o Command.o Deck.o Error.o main_terminal.o TerminalCanvas.o TerminalView.o View.o 
+
+clean:
+	rm *.o
