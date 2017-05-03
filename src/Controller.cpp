@@ -20,12 +20,6 @@ Controller::Controller(Deck *deck, GenericView *view) {
 }
 
 void Controller::findHelp(){
-//    this->view->highlightNextCardCommand();
-//    this->view->highlightRemainingToWorking(2);
-//    this->view->highlightRemainingToWorking(2);
-//    this->view->highlightWorkingToTarget(1, 3);
-//    this->view->highlightWorkingToWorking(1, 2, 0);
-// TODO vyhladanie helpu
     try{
         cmd_t cmd = deck->get_help_command();
         int typeSource = cmd.source_stack.type_stack;
@@ -70,6 +64,9 @@ void Controller::move_card(cmd_t cmd) {
         try{
             c = deck->get_top_card_from_target_pack(cmd.destination_stack.id_stack);
             view->update(cmd.destination_stack.id_stack, &c);
+            if(deck->is_win()){
+                view->finishGame();
+            }
         } catch(ErrorException e){
             if(e.get_err_code() == E_POP_FROM_EMPTY_STACK){
                 view->update(cmd.destination_stack.id_stack, nullptr);
@@ -185,11 +182,6 @@ void Controller::load(std::string input_file){
     }
 
     updateAll();
-
-//    delete deck;
-//    delete command
-
-    // todo update
 }
 
 void Controller::finishGame() {

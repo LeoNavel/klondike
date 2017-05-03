@@ -290,6 +290,8 @@ void DeckView::highlightWorkingToWorking(unsigned int sourceID, unsigned int cou
 }
 
 void DeckView::finishGame(){
+    cardSelection->clear();
+    updateCursor();
     QRect r = targetPacks[0]->rect();
     QPoint p = targetPacks[0]->pos();
     TargetPackView * tpw = targetPacks[0];
