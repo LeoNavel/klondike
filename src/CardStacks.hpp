@@ -13,6 +13,7 @@
 
 #include <vector>
 #include "Card.hpp"
+#include <random>
 
 #define WORKING_STACK 0
 #define REMAINING_STACK 1

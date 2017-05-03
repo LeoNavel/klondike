@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mydialog.h"
-#include "myframe.h"
 #include "deckview.h"
 #include <QDebug>
 #include <string>

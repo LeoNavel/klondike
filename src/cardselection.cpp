@@ -1,3 +1,13 @@
+/**************************************
+ *   Project :               Solitaire
+ *   Authors :               xklemb00, xtomas32
+ *   Created :               25.03.2017
+ *   Compiled:               g++ 6.3.1
+ *
+ *   Notes :         Card selection definition
+ *
+ ***************************************/
+
 #include "cardselection.h"
 #include "ui_cardselection.h"
 #include "workingpackview.h"

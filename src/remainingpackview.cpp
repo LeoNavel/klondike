@@ -46,14 +46,6 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
         } else {
             turnPack();
         }
-//        selectionDelegate->mainView->cont
-//        if(allCardVisible()){
-//            turnPack();
-//            update();
-//        } else{
-//            nextCard();
-//            update();
-//        }
         return true;
     }
     if(obj == currentCardView && e->type() == QEvent::MouseButtonPress){

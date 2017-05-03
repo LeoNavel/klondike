@@ -45,20 +45,41 @@ public:
      */
     void undo_command();
 
+    /**
+     * update all view
+     */
     void updateAll();
 
+    /**
+     * save gard state to file
+     *
+     * @param output_file file name
+     */
     void save(std::string output_file);
 
+    /**
+     * load game
+     *
+     * @param input_file file with game
+     */
     void load(std::string input_file);
 
+    /**
+     * find next move
+     */
     void findHelp();
 
+    /**
+     * finish game when game is won
+     */
     void finishGame();
 
+    /**
+     * restart game
+     */
     void restartGame();
 
     ~Controller();
-
 };
 
 #endif //CONTROLLER_H
