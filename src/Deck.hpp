@@ -137,6 +137,11 @@ public:
      */
     cmd_t get_help_command();
 
+    /**
+     * Check if win is in the end.
+     * @return
+     */
+    bool is_win();
 };
 
 

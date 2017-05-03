@@ -449,3 +449,21 @@ cmd_t Deck::get_help_command() {
     // if no help was found excpetion is raised
     throw ErrorException(E_NO_MORE_MOVE, "<get_help_command> didn't find any possible command");
 }
+
+bool Deck::is_win() {
+    card::Card top_card;
+
+    for (int i = 0 ; i < 4; i++){
+        if (!targetPacks[i]->isEmpty()) {
+            top_card = targetPacks[i]->top();
+            if (top_card.get_number() != card::KING) {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    return true;
+}
