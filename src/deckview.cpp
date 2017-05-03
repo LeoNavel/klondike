@@ -1,7 +1,6 @@
 #include "deckview.h"
 #include "ui_deckview.h"
 #include "cardview.h"
-#include <QDebug>
 
 DeckView::DeckView(QWidget *parent) :
     QFrame(parent),

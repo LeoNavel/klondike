@@ -2,7 +2,6 @@
 #define TARGETPACKVIEW_H
 
 #include <QFrame>
-#include <QDebug>
 #include "CardStacks.hpp"
 #include "cardselection.h"
 #include "Error.hpp"

@@ -140,16 +140,6 @@ void CardSelection::setSourcePack(void *wpv){
     sourcePack = wpv;
 }
 
-void CardSelection::mouseMoveEvent(QMouseEvent *event){
-    if(!isEmpty()){
-        QPoint np = mapToParent(event->pos() - offset);
-        if(np.y() < 0 || np.x() < 0){
-            qDebug() << "nope na hraniciach";
-        } else
-            this->move(np);
-    }
-}
-
 void CardSelection::setOffset(QPoint p){
     offset = p;
 }

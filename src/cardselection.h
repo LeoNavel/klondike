@@ -15,7 +15,6 @@
 #include <vector>
 #include "CardStacks.hpp"
 #include "cardview.h"
-#include <QDebug>
 class DeckView;
 namespace Ui {
 class CardSelection;
@@ -90,13 +89,6 @@ public:
      * @param p point
      */
     void setOffset(QPoint p);
-
-    /**
-     * mouse move event
-     *
-     * @param event event
-     */
-    void mouseMoveEvent(QMouseEvent *event);
 
     /**
      * roll back all changes

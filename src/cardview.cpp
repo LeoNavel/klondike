@@ -1,7 +1,6 @@
 #include "cardview.h"
 #include "ui_cardview.h"
 #include "remainingpackview.h"
-#include <QDebug>
 
 CardView::CardView(QWidget *parent) :
     QFrame(parent),
@@ -131,21 +130,6 @@ void CardView::setGeometry(const QRect &r) {
 
     ui->back->setGeometry(QRect(QPoint(0,0), nr.size()));
 }
-
-//void CardView::mousePressEvent(QMouseEvent *event) {
-//    qDebug() << "asda";
-////    qDebug() << event->pos();
-//    offset = event->pos();
-//    raise();
-//}
-
-//void CardView::mouseMoveEvent(QMouseEvent *event)
-//{
-//    if(event->buttons() & Qt::LeftButton)
-//    {
-//        this->move(mapToParent(event->pos() - offset));
-//    }
-//}
 
 void CardView::turnUp() {
     Card::turnUp();

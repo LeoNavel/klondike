@@ -5,7 +5,6 @@
 #include "CardStacks.hpp"
 #include "cardview.h"
 #include <QSignalTransition>
-#include <QDebug>
 #include "cardselection.h"
 #include "Error.hpp"
 #include <QTime>

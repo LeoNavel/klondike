@@ -94,10 +94,8 @@ void WorkingPackView::pop() {
 }
 
 bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
-//    selectionDelegate->installEventFilter(this);
     if(e->type() == QEvent::MouseButtonPress){
         if(selectionDelegate->isEmpty()){
-            qDebug() << "sata";
             CardStacks::GenericCardStack gs, gs1;
             bool found = false;
             if(cards.size() == 0)
@@ -105,8 +103,6 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
             CardView * lastCard = cards[cards.size() - 1];
             if(lastCard == obj && !lastCard->isTurnedUp()){
                 selectionDelegate->mainView->turnCard(this);
-//                    turn_invisible();
-//                    update();
                 return true;
             }
 
@@ -130,7 +126,6 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
             if(found){
                 while(!gs1.isEmpty())
                     gs.push(gs1.topAndPop());
-//                selectionDelegate->show();
                 QMouseEvent * me = static_cast<QMouseEvent*>(e);
 
                 selectionDelegate->push(gs);
@@ -143,11 +138,6 @@ bool WorkingPackView::eventFilter(QObject *obj, QEvent *e) {
                 selectionDelegate->setWpv(true);
 
                 selectionDelegate->mainView->updateCursor();
-
-//                QPixmap cursor_pixmap = selectionDelegate->grab();
-//                QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
-//                QApplication::setOverrideCursor(cursor_default);
-
                 update();
                 return true;
             }

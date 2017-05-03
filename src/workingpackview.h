@@ -6,7 +6,6 @@
 #include <vector>
 #include "cardview.h"
 #include "cardselection.h"
-#include <QDebug>
 #include "Error.hpp"
 
 namespace Ui {

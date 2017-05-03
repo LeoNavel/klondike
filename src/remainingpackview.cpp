@@ -14,15 +14,8 @@ RemainingPackView::RemainingPackView(QWidget *parent) :
     this->currentCardView = new CardView(1, card::sign::CLUBS, this);
     this->currentCardView->turnUp();
 
-//    this->
-
     ui->frame->installEventFilter(this);
     currentCardView->installEventFilter(this);
-//    setMouseTracking(true);
-
-//    for(int i = 0; i < 20; i++)
-//        nextCard();
-
 }
 
 void RemainingPackView::nextCard() {
@@ -53,28 +46,17 @@ bool RemainingPackView::eventFilter(QObject *obj, QEvent *e) {
             try{
                 selectionDelegate->push(topAndPopCurrent());
             } catch (ErrorException err) {
-                qDebug() << err.get_message().c_str();
             }
             QMouseEvent * me = static_cast<QMouseEvent*>(e);
             QPoint p = currentCardView->pos();
-//            p = QPoint(p.x(), p.y());
             selectionDelegate->setGeometry(QRect(p,currentCardView->rect().size()));
             selectionDelegate->setSourcePack(this);
-//            selectionDelegate->setGeometry(currentCardView->rect());
             selectionDelegate->raise();
             selectionDelegate->setOffset(me->pos());
             selectionDelegate->setWpv(false);
-//            selectionDelegate->show();
-//            QPixmap cursor_pixmap = selectionDelegate->grab();
-
-//            QCursor cursor_default = QCursor(cursor_pixmap, me->pos().x(), me->pos().y());
-//            QApplication::setOverrideCursor(cursor_default);
             selectionDelegate->mainView->updateCursor();
             update();
         } else {
-//            selectionDelegate->rollBack();
-//            selectionDelegate->clear();
-//            QApplication::restoreOverrideCursor();
             return false;
         }
         return true;

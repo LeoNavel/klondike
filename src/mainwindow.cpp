@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "deckview.h"
-#include <QDebug>
 #include <string>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -277,7 +276,6 @@ void MainWindow::save(unsigned int i){
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save game"), "",
             tr("game (*.klondike)"), 0, QFileDialog::DontUseNativeDialog);
-    qDebug() << fileName;
     if(fileName.isEmpty())
         return;
     Controller *controller = controllers[i];
@@ -312,7 +310,6 @@ void MainWindow::load(unsigned int i){
             tr("klondike (*.klondike);;All Files (*)"), 0, QFileDialog::DontUseNativeDialog);
     if(fileName.isEmpty())
         return;
-    qDebug() << "load";
     std::string fn = fileName.toStdString();
     Controller * controller = controllers[i];
     controller->load(fn);
