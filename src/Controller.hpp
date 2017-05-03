@@ -55,6 +55,8 @@ public:
 
     void finishGame();
 
+    void restartGame();
+
     ~Controller();
 
 };

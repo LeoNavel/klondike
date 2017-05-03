@@ -196,6 +196,13 @@ void Controller::finishGame() {
     view->finishGame();
 }
 
+void Controller::restartGame() {
+    delete deck;
+    deck = new Deck();
+    deck->prepareDeck(13);
+    updateAll();
+}
+
 Controller::~Controller(){
     delete command;
 }

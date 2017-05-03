@@ -30,7 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
         disableSave(i);
         disableLoad(i);
         disableHelp(i);
+        disableNewGame(i);
     }
+    enableNewGame(1);
 }
 
 void MainWindow::disableUndo(unsigned int i){
@@ -127,16 +129,27 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     }
 }
 
-void MainWindow::enableNewGame(){
+void MainWindow::enableNewGame(unsigned int i){
+
     QAction * fileAction = ui->menuBar->actions()[0];
-    QAction * addGame = fileAction->menu()->actions()[0];
-    addGame->setEnabled(true);
+    QAction * new_game = fileAction->menu()->actions()[0];
+    QAction * newGameItem = new_game->menu()->actions()[i];
+    newGameItem->setEnabled(true);
+
+//    QAction * fileAction = ui->menuBar->actions()[0];
+//    QAction * addGame = fileAction->menu()->actions()[0];
+//    addGame->setEnabled(true);
 }
 
-void MainWindow::disableNewGame(){
+void MainWindow::disableNewGame(unsigned int i){
+//    QAction * fileAction = ui->menuBar->actions()[0];
+//    QAction * addGame = fileAction->menu()->actions()[0];
+//    addGame->setEnabled(false);
+
     QAction * fileAction = ui->menuBar->actions()[0];
-    QAction * addGame = fileAction->menu()->actions()[0];
-    addGame->setEnabled(false);
+    QAction * new_game = fileAction->menu()->actions()[0];
+    QAction * newGameItem = new_game->menu()->actions()[i];
+    newGameItem->setEnabled(false);
 }
 
 void MainWindow::enableRemoveGame(){
@@ -152,15 +165,16 @@ void MainWindow::disableRemoveGame(){
 }
 
 
-void MainWindow::on_actionMore_games_triggered()
-{
-    if(controllers.size() < 4){
+void MainWindow::newGame(unsigned int i){
+    if(controllers.size() == i) {
         enableRemoveGame();
         unsigned int size = controllers.size();
         enableUndo(size);
         enableSave(size);
         enableLoad(size);
         enableHelp(size);
+        if(size < 3)
+            enableNewGame(size + 1);
         QRect r = this->rect();
         r.setY(30);
         r.setWidth(r.width() / 2);
@@ -202,9 +216,9 @@ void MainWindow::on_actionMore_games_triggered()
             views.push_back(newView);
             controllers.push_back(newController);
         }
-    }
-    if(controllers.size() == 4){
-        disableNewGame();
+    } else {
+        Controller * controller = controllers[i];
+        controller->restartGame();
     }
 }
 
@@ -212,7 +226,6 @@ void MainWindow::on_actionRemove_game_triggered()
 {
     unsigned int size = controllers.size();
     if(size > 1){
-        enableNewGame();
         DeckView * dv = views[views.size() - 1];
         delete dv;
         views.pop_back();
@@ -224,6 +237,8 @@ void MainWindow::on_actionRemove_game_triggered()
         disableSave(size - 1);
         disableLoad(size - 1);
         disableHelp(size - 1);
+        if(size < 4)
+            disableNewGame(size);
     }
     if(size == 2){
         DeckView *dv = views[0];
@@ -351,4 +366,24 @@ void MainWindow::on_actionHelp_for_third_game_triggered()
 void MainWindow::on_actionHelp_for_fourth_game_triggered()
 {
     findHelp(3);
+}
+
+void MainWindow::on_actionFirst_game_2_triggered()
+{
+    newGame(0);
+}
+
+void MainWindow::on_actionSecond_game_2_triggered()
+{
+    newGame(1);
+}
+
+void MainWindow::on_actionThird_game_2_triggered()
+{
+    newGame(2);
+}
+
+void MainWindow::on_actionFourth_game_2_triggered()
+{
+    newGame(3);
 }

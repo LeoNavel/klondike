@@ -33,7 +33,7 @@ protected:
 
 private slots:
 
-    void on_actionMore_games_triggered();
+//    void on_actionMore_games_triggered();
 
 //    void on_actionUndo_triggered();
 
@@ -71,9 +71,17 @@ private slots:
 
     void on_actionHelp_for_fourth_game_triggered();
 
+    void on_actionFirst_game_2_triggered();
+
+    void on_actionSecond_game_2_triggered();
+
+    void on_actionThird_game_2_triggered();
+
+    void on_actionFourth_game_2_triggered();
+
 private:
-    void enableNewGame();
-    void disableNewGame();
+    void enableNewGame(unsigned int i);
+    void disableNewGame(unsigned int i);
     void enableRemoveGame();
     void disableRemoveGame();
     void disableUndo(unsigned int i);
@@ -87,6 +95,7 @@ private:
     void save(unsigned int i);
     void load(unsigned int i);
     void findHelp(unsigned int i);
+    void newGame(unsigned int i);
 
     Ui::MainWindow *ui;
     myDialog *mDialog;
