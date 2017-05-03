@@ -308,9 +308,12 @@ void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) 
         remaining_pack->pushCurrent(src_pack->topAndPop());
     }
     else {
+        CardStacks::GenericCardStack gcs = CardStacks::GenericCardStack();
         for (int i = 0; i < num_of_cards; i++) {
-            dst_pack->force_push(src_pack->topAndPop());
+            gcs.push(src_pack->topAndPop());
         }
+        while(!gcs.isEmpty())
+            dst_pack->force_push(gcs.topAndPop());
     }
 }
 

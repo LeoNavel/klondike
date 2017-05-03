@@ -190,8 +190,10 @@ void Controller::finishGame() {
 
 void Controller::restartGame() {
     delete deck;
+    delete command;
     deck = new Deck();
     deck->prepareDeck(13);
+    command = new Command(deck);
     view->restartView();
     updateAll();
 }
