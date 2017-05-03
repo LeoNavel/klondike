@@ -36,6 +36,10 @@ void GenericView::highlightWorkingToWorking(unsigned int sourceID, unsigned int 
 
 }
 
+void GenericView::restartView() {
+
+}
+
 void GenericView::finishGame(){
 
 }

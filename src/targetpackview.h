@@ -23,6 +23,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *e);
     void setGeometry(const QRect &r);
     void setTopCard(card::Card *card);
+    card::sign getColor();
     ~TargetPackView();
     void highlight();
 

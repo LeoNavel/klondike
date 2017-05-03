@@ -292,8 +292,13 @@ void DeckView::highlightWorkingToWorking(unsigned int sourceID, unsigned int cou
 void DeckView::finishGame(){
     QRect r = targetPacks[0]->rect();
     QPoint p = targetPacks[0]->pos();
+    TargetPackView * tpw = targetPacks[0];
+    card::sign s = tpw->getColor();
+    int j = 13;
     for(int x = p.x(); x > - 50; x-=20){
-        CardView * c = new CardView(13, card::sign::SPADES, this);
+        if(j == 0)
+            j = 13;
+        CardView * c = new CardView(j, s, this);
         int y = p.y() + ( - x + p.x()) * (- x + p.x()) / 1000;
         c->setGeometry(r);
         c->move(x, y);
@@ -303,12 +308,17 @@ void DeckView::finishGame(){
         QTime dieTime= QTime::currentTime().addMSecs(25);
         while (QTime::currentTime() < dieTime)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        j--;
     }
 
     r = targetPacks[3]->rect();
     p = targetPacks[3]->pos();
+    s = targetPacks[3]->getColor();
+    j = 13;
     for(int x = p.x(); x < this->width() + 50; x+=20){
-        CardView * c = new CardView(13, card::sign::SPADES, this);
+        if(j == 0)
+            j = 13;
+        CardView * c = new CardView(j, s, this);
         int y = p.y() + ( - x + p.x()) * ( - x + p.x()) / 1000;
         c->setGeometry(r);
         c->move(x, y);
@@ -318,12 +328,17 @@ void DeckView::finishGame(){
         QTime dieTime= QTime::currentTime().addMSecs(25);
         while (QTime::currentTime() < dieTime)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        j--;
     }
 
     r = targetPacks[1]->rect();
     p = targetPacks[1]->pos();
+    s = targetPacks[1]->getColor();
+    j = 13;
     for(int x = p.x(); x > - 100; x-=20){
-        CardView * c = new CardView(13, card::sign::SPADES, this);
+        if(j == 0)
+            j = 13;
+        CardView * c = new CardView(j, s, this);
         int y = p.y() + ( - x + p.x()) * (- x + p.x()) / 5000;
         c->setGeometry(r);
         c->move(x, y);
@@ -333,12 +348,17 @@ void DeckView::finishGame(){
         QTime dieTime= QTime::currentTime().addMSecs(25);
         while (QTime::currentTime() < dieTime)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        j--;
     }
 
     r = targetPacks[2]->rect();
     p = targetPacks[2]->pos();
+    s = targetPacks[2]->getColor();
+    j = 13;
     for(int x = p.x(); x < this->width() + 50; x+=20){
-        CardView * c = new CardView(13, card::sign::SPADES, this);
+        if(j == 0)
+            j = 13;
+        CardView * c = new CardView(j, s, this);
         int y = p.y() + ( - x + p.x()) * ( - x + p.x()) / 100;
         c->setGeometry(r);
         c->move(x, y);
@@ -348,8 +368,35 @@ void DeckView::finishGame(){
         QTime dieTime= QTime::currentTime().addMSecs(25);
         while (QTime::currentTime() < dieTime)
             QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        j--;
     }
 
+
+    r = targetPacks[0]->rect();
+    p = targetPacks[0]->pos();
+    s = targetPacks[0]->getColor();
+    j = 13;
+    for(int x = p.x(); x > - 50; x-=20){
+        if(j == 0)
+            j = 13;
+        CardView * c = new CardView(j, s, this);
+        int y = p.y() + ( - x + p.x()) * (- x + p.x()) / 250;
+        c->setGeometry(r);
+        c->move(x, y);
+        c->show();
+        c->turnUp();
+        finishGameCards.push_back(c);
+        QTime dieTime= QTime::currentTime().addMSecs(25);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        j--;
+    }
+
+}
+
+void DeckView::restartView(){
+    for(auto c: finishGameCards)
+        delete c;
 }
 
 DeckView::~DeckView()

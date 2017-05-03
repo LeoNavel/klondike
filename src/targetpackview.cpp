@@ -31,6 +31,10 @@ void TargetPackView::setTopCard(card::Card *card){
     }
 }
 
+card::sign TargetPackView::getColor() {
+    currentCardView->get_sign();
+}
+
 void TargetPackView::mouseReleaseEvent(QMouseEvent *e)
 {
   if (e->button() == Qt::LeftButton)    // Left button...

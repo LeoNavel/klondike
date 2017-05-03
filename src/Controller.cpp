@@ -200,6 +200,7 @@ void Controller::restartGame() {
     delete deck;
     deck = new Deck();
     deck->prepareDeck(13);
+    view->restartView();
     updateAll();
 }
 
