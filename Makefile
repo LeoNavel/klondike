@@ -2,7 +2,7 @@ all: klondike klondike_terminal
 
 klondike:
 	cd src &&  qmake-qt5  &&$(MAKE)
-	mv klondike .
+	mv src/klondike .
 
 klondike_terminal: src
 	cd src && $(MAKE) -f Makefile-terminal
