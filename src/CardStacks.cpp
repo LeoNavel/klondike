@@ -9,6 +9,7 @@
  ***************************************/
 #include <iostream>
 #include <algorithm>
+#include <random>
 #include "CardStacks.hpp"
 #include "Card.hpp"
 #include "Error.hpp"
