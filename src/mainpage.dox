@@ -1,0 +1,12 @@
+/**
+\mainpage ICP: Klondike
+
+This is school project into The C++ Programming Language. Main theme of this project is
+implement crossplatform application, where you can play solitaire game. The game should
+be played in graphical mode using QT framework and in terminal/command line mode using
+standardized output.
+
+\author Filip Klembara
+\author Adrián Tomašov
+
+*/
