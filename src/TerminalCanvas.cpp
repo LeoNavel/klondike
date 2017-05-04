@@ -22,8 +22,8 @@ TerminalCanvas::TerminalCanvas() {
     canvas[0][CARD_WIDTH +2] = 'r';
 
     for (int i = 0 ; i < 4 ; i++) {
-        canvas[0][CARD_WIDTH*3 + i*(CARD_WIDTH + 2)] = 't';
-        canvas[0][CARD_WIDTH*3 + i*(CARD_WIDTH + 2) + 1] = 49 + i;
+        canvas[0][CARD_WIDTH*3 + 4 + i*(CARD_WIDTH + 2)] = 't';
+        canvas[0][CARD_WIDTH*3 + 4 + i*(CARD_WIDTH + 2) + 1] = 49 + i;
     }
 
     for (int i = 0 ; i < 7 ; i++){
