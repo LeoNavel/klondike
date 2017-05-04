@@ -32,7 +32,7 @@ class TerminalCanvas {
 private:
     int width;
     int height;
-    wchar_t canvas[CANVAS_HEIGHT][CANVAS_WIDTH];
+    char canvas[CANVAS_HEIGHT][CANVAS_WIDTH];
 
 public:
     /**

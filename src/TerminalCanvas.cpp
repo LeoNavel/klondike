@@ -36,7 +36,7 @@ TerminalCanvas::TerminalCanvas() {
 void TerminalCanvas::print() {
     clrscr();
     for (int y = 0  ; y < height ; y++) {
-        std::wcout << canvas[y] << std::endl;
+        std::cout << canvas[y] << std::endl;
     }
     std::cout << "\n\n";
 }
