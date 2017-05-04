@@ -1,3 +1,10 @@
+/*! 
+ *  \file       targetpackview.h
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef TARGETPACKVIEW_H
 #define TARGETPACKVIEW_H
 

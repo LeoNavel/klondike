@@ -1,3 +1,10 @@
+/*! 
+ *  \file       workingpackview.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "workingpackview.h"
 #include "ui_workingpackview.h"
 #include "deckview.h"

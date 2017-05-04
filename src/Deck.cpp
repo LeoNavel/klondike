@@ -1,3 +1,10 @@
+/*! 
+ *  \file       Deck.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "Error.hpp"
 #include "Deck.hpp"
 #include "Command.hpp"

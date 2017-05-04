@@ -1,3 +1,10 @@
+/*! 
+ *  \file       Error.hpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef ERROR_OBJ
 #define ERROR_OBJ
 

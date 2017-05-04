@@ -1,3 +1,10 @@
+/*! 
+ *  \file       cardview.h
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef CARDVIEW_H
 #define CARDVIEW_H
 

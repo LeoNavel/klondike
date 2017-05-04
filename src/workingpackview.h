@@ -1,3 +1,10 @@
+/*! 
+ *  \file       workingpackview.h
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef WORKINGPACKVIEW_H
 #define WORKINGPACKVIEW_H
 

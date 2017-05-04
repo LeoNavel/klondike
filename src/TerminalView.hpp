@@ -1,3 +1,10 @@
+/*! 
+ *  \file       TerminalView.hpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef TERMINAL_VIEW_H
 #define TERMINAL_VIEW_H
 

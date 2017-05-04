@@ -1,3 +1,10 @@
+/*! 
+ *  \file       deckview.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "deckview.h"
 #include "ui_deckview.h"
 #include "cardview.h"

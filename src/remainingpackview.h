@@ -1,3 +1,10 @@
+/*! 
+ *  \file       remainingpackview.h
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef REMAININGPACKVIEW_H
 #define REMAININGPACKVIEW_H
 

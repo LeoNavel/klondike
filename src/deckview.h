@@ -1,3 +1,10 @@
+/*! 
+ *  \file       deckview.h
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef DECKVIEW_H
 #define DECKVIEW_H
 

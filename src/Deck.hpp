@@ -1,3 +1,10 @@
+/*! 
+ *  \file       Deck.hpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef DECK
 #define DECK
 

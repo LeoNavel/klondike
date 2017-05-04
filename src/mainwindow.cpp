@@ -1,3 +1,10 @@
+/*! 
+ *  \file       mainwindow.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "deckview.h"

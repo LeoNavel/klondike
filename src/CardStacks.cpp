@@ -1,3 +1,10 @@
+/*! 
+ *  \file       CardStacks.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 /**************************************
  *   Project :               Solitaire
  *   Authors :               xklemb00, xtomas32

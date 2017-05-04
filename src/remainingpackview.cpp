@@ -1,3 +1,10 @@
+/*! 
+ *  \file       remainingpackview.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "remainingpackview.h"
 #include "ui_remainingpackview.h"
 #include "deckview.h"

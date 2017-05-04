@@ -1,3 +1,10 @@
+/*! 
+ *  \file       cardview.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include "cardview.h"
 #include "ui_cardview.h"
 #include "remainingpackview.h"

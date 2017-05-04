@@ -1,3 +1,10 @@
+/*! 
+ *  \file       test_card_stack.cpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #include <cstdlib>
 #include <iostream>
 #include "CardStacks.hpp"

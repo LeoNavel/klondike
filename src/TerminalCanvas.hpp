@@ -1,3 +1,10 @@
+/*! 
+ *  \file       TerminalCanvas.hpp
+ *  \author     Filip Klembara
+ *  \author     Adrián Tomašov
+ *  \date       2017
+ *  \copyright GNU Public License.
+ */
 #ifndef TERMINAL_CANVAS_H
 #define TERMINAL_CANVAS_H
 
