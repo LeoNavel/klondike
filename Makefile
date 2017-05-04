@@ -1,12 +1,12 @@
-all: klondike klondike-terminal
+all: hra2017 hra2017-cli
 
-klondike:
+hra2017: src
 	cd src &&  qmake-qt5  &&$(MAKE)
-	mv src/klondike .
+	mv src/klondike ./hra2017
 
-klondike-terminal: src
+hra2017-cli: src
 	cd src && $(MAKE) -f Makefile-terminal
-	mv src/klondike-terminal .
+	mv src/klondike-terminal ./hra2017-cli
 
 .PHONY:doc
 doxygen:
@@ -16,11 +16,11 @@ doxygen:
 clean:
 	cd src && $(MAKE) clean
 	cd src && $(MAKE) -f Makefile-terminal clean
-	rm -rf klondike klondike-terminal doc src/Makefile
+	rm -rf hra2017* doc src/Makefile
 
 pack:
 	zip -r xklemb00-xtomas32.zip src/ Makefile Doxyfile 
 
-run: klondike klondike-terminal 
-	./klondike &
-	./klondike-terminal
+run: hra2017 hra2017-cli
+	./hra2017
+	./hra2017-cli
