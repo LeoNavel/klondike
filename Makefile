@@ -1,7 +1,7 @@
 all: hra2017 hra2017-cli
 
 hra2017: src
-	cd src &&  qmake-qt5  &&$(MAKE)
+	cd src &&  qmake  &&$(MAKE)
 	mv src/klondike ./hra2017
 
 hra2017-cli: src

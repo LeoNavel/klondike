@@ -10,6 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
+QMAKE_CXXFLAGS += -std=c++11
+
 TARGET = klondike
 TEMPLATE = app
 
