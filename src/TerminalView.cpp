@@ -100,6 +100,7 @@ int TerminalView::run() {
                         cmd.source_stack.id_stack = std::stoi(&from[1]) - 1;
                     }
                     else {
+                        std::cout << "Error" << std::endl;
                         continue;
                     }
                 }
@@ -115,7 +116,7 @@ int TerminalView::run() {
                 if (rest == to) {
                     cmd.num_of_cards = 1;
                 } else {
-                    cmd.num_of_cards = std::stoi(rest.c_str()) - 1;
+                    cmd.num_of_cards = std::stoi(rest.c_str());
                 }
 
                 if (
@@ -124,6 +125,7 @@ int TerminalView::run() {
                     cmd.destination_stack.id_stack < 0 or
                     cmd.destination_stack.id_stack >= 7
                         ){
+                    std::cout << "Error" << std::endl;
                     continue;
                 }
 
@@ -135,7 +137,8 @@ int TerminalView::run() {
                         throw e;
                     }
             }
-            catch (void *){
+            catch (std::invalid_argument){
+                std::cout << "Error" << std::endl;
                 continue;
             }
 
@@ -157,9 +160,10 @@ int TerminalView::run() {
             }
             else if (to == "card"){
                 try {
-                    controller->turn_card(std::stoi(rest.c_str()) - 1);
+                    controller->turn_card(std::stoi(rest) - 1);
                 }
-                catch (void *){
+                catch (std::invalid_argument){
+                    std::cout << "Error" << std::endl;
                     continue;
                 }
             }
