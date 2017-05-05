@@ -90,6 +90,7 @@ void TerminalCanvas::make_card_title(int x, int y, card::Card *card) {
     //creating lines
     for (int i = 0 ; i < CARD_WIDTH-2 ; i++){
         canvas[y][x+1+i] = '-';
+        canvas[y+1][x+1+i] = ' ';
     }
 
     char sign = make_sign(card->get_sign());
