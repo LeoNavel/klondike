@@ -93,6 +93,7 @@ int TerminalView::run() {
 
                 if (from[0] == 'r') {
                     cmd.source_stack.type_stack = REMAINING_STACK;
+                    cmd.source_stack.id_stack = 1;
                 } else if (from[0] == 'w') {
                     cmd.source_stack.type_stack = WORKING_STACK;
                     if (from.length() == 2) {

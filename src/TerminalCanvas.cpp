@@ -182,7 +182,11 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     for (int i = 0 ; i < size - 1 ; i++){
         card::Card card = workingPack[i];
         make_card_title(x,y,&card);
-        y += 2;
+        if (size > 10 and card.get_visibility()) {
+            y += 1;
+        } else {
+            y += 2;
+        }
     }
     delete_card(x,y);
     delete_card(x,y+CARD_HEIGHT);

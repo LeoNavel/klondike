@@ -28,7 +28,9 @@
 
 
 /**
- * This is sepaate namespace for stacks
+ * @brief Namespace for CardStacks
+ *
+ * This is separate namespace for stacks.
  */
 namespace CardStacks{
 

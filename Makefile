@@ -14,9 +14,10 @@ doxygen:
 	doxygen Doxyfile
 
 clean:
-	cd src && $(MAKE) clean
 	cd src && $(MAKE) -f Makefile-terminal clean
+	cd src && $(MAKE) clean
 	rm -rf hra2017* doc src/Makefile
+
 
 pack:
 	zip -r xklemb00-xtomas32.zip src/ Makefile Doxyfile LICENSE README.md examples
