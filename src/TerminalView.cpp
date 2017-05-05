@@ -127,6 +127,13 @@ int TerminalView::run() {
                 }
 
             }
+            catch (ErrorException * e){
+                    if (e->get_err_code() == E_END_GAME){
+                        break;
+                    } else {
+                        throw e;
+                    }
+            }
             catch (void *){
                 continue;
             }
@@ -212,4 +219,29 @@ void TerminalView::help() {
     std::cout << "\tundo - revert previous commands" << std::endl;
     std::cout << "\tnext - next card in remaining pack" << std::endl;
     std::cout << "\tmove <src> <dst> [number of cards] - move cards from pack \"src\" to pack \"dest\"" << std::endl;
+}
+
+void TerminalView::finishGame() {
+    canvas.clrscr();
+    std::cout <<
+              "##      ## #### ##    ## ##    ## ######## ########  \n"
+              "##  ##  ##  ##  ###   ## ###   ## ##       ##     ## \n"
+              "##  ##  ##  ##  ####  ## ####  ## ##       ##     ## \n"
+              "##  ##  ##  ##  ## ## ## ## ## ## ######   ########  \n"
+              "##  ##  ##  ##  ##  #### ##  #### ##       ##   ##   \n"
+              "##  ##  ##  ##  ##   ### ##   ### ##       ##    ##  \n"
+              " ###  ###  #### ##    ## ##    ## ######## ##     ##";
+
+    std::string answer;
+
+    std::cout << std::endl << std::endl;
+    std::cout << "Do you want to play new game ? (y/n)";
+    std::cin  >> answer;
+
+    if (answer.length() and answer[0] == 'y'){
+        controller->restartGame();
+        return;
+    } else {
+        throw ErrorException(E_END_GAME, "End of game");
+    }
 }

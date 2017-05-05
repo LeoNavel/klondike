@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+#define E_END_GAME                  0
 #define E_TARGET_PACK_PUSH          1
 #define E_WORK_PACK_POP             2
 #define E_WORK_PACK_PUSH            3
