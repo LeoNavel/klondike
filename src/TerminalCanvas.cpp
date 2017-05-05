@@ -6,8 +6,6 @@
  *  \copyright GNU Public License.
  */
 #include "TerminalCanvas.hpp"
-#include <cstdlib>
-#include <unistd.h>
 
 TerminalCanvas::TerminalCanvas() {
     height = CANVAS_HEIGHT;
@@ -23,18 +21,14 @@ TerminalCanvas::TerminalCanvas() {
     canvas[0][CARD_WIDTH +2] = 'r';
 
     for (int i = 0 ; i < 4 ; i++) {
-        canvas[0][CARD_WIDTH*3 + 4 + i*(CARD_WIDTH + 2)] = 't';
-        canvas[0][CARD_WIDTH*3 + 4 + i*(CARD_WIDTH + 2) + 1] = 49 + i;
+        canvas[0][29 + 4 + i*(CARD_WIDTH + 2)] = 't';
+        canvas[0][29 + 4 + i*(CARD_WIDTH + 2) + 1] = 49 + i;
     }
 
     for (int i = 0 ; i < 7 ; i++){
         canvas[CARD_HEIGHT + 3][CARD_WIDTH/2 + i*(CARD_WIDTH + 1)] = 'w';
         canvas[CARD_HEIGHT + 3][CARD_WIDTH/2 + i*(CARD_WIDTH + 1) +1] = 49 + i;
     }
-
-    print();
-    sleep(1);
-
 }
 
 void TerminalCanvas::print() {
@@ -105,12 +99,12 @@ void TerminalCanvas::make_card_title(int x, int y, card::Card *card) {
         canvas[y + 1][x + 1] = sign;
 
         if (number != '0'){
-            canvas[y + CARD_HEIGHT - 2][x + 1] = number;
-            canvas[y + CARD_HEIGHT - 2][x + 2] = ' ';
+            canvas[y + 1][x + CARD_WIDTH - 2] = number;
+            canvas[y + 1][x + CARD_WIDTH - 3] = ' ';
         }
         else {
-            canvas[y + CARD_HEIGHT - 2][x + 1] = '1';
-            canvas[y + CARD_HEIGHT - 2][x + 2] = number;
+            canvas[y + 1][x + CARD_WIDTH - 3] = '1';
+            canvas[y + 1][x + CARD_WIDTH - 2] = number;
         }
     }
 
@@ -186,7 +180,7 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     for (int i = 0 ; i < size - 1 ; i++){
         card::Card card = workingPack[i];
         make_card_title(x,y,&card);
-        if (size > 10 and card.get_visibility()) {
+        if (size > 10 and !card.get_visibility()) {
             y += 1;
         } else {
             y += 2;
