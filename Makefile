@@ -19,7 +19,7 @@ clean:
 	rm -rf hra2017* doc src/Makefile
 
 pack:
-	zip -r xklemb00-xtomas32.zip src/ Makefile Doxyfile LICENSE README.md
+	zip -r xklemb00-xtomas32.zip src/ Makefile Doxyfile LICENSE README.md examples
 
 run: hra2017 hra2017-cli
 	./hra2017
