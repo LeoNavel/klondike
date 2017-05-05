@@ -7,6 +7,7 @@
  */
 #include "TerminalCanvas.hpp"
 #include <cstdlib>
+#include <unistd.h>
 
 TerminalCanvas::TerminalCanvas() {
     height = CANVAS_HEIGHT;
@@ -27,9 +28,12 @@ TerminalCanvas::TerminalCanvas() {
     }
 
     for (int i = 0 ; i < 7 ; i++){
-        canvas[13][CARD_WIDTH/2 + i*(CARD_WIDTH + 1)] = 'w';
-        canvas[13][CARD_WIDTH/2 + i*(CARD_WIDTH + 1) +1] = 49 + i;
+        canvas[CARD_HEIGHT + 3][CARD_WIDTH/2 + i*(CARD_WIDTH + 1)] = 'w';
+        canvas[CARD_HEIGHT + 3][CARD_WIDTH/2 + i*(CARD_WIDTH + 1) +1] = 49 + i;
     }
+
+    print();
+    sleep(1);
 
 }
 
@@ -173,7 +177,7 @@ void TerminalCanvas::update(int id, card::Card *topTargetCard) {
 
 void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
     int x,y;
-    y = CARD_HEIGHT + 6;
+    y = CARD_HEIGHT + 5;
     x = 1 + id*(CARD_WIDTH + 1);
 
     long size = workingPack.size();
