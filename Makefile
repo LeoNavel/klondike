@@ -6,7 +6,7 @@ hra2017: src
 
 hra2017-cli: src
 	cd src && $(MAKE) -f Makefile-terminal
-	mv src/klondike-terminal ./hra2017-cli
+	mv src/hra2017-cli* .
 
 .PHONY:doxygen
 doxygen:
