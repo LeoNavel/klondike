@@ -97,8 +97,6 @@ void MainWindow::enableHelp(unsigned int i){
 
 MainWindow::~MainWindow()
 {
-//    for(DeckView * v: views)
-//        delete v;
     for(Controller *c: controllers)
         delete c;
     delete ui;
@@ -139,17 +137,9 @@ void MainWindow::enableNewGame(unsigned int i){
     QAction * new_game = fileAction->menu()->actions()[0];
     QAction * newGameItem = new_game->menu()->actions()[i];
     newGameItem->setEnabled(true);
-
-//    QAction * fileAction = ui->menuBar->actions()[0];
-//    QAction * addGame = fileAction->menu()->actions()[0];
-//    addGame->setEnabled(true);
 }
 
 void MainWindow::disableNewGame(unsigned int i){
-//    QAction * fileAction = ui->menuBar->actions()[0];
-//    QAction * addGame = fileAction->menu()->actions()[0];
-//    addGame->setEnabled(false);
-
     QAction * fileAction = ui->menuBar->actions()[0];
     QAction * new_game = fileAction->menu()->actions()[0];
     QAction * newGameItem = new_game->menu()->actions()[i];
