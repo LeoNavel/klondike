@@ -17,8 +17,8 @@ int main(){
     view->run();
 
 
-    delete deck;
-    delete view;
+    //delete deck;
+    //delete view;
     delete controller;
 
     return EXIT_SUCCESS;

@@ -237,6 +237,8 @@ void Deck::save(std::string output_file) {
         out_file << std::endl;
     }
     out_file << std::to_string(remaining_pack->get_current_id()) << std::endl;
+
+    out_file.close();
 }
 
 void Deck::load(std::string input_file) {
@@ -271,6 +273,8 @@ void Deck::load(std::string input_file) {
 
     input_file_stream >> ptr_id;
     remaining_pack->set_current_id(ptr_id);
+
+    input_file_stream.close();
 }
 
 void Deck::force_move_from_to(stack_id_t src, stack_id_t dst, int num_of_cards) {

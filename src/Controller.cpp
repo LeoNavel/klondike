@@ -206,5 +206,7 @@ void Controller::restartGame() {
 }
 
 Controller::~Controller(){
+    delete deck;
     delete command;
+    delete view;
 }
