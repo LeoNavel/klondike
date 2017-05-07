@@ -18,4 +18,4 @@ klondike-terminal: Card.o CardStacks.o Command.o Controller.o Deck.o Error.o Ter
 	$(CC) -o $@ $(CXXFLAGS) Card.o CardStacks.o Controller.o Command.o Deck.o Error.o main_terminal.o TerminalCanvas.o TerminalView.o View.o 
 
 clean:
-	rm *.o
+	rm -rvf *.o
