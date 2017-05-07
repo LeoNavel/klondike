@@ -24,6 +24,10 @@ void TargetPackView::setGeometry(const QRect &r) {
     QFrame::setGeometry(r);
 
     currentCardView->setGeometry(QRect(QPoint(0,0), QSize(r.width(),r.height())));
+//    r.setWidth(currentCardView->rect().width());
+//    r.setHeight(currentCardView->rect().height());
+    QRect nr = QRect(r.x(), r.y(), currentCardView->rect().width(), currentCardView->rect().height());
+    QFrame::setGeometry(nr);
 }
 
 void TargetPackView::setTopCard(card::Card *card){

@@ -151,6 +151,8 @@ void RemainingPackView::setGeometry(const QRect &r) {
     currentCardView->setGeometry(QRect(QPoint((r.width() + 10)/2,0), QSize((r.width() - 10)/2,r.height())));
 
     backCard->setGeometry(QRect(QPoint(0,0), currentCardView->rect().size()));
+    QRect nr = QRect(r.x(), r.y(), (r.width() + 10)/2 + currentCardView->rect().width(), currentCardView->rect().height());
+    QFrame::setGeometry(nr);
 }
 
 void RemainingPackView::mousePressEvent(QMouseEvent *e){
