@@ -330,25 +330,27 @@ cmd_t Deck::get_help_command() {
     card::Card src_card, dst_card;
 
     //checking if -> from rem to target pack
-    src_card = remaining_pack->currentCard();
-    for (int i = 0 ; i < 4 ; i++){
-        if (!targetPacks[i]->isEmpty()){
-            dst_card = targetPacks[i]->top();
-            if (src_card.get_sign() == dst_card.get_sign() && src_card.get_number() == dst_card.get_number() + 1){
-                found_command.source_stack.type_stack = REMAINING_STACK;
-                found_command.destination_stack.type_stack = TARGET_STACK;
-                found_command.destination_stack.id_stack = i;
-                found_command.num_of_cards = 1;
+    if (!remaining_pack->isEmpty()) {
+        src_card = remaining_pack->currentCard();
+        for (int i = 0; i < 4; i++) {
+            if (!targetPacks[i]->isEmpty()) {
+                dst_card = targetPacks[i]->top();
+                if (src_card.get_sign() == dst_card.get_sign() && src_card.get_number() == dst_card.get_number() + 1) {
+                    found_command.source_stack.type_stack = REMAINING_STACK;
+                    found_command.destination_stack.type_stack = TARGET_STACK;
+                    found_command.destination_stack.id_stack = i;
+                    found_command.num_of_cards = 1;
 
-                return found_command;
-            }
-        } else {
-            if(src_card.get_number() == 1) {
-                found_command.source_stack.type_stack = REMAINING_STACK;
-                found_command.destination_stack.type_stack = TARGET_STACK;
-                found_command.destination_stack.id_stack = i;
-                found_command.num_of_cards = 1;
-                return found_command;
+                    return found_command;
+                }
+            } else {
+                if (src_card.get_number() == 1) {
+                    found_command.source_stack.type_stack = REMAINING_STACK;
+                    found_command.destination_stack.type_stack = TARGET_STACK;
+                    found_command.destination_stack.id_stack = i;
+                    found_command.num_of_cards = 1;
+                    return found_command;
+                }
             }
         }
     }

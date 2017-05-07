@@ -37,24 +37,19 @@ void TerminalView::update(CardStacks::RemainingPack *remainigPack) {
 }
 
 void TerminalView::highlightNextCardCommand() {
-    GenericView::highlightNextCardCommand();
 }
 
 void TerminalView::highlightRemainingToWorking(unsigned int id) {
-    GenericView::highlightRemainingToWorking(id);
 }
 
 void TerminalView::highlightRemainingToTarget(unsigned int id) {
-    GenericView::highlightRemainingToTarget(id);
 }
 
 void TerminalView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
-
 }
 
 
 void TerminalView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
-
 }
 
 int TerminalView::run() {
@@ -190,6 +185,7 @@ int TerminalView::run() {
         }
         else if (command == "load") {
             if (rest.length()){
+                canvas = TerminalCanvas();
                 controller->load(rest.substr(0, rest.find(' ')));
                 refresh();
             }
@@ -205,7 +201,7 @@ int TerminalView::run() {
             }
         }
         else if (command == "hint"){
-
+            controller->findHelp();
         }
 
 
@@ -224,6 +220,7 @@ void TerminalView::help() {
     std::cout << "\tundo - revert previous commands" << std::endl;
     std::cout << "\tnext - next card in remaining pack" << std::endl;
     std::cout << "\tmove <src> <dst> [number of cards] - move cards from pack \"src\" to pack \"dest\"" << std::endl;
+    std::cout << "\thint - show move" << std::endl;
 }
 
 void TerminalView::finishGame() {
