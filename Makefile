@@ -14,9 +14,10 @@ doxygen:
 	doxygen Doxyfile
 
 clean:
+	rm -rf doc hra2017*
 	cd src && $(MAKE) -f Makefile-terminal clean
 	cd src && $(MAKE) clean
-	rm -rf hra2017* doc src/Makefile
+	rm -rf src/Makefile
 
 
 pack:
