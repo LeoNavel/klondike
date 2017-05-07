@@ -220,6 +220,7 @@ int TerminalView::run() {
         help();
     }
 
+    canvas.clrscr();
     return 0;
 }
 
