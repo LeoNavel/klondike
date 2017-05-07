@@ -33,8 +33,8 @@ SOURCES += main.cpp\
     View.cpp
 
 
-HEADERS  += mainwindow.h \
-    deckview.h \
+HEADERS  += deckview.h \
+    mainwindow.h \
     Card.hpp \
     CardStacks.hpp \
     Error.hpp \
