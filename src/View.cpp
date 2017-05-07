@@ -39,6 +39,10 @@ void GenericView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned 
 
 }
 
+GenericView::~GenericView() {
+
+}
+
 void GenericView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
 
 }
@@ -48,9 +52,5 @@ void GenericView::restartView() {
 }
 
 void GenericView::finishGame(){
-
-}
-
-GenericView::~GenericView(){
 
 }

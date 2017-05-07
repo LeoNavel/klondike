@@ -22,7 +22,7 @@ public:
      * @param controller controller
      */
     void setController(Controller *controller);
-    ~GenericView();
+//    ~GenericView();
 
     /**
      * update top card in target deck
@@ -92,6 +92,8 @@ public:
      * run finish game animations
      */
     virtual void finishGame();
+
+    virtual ~GenericView();
 };
 
 #endif //VIEW_H

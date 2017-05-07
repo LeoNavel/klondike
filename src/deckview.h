@@ -159,7 +159,7 @@ public:
     void finishGame();
 
     void turnCard(WorkingPackView * on);
-    ~DeckView();
+    virtual ~DeckView();
 
 private:
     Ui::DeckView *ui;

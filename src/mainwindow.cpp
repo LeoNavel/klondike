@@ -97,8 +97,8 @@ void MainWindow::enableHelp(unsigned int i){
 
 MainWindow::~MainWindow()
 {
-    for(DeckView * v: views)
-        delete v;
+//    for(DeckView * v: views)
+//        delete v;
     for(Controller *c: controllers)
         delete c;
     delete ui;
