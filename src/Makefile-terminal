@@ -1,4 +1,4 @@
-all: klondike-terminal
+all: hra2017-cli
 
 CC=g++
 CXXFLAGS= -std=c++11
@@ -14,7 +14,7 @@ TerminalCanvas.o : TerminalCanvas.cpp TerminalCanvas.hpp
 TerminalView.o : TerminalView.cpp TerminalView.hpp
 View.o : View.cpp View.hpp
 
-klondike-terminal: Card.o CardStacks.o Command.o Controller.o Deck.o Error.o TerminalCanvas.o TerminalView.o View.o main_terminal.o
+hra2017-cli: Card.o CardStacks.o Command.o Controller.o Deck.o Error.o TerminalCanvas.o TerminalView.o View.o main_terminal.o
 	$(CC) -o $@ $(CXXFLAGS) Card.o CardStacks.o Controller.o Command.o Deck.o Error.o main_terminal.o TerminalCanvas.o TerminalView.o View.o 
 
 clean:
