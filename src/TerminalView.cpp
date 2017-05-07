@@ -37,19 +37,31 @@ void TerminalView::update(CardStacks::RemainingPack *remainigPack) {
 }
 
 void TerminalView::highlightNextCardCommand() {
+    std::cout << "next" << std::endl;
 }
 
 void TerminalView::highlightRemainingToWorking(unsigned int id) {
+    std::cout << "move ";
+    std::cout << "r w" << std::to_string(id+1) << std::endl;
 }
 
 void TerminalView::highlightRemainingToTarget(unsigned int id) {
+    std::cout << "move ";
+    std::cout << "r t" << std::to_string(id+1) << std::endl;
 }
 
 void TerminalView::highlightWorkingToTarget(unsigned int workingDeckID, unsigned int targetDeckID){
+    std::cout << "move ";
+    std::cout << "w" << std::to_string(workingDeckID+1);
+    std::cout << " t" << std::to_string(targetDeckID+1) << std::endl;
 }
 
 
 void TerminalView::highlightWorkingToWorking(unsigned int sourceID, unsigned int count, unsigned int destinationID){
+    std::cout << "move ";
+    std::cout << "w" << std::to_string(sourceID+1);
+    std::cout << " w" << std::to_string(destinationID+1);
+    std::cout << " " << std::to_string(count) << std::endl;
 }
 
 int TerminalView::run() {
