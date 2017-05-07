@@ -187,8 +187,10 @@ void TerminalCanvas::update(int id, CardStacks::GenericCardStack workingPack) {
             y += 2;
         }
     }
-    delete_card(x,y);
-    delete_card(x,y+CARD_HEIGHT);
+
+    for (int i = y + CARD_HEIGHT ; i < height - CARD_HEIGHT ; i+= CARD_HEIGHT){
+        delete_card(x,i);
+    }
 
     if (size > 0) {
         card::Card card = workingPack[size - 1];
