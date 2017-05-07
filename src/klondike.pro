@@ -12,7 +12,7 @@ CONFIG += c++11
 
 QMAKE_CXXFLAGS += -std=c++11
 
-TARGET = klondike
+TARGET = hra2017
 TEMPLATE = app
 
 
