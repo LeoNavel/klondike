@@ -95,7 +95,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
 
         case WORKING_STACK:
             id_last = workingPacks[src.id_stack]->size() - 1;
-            for (int i = 0; i < num_of_cards; i++){
+            for (unsigned i = 0; i < num_of_cards; i++){
                 tmp_stack.push(workingPacks[src.id_stack]->operator[](id_last - i));
             }
 
@@ -128,7 +128,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
         }
     }
     catch (ErrorException * error){
-        for (int i = 0 ; i <already_pushed; i++){
+        for (unsigned i = 0 ; i <already_pushed; i++){
             switch (dst.type_stack){
                 case WORKING_STACK:
                     workingPacks[dst.id_stack]->pop();
@@ -144,7 +144,7 @@ void Deck::move_from_to(stack_id_t src, stack_id_t dst, unsigned num_of_cards) {
         throw error;
     }
 
-    for (int i = 0; i < num_of_cards; i++) {
+    for (unsigned i = 0; i < num_of_cards; i++) {
         switch (src.type_stack) {
             case WORKING_STACK:
                 workingPacks[src.id_stack]->pop();
@@ -211,7 +211,7 @@ void Deck::save(std::string output_file) {
 
     for (int i = 0 ; i < 7; i++){
         out_file << workingPacks[i]->size() << std::endl;
-        for (int j = 0 ; j < workingPacks[i]->size(); j++){
+        for (int j = 0 ; j < static_cast<int>(workingPacks[i]->size()); j++){
             out_file << std::to_string(workingPacks[i]->operator[](j).get_number()) + " ";
             out_file << std::to_string(workingPacks[i]->operator[](j).get_sign()) + " ";
             out_file << std::to_string(workingPacks[i]->operator[](j).get_visibility());
@@ -221,7 +221,7 @@ void Deck::save(std::string output_file) {
 
     for (int i = 0 ; i < 4; i++){
         out_file << targetPacks[i]->size() << std::endl;
-        for (int j = 0 ; j < targetPacks[i]->size(); j++){
+        for (int j = 0 ; j < static_cast<int>(targetPacks[i]->size()); j++){
             out_file << std::to_string(targetPacks[i]->operator[](j).get_number()) + " ";
             out_file << std::to_string(targetPacks[i]->operator[](j).get_sign()) + " ";
             out_file << std::to_string(targetPacks[i]->operator[](j).get_visibility());
@@ -230,7 +230,7 @@ void Deck::save(std::string output_file) {
     }
 
     out_file << remaining_pack->size() << std::endl;
-    for (int j = 0 ; j < remaining_pack->size(); j++){
+    for (int j = 0 ; j < static_cast<int>(remaining_pack->size()); j++){
         out_file << std::to_string(remaining_pack->operator[](j).get_number()) + " ";
         out_file << std::to_string(remaining_pack->operator[](j).get_sign()) + " ";
         out_file << std::to_string(remaining_pack->operator[](j).get_visibility());
