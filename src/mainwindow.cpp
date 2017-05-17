@@ -221,7 +221,7 @@ void MainWindow::on_actionRemove_game_triggered()
     unsigned int size = controllers.size();
     if(size > 1){
         DeckView * dv = views[views.size() - 1];
-        delete dv;
+//        delete dv;
         views.pop_back();
 
         Controller * controller = controllers[size - 1];
